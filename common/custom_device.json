@@ -1,0 +1,4823 @@
+{
+  "export_date": "2023-4-27",
+  "type": "custom_device_type",
+  "data": [
+    {
+      "device": {
+        "name": "CID_Satel_c54598f6-bfcd-4056-a890-515b96f58b49_ac73cec9-fdb3-43e0-be1f-f3f39bb62c19",
+        "lang_en": "Satel",
+        "lang_ru": "Satel",
+        "lang_uk": "Satel"
+      },
+      "dictionary_add": [
+        {
+          "name": "PERSONAL_DANGER",
+          "lang_en": "Personal danger",
+          "lang_ru": "Персональная опасность",
+          "lang_uk": "Персональна небезпека"
+        },
+        {
+          "name": "CANT_INALARM",
+          "lang_en": "Can`t send in alarm",
+          "lang_ru": "Невозможность передачи при тревоге",
+          "lang_uk": "Неможливість передачі під час тривоги"
+        },
+        {
+          "name": "FIRE_ALARM",
+          "lang_en": "Fire alarm",
+          "lang_ru": "Пожарная тривога",
+          "lang_uk": "Пожежна тривога"
+        },
+        {
+          "name": "FIRE_START",
+          "lang_en": "Ignition",
+          "lang_ru": "Возгорание",
+          "lang_uk": "Займання вогню"
+        },
+        {
+          "name": "WATER_LEAK",
+          "lang_en": "Water leak",
+          "lang_ru": "Протечка воды",
+          "lang_uk": "Протікання води"
+        },
+        {
+          "name": "HEAT",
+          "lang_en": "Thermal sensor alarm: high temperature",
+          "lang_ru": "Тревога по тепловому сенсору: превышение температуры",
+          "lang_uk": "Тривога по тепловому сенсору: перевищення температури"
+        },
+        {
+          "name": "FIRE_KEYBOARD",
+          "lang_en": "Fire by keyboard",
+          "lang_ru": "Пожар с клавиатуры",
+          "lang_uk": "Пожежа з клавіатури"
+        },
+        {
+          "name": "FIRE",
+          "lang_en": "Fire",
+          "lang_ru": "Огонь",
+          "lang_uk": "Вогонь"
+        },
+        {
+          "name": "POSIBLE_FIRE",
+          "lang_en": "Possible fire alarm",
+          "lang_ru": "Вероятная пожарная тревога",
+          "lang_uk": "Ймовірна пожежна тривога"
+        },
+        {
+          "name": "FORCING",
+          "lang_en": "Compulsion to client",
+          "lang_ru": "Принуждение",
+          "lang_uk": "Примус"
+        },
+        {
+          "name": "Hearing alarm",
+          "lang_en": "Hearing alarm",
+          "lang_ru": "Слышимая тревога",
+          "lang_uk": "Чутна тривога"
+        },
+        {
+          "name": "Hearing alarm canseled",
+          "lang_en": "Hearing alarm canseled",
+          "lang_ru": "Восстановление слышимой тревоги",
+          "lang_uk": "Відміна чутної тривоги"
+        },
+        {
+          "name": "Duress – Access granted",
+          "lang_en": "Duress – Access granted",
+          "lang_ru": "Тревога принуждение, вход разрешен",
+          "lang_uk": "Примус – доступ надано"
+        },
+        {
+          "name": "Duress – Access granted canseled",
+          "lang_en": "Duress – Access granted canseled",
+          "lang_ru": "Отмена тревоги принуждение, вход разрешен",
+          "lang_uk": "Скасування тривоги примус, вхід дозволено"
+        },
+        {
+          "name": "Duress – Egress granted",
+          "lang_en": "Duress – Egress granted",
+          "lang_ru": "Тревога принуждение, выход разрешен",
+          "lang_uk": "Тривога примус, вихід дозволено"
+        },
+        {
+          "name": "Duress – Egress granted cenceled",
+          "lang_en": "Duress – Egress granted cenceled",
+          "lang_ru": "Отмена тревоги принуждение, выход разрешен",
+          "lang_uk": "Відміна тривоги примус, вихід дозволено"
+        },
+        {
+          "name": "ALM_INNER_ZONE",
+          "lang_en": "Internal zone alarm",
+          "lang_ru": "Тревога в зоне внутренняя",
+          "lang_uk": "Тривога в зоні внутрішня"
+        },
+        {
+          "name": "Absence of a guard normal",
+          "lang_en": "Absence of a guard normal",
+          "lang_ru": "Норма Отсутствие охранника",
+          "lang_uk": "Норма відсутності охоронця"
+        },
+        {
+          "name": "Invasion, day / night zone",
+          "lang_en": "Invasion, day / night zone",
+          "lang_ru": "Вторжение, зона день/ночь",
+          "lang_uk": "Вторгнення, зона день/ніч"
+        },
+        {
+          "name": "Invasion recovery, day / night zone",
+          "lang_en": "Invasion recovery, day / night zone",
+          "lang_ru": "Восстановление вторжения, зона день/ночь",
+          "lang_uk": "Відновлення вторгнення, зона день/ніч"
+        },
+        {
+          "name": "Hearing alarm",
+          "lang_en": "Hearing alarm",
+          "lang_ru": "Слышимая тревога",
+          "lang_uk": "Чутна тривога"
+        },
+        {
+          "name": "Hearing alarm canseled",
+          "lang_en": "Hearing alarm canseled",
+          "lang_ru": "Восстановление слышимой тревоги",
+          "lang_uk": "Відміна чутної тривоги"
+        },
+        {
+          "name": "ALARM_OPEN_TMP_DEVICE",
+          "lang_en": "Alarm device tamper",
+          "lang_ru": "Тревога тампер прибора",
+          "lang_uk": "Тривога тампер приладу"
+        },
+        {
+          "name": "NORM_TMP_DEVICE",
+          "lang_en": "Device tamper norm",
+          "lang_ru": "Норма тампер прибора",
+          "lang_uk": "Норма тампер приладу"
+        },
+        {
+          "name": "Probable burglary alarm",
+          "lang_en": "Probable burglary alarm",
+          "lang_ru": "Вероятная тревога взлома",
+          "lang_uk": "Ймовірна тривога злому"
+        },
+        {
+          "name": "Canceling a probable burglary alarm",
+          "lang_en": "Canceling a probable burglary alarm",
+          "lang_ru": "Отмена вероятной тревоги взлома",
+          "lang_uk": "Скасування ймовірної тривоги злому"
+        },
+        {
+          "name": "Alarm, intrusion verifier",
+          "lang_en": "Alarm, intrusion verifier",
+          "lang_ru": "Тревога, верификатор проникновения",
+          "lang_uk": "Тривога, верифікатор проникнення"
+        },
+        {
+          "name": "Recovery, penetration verifier",
+          "lang_en": "Recovery, penetration verifier",
+          "lang_ru": "Восстановление, верификатор проникновения",
+          "lang_uk": "Відновлення, верифікатор проникнення"
+        },
+        {
+          "name": "Sensor cable interrupted",
+          "lang_en": "Sensor cable interrupted",
+          "lang_ru": "Шлейф датчиков оборван",
+          "lang_uk": "Шлейф датчиків обірваний"
+        },
+        {
+          "name": "Restoration of a broken loop of sensors",
+          "lang_en": "Restoration of a broken loop of sensors",
+          "lang_ru": "Восстановление обрыва шлейфа датчиков",
+          "lang_uk": "Відновлення обриву шлейфу датчиків"
+        },
+        {
+          "name": "Sensor loop is short-circuited",
+          "lang_en": "Sensor loop is short-circuited",
+          "lang_ru": "Шлейф датчиков коротко замкнут",
+          "lang_uk": "Шлейф датчиків коротко замкнутий"
+        },
+        {
+          "name": "Loop short circuit recovery",
+          "lang_en": "Loop short circuit recovery",
+          "lang_ru": "Восстановление короткого замыкания шлейфа",
+          "lang_uk": "Відновлення короткого замикання шлейфу"
+        },
+        {
+          "name": "Expansion module defective",
+          "lang_en": "Expansion module defective",
+          "lang_ru": "Неисправность модуля расширения",
+          "lang_uk": "Несправність модуля розширеннярения"
+        },
+        {
+          "name": "Expansion module recovery",
+          "lang_en": "Expansion module recovery",
+          "lang_ru": "Восстановление модуля расширения",
+          "lang_uk": "Відновлення модуля розширення"
+        },
+        {
+          "name": "Silent intrusion alarm",
+          "lang_en": "Silent intrusion alarm",
+          "lang_ru": "Тихая тревога вторжения",
+          "lang_uk": "Тиха тривога вторгнення"
+        },
+        {
+          "name": "Restoring silent burglary alarm",
+          "lang_en": "Restoring silent burglary alarm",
+          "lang_ru": "Восстановление тихой тревоги вторжения",
+          "lang_uk": "Відновлення тихої тривоги вторгнення"
+        },
+        {
+          "name": "No communication with the detector",
+          "lang_en": "No communication with the detector",
+          "lang_ru": "Нет связи с извещателем",
+          "lang_uk": "Немає зв'язку з сповіщувачем"
+        },
+        {
+          "name": "Restoring communication with the detector",
+          "lang_en": "Restoring communication with the detector",
+          "lang_ru": "Восстановление связи с извещателем",
+          "lang_uk": "Відновлення зв'язку з сповіщувачем"
+        },
+        {
+          "name": "Alarm 24 hour non-security zone",
+          "lang_en": "Alarm 24 hour non-security zone",
+          "lang_ru": "Тревога 24 часовая не охранная зона",
+          "lang_uk": "Тривога 24 годинна неохоронна зона"
+        },
+        {
+          "name": "Restoring 24 hour non-security zone alarm",
+          "lang_en": "Restoring 24 hour non-security zone alarm",
+          "lang_ru": "Восстановление тревоги 24 часовой не охранной зоны",
+          "lang_uk": "Відновлення тривоги 24 годинної охоронної зони"
+        },
+        {
+          "name": "Cooling",
+          "lang_en": "Cooling",
+          "lang_ru": "Охлаждение",
+          "lang_uk": "Охолодження"
+        },
+        {
+          "name": "Cooling rate",
+          "lang_en": "Cooling rate",
+          "lang_ru": "Норма охлаждения",
+          "lang_uk": "Норма охолодження"
+        },
+        {
+          "name": "Loss of heat",
+          "lang_en": "Loss of heat",
+          "lang_ru": "Потеря тепла",
+          "lang_uk": "Втрата тепла"
+        },
+        {
+          "name": "Heat rate",
+          "lang_en": "Heat rate",
+          "lang_ru": "Норма тепла",
+          "lang_uk": "Норма тепла"
+        },
+        {
+          "name": "Foil break",
+          "lang_en": "Foil break",
+          "lang_ru": "Обрыв фольги",
+          "lang_uk": "Обрив фольги"
+        },
+        {
+          "name": "Foil rate",
+          "lang_en": "Foil rate",
+          "lang_ru": "Норма фольги",
+          "lang_uk": "Норма фольги"
+        },
+        {
+          "name": "Day zone malfunction",
+          "lang_en": "Day zone malfunction",
+          "lang_ru": "Неисправность дневной зоны",
+          "lang_uk": "Несправність денної зони"
+        },
+        {
+          "name": "Day zone rate",
+          "lang_en": "Day zone rate",
+          "lang_ru": "Норма дневной зоны",
+          "lang_uk": "Норма денної зони"
+        },
+        {
+          "name": "Day zone rate",
+          "lang_en": "Day zone rate",
+          "lang_ru": "Норма дневной зоны",
+          "lang_uk": "Норма денної зони"
+        },
+        {
+          "name": "Gas level in the cylinder",
+          "lang_en": "Gas level in the cylinder",
+          "lang_ru": "Норма уровня газа в балоне",
+          "lang_uk": "Норма рівня газу в балоні"
+        },
+        {
+          "name": "Heat",
+          "lang_en": "Heat",
+          "lang_ru": "Высокая температура",
+          "lang_uk": "Висока температура"
+        },
+        {
+          "name": "High temperature alarm recovery",
+          "lang_en": "High temperature alarm recovery",
+          "lang_ru": "Восстановление тревоги высокой температуры",
+          "lang_uk": "Відновлення тривоги високої температури"
+        },
+        {
+          "name": "Low temperature",
+          "lang_en": "Low temperature",
+          "lang_ru": "Низкая температура",
+          "lang_uk": "Низька температура"
+        },
+        {
+          "name": "Low temperature alarm recovery",
+          "lang_en": "Low temperature alarm recovery",
+          "lang_ru": "Восстановление тревоги низкой температуры",
+          "lang_uk": "Відновлення тривоги низької температури"
+        },
+        {
+          "name": "Loss of airflow",
+          "lang_en": "Loss of airflow",
+          "lang_ru": "Потеря воздушного потока",
+          "lang_uk": "Втрата повітряного потоку"
+        },
+        {
+          "name": "Air flow rate",
+          "lang_en": "Air flow rate",
+          "lang_ru": "Норма воздушного потока",
+          "lang_uk": "Норма повітряного потоку"
+        },
+        {
+          "name": "Incorrect tank level",
+          "lang_en": "Incorrect tank level",
+          "lang_ru": "Неверный уровень в резервуаре",
+          "lang_uk": "Невірний рівень у резервуарі"
+        },
+        {
+          "name": "Tank level rate",
+          "lang_en": "Tank level rate",
+          "lang_ru": "Норма уровня в резервуаре",
+          "lang_uk": "Норма рівня у резервуарі"
+        },
+        {
+          "name": "Fire relief",
+          "lang_en": "Fire relief",
+          "lang_ru": "Сброс пожара",
+          "lang_uk": "Скидання пожежі"
+        },
+        {
+          "name": "Cancel fire reset",
+          "lang_en": "Cancel fire reset",
+          "lang_ru": "Отмена сброса пожара",
+          "lang_uk": "Скасування скидання пожежі"
+        },
+        {
+          "name": "Low water pressure",
+          "lang_en": "Low water pressure",
+          "lang_ru": "Низкое давление воды",
+          "lang_uk": "Низький тиск води"
+        },
+        {
+          "name": "Water pressure rate",
+          "lang_en": "Water pressure rate",
+          "lang_ru": "Норма давления воды",
+          "lang_uk": "Норма тиску води"
+        },
+        {
+          "name": "Low CO2 concentration",
+          "lang_en": "Low CO2 concentration",
+          "lang_ru": "Низкая концентрация СО2",
+          "lang_uk": "Низька концентрація СО2"
+        },
+        {
+          "name": "CO2 concentration rate",
+          "lang_en": "CO2 concentration rate",
+          "lang_ru": "Норма концентрации СО2",
+          "lang_uk": "Норма концентрації СО2"
+        },
+        {
+          "name": "Valve sensor",
+          "lang_en": "Valve sensor",
+          "lang_ru": "Датчик вентиля",
+          "lang_uk": "Датчик вентиля"
+        },
+        {
+          "name": "Valve sensor recovery",
+          "lang_en": "Valve sensor recovery",
+          "lang_ru": "Восстановление датчика вентиля",
+          "lang_uk": "Відновлення датчика вентиля"
+        },
+        {
+          "name": "Low water level",
+          "lang_en": "Low water level",
+          "lang_ru": "Низкий уровень воды",
+          "lang_uk": "Низький рівень води"
+        },
+        {
+          "name": "Water level rate",
+          "lang_en": "Water level rate",
+          "lang_ru": "Норма уровня воды",
+          "lang_uk": "Норма рівня води"
+        },
+        {
+          "name": "Pump on",
+          "lang_en": "Pump on",
+          "lang_ru": "Насос включен",
+          "lang_uk": "Насос увімкнений"
+        },
+        {
+          "name": "Pump off",
+          "lang_en": "Pump off",
+          "lang_ru": "Насос отключен",
+          "lang_uk": "Насос вимкнено"
+        },
+        {
+          "name": "Pump malfunction",
+          "lang_en": "Pump malfunction",
+          "lang_ru": "Неисправность насоса",
+          "lang_uk": "Несправність насосу"
+        },
+        {
+          "name": "Pump rate",
+          "lang_en": "Pump rate",
+          "lang_ru": "Норма насоса",
+          "lang_uk": "Норма насосу"
+        },
+        {
+          "name": "Restriction of arming performed",
+          "lang_en": "Restriction of arming performed",
+          "lang_ru": "Выполнен запрет постановки в охрану",
+          "lang_uk": "Виконано заборону постановки на охорону"
+        },
+        {
+          "name": "Change active SIM card",
+          "lang_en": "Change active SIM card",
+          "lang_ru": "Смена активной SIM-карты",
+          "lang_uk": "Зміна активної SIM-картки"
+        },
+        {
+          "name": "Resetting the GSM module power supply",
+          "lang_en": "Resetting the GSM module power supply",
+          "lang_ru": "Сброс питания GSM-модуля",
+          "lang_uk": "Скидання живлення GSM-модуля"
+        },
+        {
+          "name": "Opening the \"keybox\"",
+          "lang_en": "Opening the \"keybox\"",
+          "lang_ru": "Открытие ящика \"keybox\"",
+          "lang_uk": "Відкриття ящика \"keybox\""
+        },
+        {
+          "name": "Opening the \"keybox\"",
+          "lang_en": "Opening the \"keybox\"",
+          "lang_ru": "Открытие ящика \"keybox\"",
+          "lang_uk": "Відкриття ящика \"keybox\""
+        },
+        {
+          "name": "RAM checksum error",
+          "lang_en": "RAM checksum error",
+          "lang_ru": "Ошибка контрольной суммы ОЗУ",
+          "lang_uk": "Помилка контрольної суми ОЗУ"
+        },
+        {
+          "name": "RAM checksum rate",
+          "lang_en": "RAM checksum rate",
+          "lang_ru": "Норма контрольной суммы ОЗУ",
+          "lang_uk": "Норма контрольної суми ОЗП"
+        },
+        {
+          "name": "ROM checksum error",
+          "lang_en": "ROM checksum error",
+          "lang_ru": "Ошибка контрольной суммы ПЗУ",
+          "lang_uk": "Помилка контрольної суми ПЗУ"
+        },
+        {
+          "name": "ROM checksum rate",
+          "lang_en": "ROM checksum rate",
+          "lang_ru": "Норма контрольной суммы ПЗУ",
+          "lang_uk": "Норма контрольної суми ПЗУ"
+        },
+        {
+          "name": "Failed battery test",
+          "lang_en": "Failed battery test",
+          "lang_ru": "Неудача теста аккумулятора",
+          "lang_uk": "Невдача тесту акумулятора"
+        },
+        {
+          "name": "Battery test rate",
+          "lang_en": "Battery test rate",
+          "lang_ru": "Норма теста аккумулятора",
+          "lang_uk": "Норма тесту акумулятора"
+        },
+        {
+          "name": "Ground fault",
+          "lang_en": "Ground fault",
+          "lang_ru": "Неисправность заземления",
+          "lang_uk": "Несправність заземлення"
+        },
+        {
+          "name": "Grounding rate",
+          "lang_en": "Grounding rate",
+          "lang_ru": "Норма заземления",
+          "lang_uk": "Норма заземлення"
+        },
+        {
+          "name": "Power supply overload",
+          "lang_en": "Power supply overload",
+          "lang_ru": "Перегрузка источника питания",
+          "lang_uk": "Перевантаження джерела живлення"
+        },
+        {
+          "name": "Power supply rate",
+          "lang_en": "Power supply rate",
+          "lang_ru": "Норма источника питания",
+          "lang_uk": "Норма джерела живлення"
+        },
+        {
+          "name": "Software reset by engineer. Device version GGGG.ZZ",
+          "lang_en": "Software reset by engineer. Device version GGGG.ZZ",
+          "lang_ru": "Программный сброс инженером. Версия прибора GGGG.Z",
+          "lang_uk": "Програмне скидання інженером. Версія приладу GGGG."
+        },
+        {
+          "name": "Engineer canceled a software reset",
+          "lang_en": "Engineer canceled a software reset",
+          "lang_ru": "Отмена программного сброса инженером",
+          "lang_uk": "Скасування програмного скидання інженером"
+        },
+        {
+          "name": "Phone Communicator Code Conversion Error",
+          "lang_en": "Phone Communicator Code Conversion Error",
+          "lang_ru": "Ошибка преобразования кодов телефонного коммуникат",
+          "lang_uk": "Помилка перетворення кодів телефонного комунікатор"
+        },
+        {
+          "name": "GSM module restart",
+          "lang_en": "GSM module restart",
+          "lang_ru": "Перезапуск GSM модуля",
+          "lang_uk": "Перезапуск GSM модуля"
+        },
+        {
+          "name": "Change active SIM card",
+          "lang_en": "Change active SIM card",
+          "lang_ru": "Смена активной SIM-карты",
+          "lang_uk": "Зміна активної SIM-картки"
+        },
+        {
+          "name": "the main transmission channel (SIM1) is used",
+          "lang_en": "the main transmission channel (SIM1) is used",
+          "lang_ru": "используется основной канал передачи (SIM1)",
+          "lang_uk": "використовується основний канал передачі (SIM1)"
+        },
+        {
+          "name": "backup transmission channel (SIM2) is used",
+          "lang_en": "backup transmission channel (SIM2) is used",
+          "lang_ru": "используется резервный канал передачи (SIM2)",
+          "lang_uk": "використовується резервний канал передачі (SIM2)"
+        },
+        {
+          "name": "Loss of communication between the telephone commun",
+          "lang_en": "Loss of communication between the telephone commun",
+          "lang_ru": "Потеря связи телефонного коммуникатора с ППК Лунь",
+          "lang_uk": "Втрата зв'язку телефонного комунікатора з ППК Лунь"
+        },
+        {
+          "name": "Loss of communication between the telephone commun",
+          "lang_en": "Loss of communication between the telephone commun",
+          "lang_ru": "Потеря связи телефонного коммуникатора с ППК Лунь",
+          "lang_uk": "Втрата зв'язку телефонного комунікатора з ППК Лунь"
+        },
+        {
+          "name": "Siren / relay malfunction",
+          "lang_en": "Siren / relay malfunction",
+          "lang_ru": "Неисправность сирены/реле",
+          "lang_uk": "Несправність сирени/реле"
+        },
+        {
+          "name": "Siren / Relay Rate",
+          "lang_en": "Siren / Relay Rate",
+          "lang_ru": "Норма Сирены/Реле",
+          "lang_uk": "Норма Сирени/Реле"
+        },
+        {
+          "name": "Siren 1 malfunction",
+          "lang_en": "Siren 1 malfunction",
+          "lang_ru": "Неисправность сирены 1",
+          "lang_uk": "Несправність сирени 1"
+        },
+        {
+          "name": "Siren rate 2",
+          "lang_en": "Siren rate 2",
+          "lang_ru": "Норма сирены 2",
+          "lang_uk": "Норма сирени 2"
+        },
+        {
+          "name": "Signal relay defective",
+          "lang_en": "Signal relay defective",
+          "lang_ru": "Неисправность сигнального реле",
+          "lang_uk": "Несправність сигнального реле"
+        },
+        {
+          "name": "Alarm relay rate",
+          "lang_en": "Alarm relay rate",
+          "lang_ru": "Норма сигнального реле",
+          "lang_uk": "Норма сигнального реле"
+        },
+        {
+          "name": "Siren / relay malfunction",
+          "lang_en": "Siren / relay malfunction",
+          "lang_ru": "Неисправность сирены/реле",
+          "lang_uk": "Несправність сирени/реле"
+        },
+        {
+          "name": "Relay rate",
+          "lang_en": "Relay rate",
+          "lang_ru": "Норма реле",
+          "lang_uk": "Норма реле"
+        },
+        {
+          "name": "Defective reversing relay",
+          "lang_en": "Defective reversing relay",
+          "lang_ru": "Неисправность реверсирующего реле",
+          "lang_uk": "Несправність реверсуючого реле"
+        },
+        {
+          "name": "Reversing relay rate",
+          "lang_en": "Reversing relay rate",
+          "lang_ru": "Норма реверсирующего реле",
+          "lang_uk": "Норма реверсуючого реле"
+        },
+        {
+          "name": "Siren 3 malfunction",
+          "lang_en": "Siren 3 malfunction",
+          "lang_ru": "Неисправность оповещателя №3",
+          "lang_uk": "Несправність оповіщувача №3"
+        },
+        {
+          "name": "Sounder rate No. 3",
+          "lang_en": "Sounder rate No. 3",
+          "lang_ru": "Норма оповещателя №3",
+          "lang_uk": "Норма оповіщувача №3"
+        },
+        {
+          "name": "Malfunction of the siren No. 4",
+          "lang_en": "Malfunction of the siren No. 4",
+          "lang_ru": "Неисправность оповещателя №4",
+          "lang_uk": "Несправність оповіщувача №4"
+        },
+        {
+          "name": "Sounder rate No. 4",
+          "lang_en": "Sounder rate No. 4",
+          "lang_ru": "Норма оповещателя №4",
+          "lang_uk": "Норма оповіщувача №4"
+        },
+        {
+          "name": "Faulty keyboard",
+          "lang_en": "Faulty keyboard",
+          "lang_ru": "Неисправность клавиатуры",
+          "lang_uk": "Несправність клавіатури"
+        },
+        {
+          "name": "System periphery rate",
+          "lang_en": "System periphery rate",
+          "lang_ru": "Норма системной периферии",
+          "lang_uk": "Норма системної периферії"
+        },
+        {
+          "name": "Sensor cable interrupted",
+          "lang_en": "Sensor cable interrupted",
+          "lang_ru": "Шлейф датчиков оборван",
+          "lang_uk": "Шлейф датчиків обірваний"
+        },
+        {
+          "name": "Sensor loop rate",
+          "lang_en": "Sensor loop rate",
+          "lang_ru": "Норма шлейфа датчиков",
+          "lang_uk": "Норма шлейфу датчиків"
+        },
+        {
+          "name": "KZ line TAN",
+          "lang_en": "KZ line TAN",
+          "lang_ru": "КЗ линии ТАН",
+          "lang_uk": "КЗ лінії ТАН"
+        },
+        {
+          "name": "Restoration of the short circuit of the TAN line",
+          "lang_en": "Restoration of the short circuit of the TAN line",
+          "lang_ru": "Восстановление КЗ линии ТАН",
+          "lang_uk": "Відновлення КЗ лінії ТАН"
+        },
+        {
+          "name": "Repeater malfunction",
+          "lang_en": "Repeater malfunction",
+          "lang_ru": "Неисправность повторителя",
+          "lang_uk": "Несправність повторювача"
+        },
+        {
+          "name": "Repeater rate",
+          "lang_en": "Repeater rate",
+          "lang_ru": "Норма повторителя",
+          "lang_uk": "Норма повторювача"
+        },
+        {
+          "name": "No paper in printer",
+          "lang_en": "No paper in printer",
+          "lang_ru": "Нет бумаги в принтере",
+          "lang_uk": "Немає паперу в принтері"
+        },
+        {
+          "name": "There is paper in the printer",
+          "lang_en": "There is paper in the printer",
+          "lang_ru": "Есть бумага в принтере",
+          "lang_uk": "Є папір у принтері"
+        },
+        {
+          "name": "Printer malfunction",
+          "lang_en": "Printer malfunction",
+          "lang_ru": "Неисправность принтера",
+          "lang_uk": "Несправність принтера"
+        },
+        {
+          "name": "Restoring the printer",
+          "lang_en": "Restoring the printer",
+          "lang_ru": "Восстановление принтера",
+          "lang_uk": "Відновлення принтера"
+        },
+        {
+          "name": "Reload the module",
+          "lang_en": "Reload the module",
+          "lang_ru": "Перезагрузка модуля",
+          "lang_uk": "Перезавантаження модуля"
+        },
+        {
+          "name": "Cancel module reload",
+          "lang_en": "Cancel module reload",
+          "lang_ru": "Отмена перезагрузки модуля",
+          "lang_uk": "Скасування перезавантаження модуля"
+        },
+        {
+          "name": "No power to the module (AC)",
+          "lang_en": "No power to the module (AC)",
+          "lang_ru": "Отсутствие питания модуля (переменного тока)",
+          "lang_uk": "Відсутність живлення модуля (змінного струму)"
+        },
+        {
+          "name": "Recovering Module Power (AC)",
+          "lang_en": "Recovering Module Power (AC)",
+          "lang_ru": "Восстановление питания модуля (переменного тока)",
+          "lang_uk": "Відновлення живлення модуля (змінного струму)"
+        },
+        {
+          "name": "Telephone Line 1 Trouble",
+          "lang_en": "",
+          "lang_ru": "Неисправность телефонной линии 1",
+          "lang_uk": "Несправність телефонної лінії 1"
+        },
+        {
+          "name": "PHONE_LINE_1_REST",
+          "lang_en": "Restoring telephone line 1",
+          "lang_ru": "Восстановление телефонной линии 1",
+          "lang_uk": "Відновлення телефонної лінії 1"
+        },
+        {
+          "name": "Telephone Line 2 Trouble",
+          "lang_en": "",
+          "lang_ru": "Неисправность телефонной линии 2",
+          "lang_uk": "Несправність телефонної лінії 2"
+        },
+        {
+          "name": "PHONE_LINE_2_REST",
+          "lang_en": "Restoring telephone line 2",
+          "lang_ru": "Восстановление телефонной линии 2",
+          "lang_uk": "Відновлення телефонної лінії 2"
+        },
+        {
+          "name": "Long Range Transmitter Malfunction",
+          "lang_en": "",
+          "lang_ru": "Неисправность передатчика дальнего действия",
+          "lang_uk": "Несправність передавача дальньої дії"
+        },
+        {
+          "name": "Loss of radio control control",
+          "lang_en": "",
+          "lang_ru": "Потеря контроля радиоуправления",
+          "lang_uk": "Втрата контролю радіокерування"
+        },
+        {
+          "name": "Radio control rate",
+          "lang_en": "",
+          "lang_ru": "Норма контроля радиоуправления",
+          "lang_uk": "Норма контролю радіокерування"
+        },
+        {
+          "name": "Lost Communication With Master",
+          "lang_en": "",
+          "lang_ru": "Потеря связи с ведущим устройством",
+          "lang_uk": "Втрата зв'язку з провідним пристроєм"
+        },
+        {
+          "name": "restart GSM module",
+          "lang_en": "restart GSM module",
+          "lang_ru": "перезагрузки GSM модуля",
+          "lang_uk": "перезавантаження GSM модуля."
+        },
+        {
+          "name": "Short circuit addressable loop",
+          "lang_en": "",
+          "lang_ru": "КЗ адресного шлейфа",
+          "lang_uk": "КЗ адресного шлейфу"
+        },
+        {
+          "name": "Loss of communication with PPK",
+          "lang_en": "",
+          "lang_ru": "Потеря связи с ППК",
+          "lang_uk": "Втрата зв'язку з ППК"
+        },
+        {
+          "name": "The protective loop is faulty",
+          "lang_en": "",
+          "lang_ru": "Защитный шлейф неисправен",
+          "lang_uk": "Захисний шлейф несправний"
+        },
+        {
+          "name": "Protective loop is working",
+          "lang_en": "",
+          "lang_ru": "Защитный шлейф исправен",
+          "lang_uk": "Захисний шлейф справний"
+        },
+        {
+          "name": "The protective loop is interrupted",
+          "lang_en": "",
+          "lang_ru": "Защитный шлейф оборван",
+          "lang_uk": "Захисний шлейф обірваний"
+        },
+        {
+          "name": "Protective loop rate",
+          "lang_en": "",
+          "lang_ru": "Норма защитного шлейфа",
+          "lang_uk": "Норма захисного шлейфу"
+        },
+        {
+          "name": "Error on exit_cid_satel15939",
+          "lang_en": "Error on exit",
+          "lang_ru": "Ошибка при выходе",
+          "lang_uk": "Помилка при виході"
+        },
+        {
+          "name": "Cancel error on exit_cid_satel15940",
+          "lang_en": "Cancel error on exit",
+          "lang_ru": "Отмена ошибки при выходе",
+          "lang_uk": "Скасування помилки при виході"
+        },
+        {
+          "name": "Panic Zone Trouble_cid_satel15941",
+          "lang_en": "Panic Zone Trouble",
+          "lang_ru": "Неисправность зоны Паника",
+          "lang_uk": "Несправність зони Паніка"
+        },
+        {
+          "name": "Panic zone rate_cid_satel15942",
+          "lang_en": "Panic zone rate",
+          "lang_ru": "Норма зоны Паника",
+          "lang_uk": "Норма зони Паніка"
+        },
+        {
+          "name": "Invasion Zone Malfunction_cid_satel15943",
+          "lang_en": "Invasion Zone Malfunction",
+          "lang_ru": "Неисправность зоны вторжения",
+          "lang_uk": "Несправність зони вторгнення"
+        },
+        {
+          "name": "Invasion Zone Rate_cid_satel15944",
+          "lang_en": "Invasion Zone Rate",
+          "lang_ru": "Норма зоны вторжения",
+          "lang_uk": "Норма зони вторгнення"
+        },
+        {
+          "name": "Fault in linked zones_cid_satel15947",
+          "lang_en": "Fault in linked zones",
+          "lang_ru": "Неисправность связанных зон",
+          "lang_uk": "Несправність пов'язаних зон"
+        },
+        {
+          "name": "Fault in linked zones_cid_satel15947",
+          "lang_en": "Fault in linked zones",
+          "lang_ru": "Неисправность связанных зон",
+          "lang_uk": "Несправність пов'язаних зон"
+        },
+        {
+          "name": "Fault in linked zones_cid_satel15947",
+          "lang_en": "Fault in linked zones",
+          "lang_ru": "Неисправность связанных зон",
+          "lang_uk": "Несправність пов'язаних зон"
+        },
+        {
+          "name": "Rate of linked zones_cid_satel15948",
+          "lang_en": "Rate of linked zones",
+          "lang_ru": "Норма связанных зон",
+          "lang_uk": "Норма пов'язаних зон"
+        },
+        {
+          "name": "Loss of communication RPM_cid_satel15953",
+          "lang_en": "Loss of communication RPM",
+          "lang_ru": "Потеря связи RPM",
+          "lang_uk": "Втрата зв'язку RPM"
+        },
+        {
+          "name": "Communication rate RPM_cid_satel15954",
+          "lang_en": "Communication rate RPM",
+          "lang_ru": "Норма связи RPM",
+          "lang_uk": "Норма зв'язку RPM"
+        },
+        {
+          "name": "ALARM_TMP_DETECTOR",
+          "lang_en": "Alarm tamper detector",
+          "lang_ru": "Тревога тампер датчик",
+          "lang_uk": "Тривога тампер датчика"
+        },
+        {
+          "name": "NORM_TMP_DETECTOR",
+          "lang_en": "Norm detector tamper",
+          "lang_ru": "Норма тампер датчика",
+          "lang_uk": "Норма тампер датчику"
+        },
+        {
+          "name": "High sensitivity of the smoke detector_cid_satel15959",
+          "lang_en": "High sensitivity of the smoke detector",
+          "lang_ru": "Высокая чувствительность детектора дыма",
+          "lang_uk": "Висока чутливість детектора диму"
+        },
+        {
+          "name": "Low sensitivity of the smoke detector_cid_satel15961",
+          "lang_en": "Low sensitivity of the smoke detector",
+          "lang_ru": "Низкая чувствительность детектора дыма",
+          "lang_uk": "Низька чутливість детектора диму"
+        },
+        {
+          "name": "Smoke detector sensitivity rate_cid_satel15960",
+          "lang_en": "Smoke detector sensitivity rate",
+          "lang_ru": "Норма чувствительности детектора дыма",
+          "lang_uk": "Норма чутливості детектора диму"
+        },
+        {
+          "name": "High sensitivity intrusion detector_cid_satel15963",
+          "lang_en": "High sensitivity intrusion detector",
+          "lang_ru": "Высокая чувствительность детектора вторжения",
+          "lang_uk": "Висока чутливість детектора вторгнення"
+        },
+        {
+          "name": "Intrusion detection sensitivity rate_cid_satel15964",
+          "lang_en": "Intrusion detection sensitivity rate",
+          "lang_ru": "Норма чувствительности детектора вторжения",
+          "lang_uk": "Норма чутливості детектора вторгнення"
+        },
+        {
+          "name": "Low sensitivity of the intrusion detector_cid_satel15965",
+          "lang_en": "Low sensitivity of the intrusion detector",
+          "lang_ru": "Низкая чувствительность детектора вторжения",
+          "lang_uk": "Низька чутливість детектора вторгнення"
+        },
+        {
+          "name": "Intrusion detection sensitivity rate_cid_satel15964",
+          "lang_en": "Intrusion detection sensitivity rate",
+          "lang_ru": "Норма чувствительности детектора вторжения",
+          "lang_uk": "Норма чутливості детектора вторгнення"
+        },
+        {
+          "name": "Frequency drift compensation rate_cid_satel15972",
+          "lang_en": "Frequency drift compensation rate",
+          "lang_ru": "Норма компенсации ухода частоты",
+          "lang_uk": "Норма компенсації догляду частоти"
+        },
+        {
+          "name": "AUTO_OFF",
+          "lang_en": "Automatic group off",
+          "lang_ru": "Автоматическое снятие группы",
+          "lang_uk": "Автоматичне зняття групи"
+        },
+		{
+          "name": "GROUP_ON",
+          "lang_en": "Group on",
+          "lang_ru": "Взятие группы",
+          "lang_uk": "Взяття групи"
+        },
+		{
+          "name": "GROUP_OFF",
+          "lang_en": "Group off",
+          "lang_ru": "Снятие группы",
+          "lang_uk": "Зняття групи"
+        },
+        {
+          "name": "AUTO_ON",
+          "lang_en": "Automatic group on",
+          "lang_ru": "Автоматическое взятие группы",
+          "lang_uk": "Автоматичне взяття групи"
+        },
+        {
+          "name": "OFF_DELAY",
+          "lang_en": "Group off with delay",
+          "lang_ru": "Снятие группы с опозданием",
+          "lang_uk": "Зняття групи із затримкою"
+        },
+        {
+          "name": "OFF_LATER",
+          "lang_en": "Group off will later",
+          "lang_ru": "Отсрочка снятия группы",
+          "lang_uk": "Відстрочка зняття групи"
+        },
+        {
+          "name": "ON_LATER",
+          "lang_en": "Group on will later",
+          "lang_ru": "Отсрочка взятие группы",
+          "lang_uk": "Відстрочка взяття групи"
+        },
+        {
+          "name": "OFF_CANCEL",
+          "lang_en": "Group on canceled",
+          "lang_ru": "Отмена взятие группы",
+          "lang_uk": "Відміна взяття групи"
+        },
+        {
+          "name": "OFF_DISTANT",
+          "lang_en": "Group off from distance",
+          "lang_ru": "Дистанционное снятие группы",
+          "lang_uk": "Дистанційне зняття групи"
+        },
+        {
+          "name": "ON_DISTANT",
+          "lang_en": "Group on from distance",
+          "lang_ru": "Дистанционное взятие группы",
+          "lang_uk": "Дистанційне взяття групи"
+        },
+        {
+          "name": "ON_QUICK",
+          "lang_en": "Quick group on",
+          "lang_ru": "Быстрое взятие группы",
+          "lang_uk": "Швидке взяття групи"
+        },
+        {
+          "name": "DOWNLOAD - start_cid_satel15993",
+          "lang_en": "DOWNLOAD - start",
+          "lang_ru": "DOWNLOAD - начало",
+          "lang_uk": "DOWNLOAD - початок"
+        },
+        {
+          "name": "DOWNLOAD - end_cid_satel15994",
+          "lang_en": "DOWNLOAD - end",
+          "lang_ru": "DOWNLOAD - конец",
+          "lang_uk": "DOWNLOAD - кінець"
+        },
+        {
+          "name": "Callback request_cid_satel15995",
+          "lang_en": "Callback request",
+          "lang_ru": "Запрос на обратный звонок",
+          "lang_uk": "Запит на зворотній дзвінок"
+        },
+        {
+          "name": "Canceling a call back request_cid_satel15996",
+          "lang_en": "Canceling a call back request",
+          "lang_ru": "Отмена запроса на обратный звонок",
+          "lang_uk": "Скасувати запит на зворотний дзвінок"
+        },
+        {
+          "name": "End of the loading function_cid_satel15998",
+          "lang_en": "End of the loading function",
+          "lang_ru": "Завершение функции загрузка",
+          "lang_uk": "Завершення функції завантаження"
+        },
+        {
+          "name": "End of the download function (off)_cid_satel15999",
+          "lang_en": "End of the download function (off)",
+          "lang_ru": "Завершение функции загрузка(выкл.)",
+          "lang_uk": "Завершення функції завантаження (Вимк.)"
+        },
+        {
+          "name": "Unsuccessful remote access attempt_cid_satel16001",
+          "lang_en": "Unsuccessful remote access attempt",
+          "lang_ru": "Неудачная попытка дистанционного доступа",
+          "lang_uk": "Невдала спроба дистанційного доступу"
+        },
+        {
+          "name": "Unsuccessful remote access attempt (off)_cid_satel16002",
+          "lang_en": "Unsuccessful remote access attempt (off)",
+          "lang_ru": "Неудачная попытка дистанционного доступа(выкл.)",
+          "lang_uk": "Невдала спроба дистанційного доступу (вимк.)"
+        },
+        {
+          "name": "System stop command received_cid_satel16003",
+          "lang_en": "System stop command received",
+          "lang_ru": "Получена команда системного останова",
+          "lang_uk": "Отримано команду системного зупинення"
+        },
+        {
+          "name": "Canceling a system stop command_cid_satel16004",
+          "lang_en": "Canceling a system stop command",
+          "lang_ru": "Отмена команды системного останова",
+          "lang_uk": "Скасування команди системного зупинки"
+        },
+        {
+          "name": "Dialer (typesetter) stop command received_cid_satel16005",
+          "lang_en": "Dialer (typesetter) stop command received",
+          "lang_ru": "Получена команда останова диалера (наборщика)",
+          "lang_uk": "Отримано команду зупинки діалера (набирача)"
+        },
+        {
+          "name": "Cancellation of the command to stop the dialer (typesetter)_cid_satel16006",
+          "lang_en": "Cancellation of the command to stop the dialer (typesetter)",
+          "lang_ru": "Отмена команды останова диалера (наборщика)",
+          "lang_uk": "Скасування команди зупинки діалера (набирача)"
+        },
+        {
+          "name": "End of remote programming_cid_satel16007",
+          "lang_en": "End of remote programming",
+          "lang_ru": "Завершение дистанционного программирования",
+          "lang_uk": "Завершення дистанційного програмування"
+        },
+        {
+          "name": "Canceling the end of remote programming_cid_satel16008",
+          "lang_en": "Canceling the end of remote programming",
+          "lang_ru": "Отмена завершения дистанционного программироания",
+          "lang_uk": "Скасування завершення дистанційного програмування"
+        },
+        {
+          "name": "Access denied_cid_satel16011",
+          "lang_en": "Access denied",
+          "lang_ru": "Отказ доступа",
+          "lang_uk": "Відмова доступу"
+        },
+        {
+          "name": "Cancel access denied_cid_satel16012",
+          "lang_en": "Cancel access denied",
+          "lang_ru": "Отмена отказа доступа",
+          "lang_uk": "Скасування відмови доступу"
+        },
+        {
+          "name": "User access message_cid_satel16014",
+          "lang_en": "User access message",
+          "lang_ru": "Сообщение о доступе пользователя",
+          "lang_uk": "Повідомлення про доступ користувача"
+        },
+        {
+          "name": "Canceling a User Access Message_cid_satel16015",
+          "lang_en": "Canceling a User Access Message",
+          "lang_ru": "Отмена сообщения о доступе пользователя",
+          "lang_uk": "Скасувати повідомлення про доступ користувача"
+        },
+        {
+          "name": "Exit Denied_cid_satel16020",
+          "lang_en": "Exit Denied",
+          "lang_ru": "Выход Запрещен",
+          "lang_uk": "Вихід Заборонено"
+        },
+        {
+          "name": "Canceling an exit ban_cid_satel16021",
+          "lang_en": "Canceling an exit ban",
+          "lang_ru": "Отмена запрета на выход",
+          "lang_uk": "Скасування заборони на вихід"
+        },
+        {
+          "name": "Exit allowed_cid_satel16023",
+          "lang_en": "Exit allowed",
+          "lang_ru": "Выход разрешен",
+          "lang_uk": "Вихід дозволено"
+        },
+        {
+          "name": "Revoke permission to exit_cid_satel16024",
+          "lang_en": "Revoke permission to exit",
+          "lang_ru": "Отмена разрешения на выход",
+          "lang_uk": "Скасування дозволу на вихід"
+        },
+        {
+          "name": "Door left open_cid_satel16026",
+          "lang_en": "Door left open",
+          "lang_ru": "Дверь оставлена в открытом состоянии",
+          "lang_uk": "Двері залишені у відкритому стані"
+        },
+        {
+          "name": "Cancel Door left open_cid_satel16027",
+          "lang_en": "Cancel Door left open",
+          "lang_ru": "Отмена Дверь оставлена в открытом состоянии",
+          "lang_uk": "Скасування Двері залишені у відкритому стані"
+        },
+        {
+          "name": "Malfunction of control of a status of a door_cid_satel16029",
+          "lang_en": "Malfunction of control of a status of a door",
+          "lang_ru": "Неисправность контроля состояния двери",
+          "lang_uk": "Несправність контролю стану дверей"
+        },
+        {
+          "name": "Door state control rate_cid_satel16030",
+          "lang_en": "Door state control rate",
+          "lang_ru": "Норма контроля состояния двери",
+          "lang_uk": "Норма контролю стану дверей"
+        },
+        {
+          "name": "Request-to-exit device malfunction_cid_satel16032",
+          "lang_en": "Request-to-exit device malfunction",
+          "lang_ru": "Неисправность устройства \"запрос на выход\"",
+          "lang_uk": "Несправність пристрою \"запит на вихід\""
+        },
+        {
+          "name": "device norm \"request to exit\"_cid_satel16033",
+          "lang_en": "device norm \"request to exit\"",
+          "lang_ru": "норма устройства \"запрос на выход\"",
+          "lang_uk": "норма пристрою \"запит на вихід\""
+        },
+        {
+          "name": "Access programming started_cid_satel16035",
+          "lang_en": "Access programming started",
+          "lang_ru": "Программирование доступа начато",
+          "lang_uk": "Програмування доступу розпочато"
+        },
+        {
+          "name": "Cancel Access programming started_cid_satel16036",
+          "lang_en": "Cancel Access programming started",
+          "lang_ru": "Отмена Программирование доступа начато",
+          "lang_uk": "Скасувати Програмування доступу розпочато"
+        },
+        {
+          "name": "Access programming complete_cid_satel16038",
+          "lang_en": "Access programming complete",
+          "lang_ru": "Программирование доступа закончено",
+          "lang_uk": "Програмування доступу закінчено"
+        },
+        {
+          "name": "Cancel Access programming finished_cid_satel16039",
+          "lang_en": "Cancel Access programming finished",
+          "lang_ru": "Отмена Программирование доступа закончено",
+          "lang_uk": "Скасування Програмування доступу закінчено"
+        },
+        {
+          "name": "Changing the threat level of access_cid_satel16041",
+          "lang_en": "Changing the threat level of access",
+          "lang_ru": "Изменение уровня угрозы доступа",
+          "lang_uk": "Зміна рівня загрози доступу"
+        },
+        {
+          "name": "Arming with a key fob_cid_satel16042",
+          "lang_en": "Arming with a key fob",
+          "lang_ru": "Постановка под охрану брелком",
+          "lang_uk": "Постановка під охорону брелоком"
+        },
+        {
+          "name": "Access relay not triggered_cid_satel16044",
+          "lang_en": "Access relay not triggered",
+          "lang_ru": "Реле доступа не сработало",
+          "lang_uk": "Реле доступу не спрацювало"
+        },
+        {
+          "name": "Access relay rate_cid_satel16045",
+          "lang_en": "Access relay rate",
+          "lang_ru": "Норма реле доступа",
+          "lang_uk": "Норма реле доступу"
+        },
+        {
+          "name": "Request to Exit RTE_cid_satel16047",
+          "lang_en": "Request to Exit RTE",
+          "lang_ru": "Запрос на Выход RTE",
+          "lang_uk": "Запит на вихід RTE"
+        },
+        {
+          "name": "Canceling an RTE Logout Request_cid_satel16048",
+          "lang_en": "Canceling an RTE Logout Request",
+          "lang_ru": "Отмена запроса на Выход RTE",
+          "lang_uk": "Скасувати запит на Вихід RTE"
+        },
+        {
+          "name": "DSM Logout Request_cid_satel16050",
+          "lang_en": "DSM Logout Request",
+          "lang_ru": "Запрос на Выход DSM",
+          "lang_uk": "Запит на вихід DSM"
+        },
+        {
+          "name": "Canceling a DSM Logout Request_cid_satel16051",
+          "lang_en": "Canceling a DSM Logout Request",
+          "lang_ru": "Отмена запроса на Выход DSM",
+          "lang_uk": "Скасувати запит на Вихід DSM"
+        },
+        {
+          "name": "Restriction of arming performed_cid_satel16057",
+          "lang_en": "Restriction of arming performed",
+          "lang_ru": "Выполнен запрет постановки под охрану",
+          "lang_uk": "Виконано заборону постановки під охорону"
+        },
+        {
+          "name": "Canceling the prohibition of arming_cid_satel16058",
+          "lang_en": "Canceling the prohibition of arming",
+          "lang_ru": "Отмена запрета постановки под охрану",
+          "lang_uk": "Скасування заборони постановки під охорону"
+        },
+        {
+          "name": "Failure of automatic arming_cid_satel16067",
+          "lang_en": "Failure of automatic arming",
+          "lang_ru": "Неудача автоматичесой постановки под охрану",
+          "lang_uk": "Невдача автоматичної постановки під охорону"
+        },
+        {
+          "name": "Cancellation of automatic disarming failure_cid_satel16068",
+          "lang_en": "Cancellation of automatic disarming failure",
+          "lang_ru": "Отмена неудачи автоматического снятия с охраны",
+          "lang_uk": "Скасування невдачі автоматичного зняття з охорони"
+        },
+        {
+          "name": "User error on logout_cid_satel16071",
+          "lang_en": "User error on logout",
+          "lang_ru": "Ошибка пользователя при выходе",
+          "lang_uk": "Помилка користувача під час виходу"
+        },
+        {
+          "name": "Cancel error on user logout_cid_satel16072",
+          "lang_en": "Cancel error on user logout",
+          "lang_ru": "Отмена ошибки при выходе пользователя",
+          "lang_uk": "Скасування помилки під час виходу користувача"
+        },
+        {
+          "name": "User in the room_cid_satel16073",
+          "lang_en": "User in the room",
+          "lang_ru": "Пользователь в помещении",
+          "lang_uk": "Користувач у приміщенні"
+        },
+        {
+          "name": "User exit from the premises_cid_satel16074",
+          "lang_en": "User exit from the premises",
+          "lang_ru": "Выход пользователя из помещения",
+          "lang_uk": "Вихід користувача із приміщення"
+        },
+        {
+          "name": "Last arming_cid_satel16075",
+          "lang_en": "Last arming",
+          "lang_ru": "Последнее включение охраны",
+          "lang_uk": "Останнє включення охорони"
+        },
+        {
+          "name": "Last disarmed_cid_satel16076",
+          "lang_en": "Last disarmed",
+          "lang_ru": "Последнее снятие с охраны",
+          "lang_uk": "Останнє зняття з охорони"
+        },
+        {
+          "name": "The entered password is correct_cid_satel16080",
+          "lang_en": "The entered password is correct",
+          "lang_ru": "Введен верный пароль",
+          "lang_uk": "Введено правильний пароль"
+        },
+        {
+          "name": "Correct password entered (off)_cid_satel16081",
+          "lang_en": "Correct password entered (off)",
+          "lang_ru": "Введен верный пароль(выкл.)",
+          "lang_uk": "Введено правильний пароль (вимк.)"
+        },
+        {
+          "name": "Re-arming after alarm_cid_satel16082",
+          "lang_en": "Re-arming after alarm",
+          "lang_ru": "Перепостановка после тревоги",
+          "lang_uk": "Перестановка після тривоги"
+        },
+        {
+          "name": "Re-arm after alarm (off)_cid_satel16083",
+          "lang_en": "Re-arm after alarm (off)",
+          "lang_ru": "Перепостановка после тревоги(выкл.)",
+          "lang_uk": "Перестановка після тривоги (викл.)"
+        },
+        {
+          "name": "Automatic arming extended_cid_satel16084",
+          "lang_en": "Automatic arming extended",
+          "lang_ru": "Автоматическая постановка продлена",
+          "lang_uk": "Автоматична постановка продовжена"
+        },
+        {
+          "name": "Automatic arming extended (off)_cid_satel16085",
+          "lang_en": "Automatic arming extended (off)",
+          "lang_ru": "Автоматическая постановка продлена(выкл)",
+          "lang_uk": "Автоматична постановка продовжена (викл)"
+        },
+        {
+          "name": "Alarm clearing Panic_cid_satel16086",
+          "lang_en": "Alarm clearing Panic",
+          "lang_ru": "Сброс тревоги Паника",
+          "lang_uk": "Скидання тривоги Паніка"
+        },
+        {
+          "name": "Canceling alarm clearing Panic_cid_satel16087",
+          "lang_en": "Canceling alarm clearing Panic",
+          "lang_ru": "Отмена сброса тревоги Паника",
+          "lang_uk": "Скасування скидання тривоги Паніка"
+        },
+        {
+          "name": "Activation of the security by the service department_cid_satel16088",
+          "lang_en": "Activation of the security by the service department",
+          "lang_ru": "Включение охраны сервисной службой",
+          "lang_uk": "Увімкнення охорони сервісною службою"
+        },
+        {
+          "name": "Disarming by service_cid_satel16089",
+          "lang_en": "Disarming by service",
+          "lang_ru": "Выключение охраны сервисной службой",
+          "lang_uk": "Вимкнення охорони сервісною службою"
+        },
+        {
+          "name": "Access control reader locked_cid_satel16090",
+          "lang_en": "Access control reader locked",
+          "lang_ru": "Считыватель контроля доступа заблокирован",
+          "lang_uk": "Зчитувач контролю доступу заблоковано"
+        },
+        {
+          "name": "Access control reader unlocked_cid_satel16091",
+          "lang_en": "Access control reader unlocked",
+          "lang_ru": "Считыватель контроля доступа разблокирован",
+          "lang_uk": "Зчитувач контролю доступу розблоковано"
+        },
+        {
+          "name": "Relay off (relay number - see loop number)_cid_satel16092",
+          "lang_en": "Relay off (relay number - see loop number)",
+          "lang_ru": "Реле выключено (номер реле - см. номер шлейфа)",
+          "lang_uk": "Реле вимкнено (номер реле - див. номер шлейфу)"
+        },
+        {
+          "name": "Relay on (relay number - see loop number)_cid_satel16093",
+          "lang_en": "Relay on (relay number - see loop number)",
+          "lang_ru": "Реле включено (номер реле - см. номер шлейфа)",
+          "lang_uk": "Реле увімкнено (номер реле - див. номер шлейфу)"
+        },
+        {
+          "name": "Siren 1 disabled_cid_satel16094",
+          "lang_en": "Siren 1 disabled",
+          "lang_ru": "Сирена 1 отключена",
+          "lang_uk": "Сирена 1 відключена"
+        },
+        {
+          "name": "Siren 1 on_cid_satel16095",
+          "lang_en": "Siren 1 on",
+          "lang_ru": "Сирена 1 включена",
+          "lang_uk": "Сирена 1 включена"
+        },
+        {
+          "name": "Siren 2 disabled_cid_satel16096",
+          "lang_en": "Siren 2 disabled",
+          "lang_ru": "Сирена 2 отключена",
+          "lang_uk": "Сирена 2 відключена"
+        },
+        {
+          "name": "Siren 2 on_cid_satel16097",
+          "lang_en": "Siren 2 on",
+          "lang_ru": "Сирена 2 включена",
+          "lang_uk": "Сирена 2 включена"
+        },
+        {
+          "name": "Alarm relay disabled_cid_satel16098",
+          "lang_en": "Alarm relay disabled",
+          "lang_ru": "Тревожное реле отключено",
+          "lang_uk": "Тривожне реле відключено"
+        },
+        {
+          "name": "Alarm relay enabled_cid_satel16099",
+          "lang_en": "Alarm relay enabled",
+          "lang_ru": "Тревожное реле включено",
+          "lang_uk": "Тривожне реле увімкнено"
+        },
+        {
+          "name": "Alarm relay disabled_cid_satel16100",
+          "lang_en": "Alarm relay disabled",
+          "lang_ru": "Аварийное реле отключено",
+          "lang_uk": "Аварійне реле вимкнено"
+        },
+        {
+          "name": "Alarm relay enabled_cid_satel16101",
+          "lang_en": "Alarm relay enabled",
+          "lang_ru": "Аварийное реле включено",
+          "lang_uk": "Аварійне реле увімкнено"
+        },
+        {
+          "name": "Reversing relay disconnected_cid_satel16102",
+          "lang_en": "Reversing relay disconnected",
+          "lang_ru": "Реверсивное реле отключено",
+          "lang_uk": "Реверсивне реле вимкнено"
+        },
+        {
+          "name": "Reversing relay switched on_cid_satel16103",
+          "lang_en": "Reversing relay switched on",
+          "lang_ru": "Реверсивное реле включено",
+          "lang_uk": "Реверсивне реле увімкнено"
+        },
+        {
+          "name": "Annunciator # 3 disabled_cid_satel16104",
+          "lang_en": "Annunciator # 3 disabled",
+          "lang_ru": "Оповещатель №3 отключен",
+          "lang_uk": "Оповіщувач №3 вимкнено"
+        },
+        {
+          "name": "Annunciator # 3 is on_cid_satel16105",
+          "lang_en": "Annunciator # 3 is on",
+          "lang_ru": "Оповещатель №3 включен",
+          "lang_uk": "Оповіщувач №3 увімкнено"
+        },
+        {
+          "name": "Annunciator # 4 disabled_cid_satel16106",
+          "lang_en": "Annunciator # 4 disabled",
+          "lang_ru": "Оповещатель №4 отключен",
+          "lang_uk": "Оповіщувач №4 вимкнено"
+        },
+        {
+          "name": "Annunciator # 4 is on_cid_satel16107",
+          "lang_en": "Annunciator # 4 is on",
+          "lang_ru": "Оповещатель №4 включен",
+          "lang_uk": "Оповіщувач №4 включений"
+        },
+        {
+          "name": "Turn off AUX_cid_satel16108",
+          "lang_en": "Turn off AUX",
+          "lang_ru": "Выключение AUX",
+          "lang_uk": "Вимкнення AUX"
+        },
+        {
+          "name": "Switching off the control panel function (control panel, panel)_cid_satel16109",
+          "lang_en": "Switching off the control panel function (control panel, panel)",
+          "lang_ru": "Выключение функции ППК (централи, панели) ",
+          "lang_uk": "Вимкнення функції ППК (централі, панелі)"
+        },
+        {
+          "name": "Enabling the control panel function (control panel, panel)_cid_satel16110",
+          "lang_en": "Enabling the control panel function (control panel, panel)",
+          "lang_ru": "Включение функции ППК (централи, панели) ",
+          "lang_uk": "Увімкнення функції ППК (централі, панелі)"
+        },
+        {
+          "name": "Module added_cid_satel16111",
+          "lang_en": "Module added",
+          "lang_ru": "Модуль добавлен",
+          "lang_uk": "Модуль доданий"
+        },
+        {
+          "name": "Module added (off)_cid_satel16112",
+          "lang_en": "Module added (off)",
+          "lang_ru": "Модуль добавлен(выкл.)",
+          "lang_uk": "Модуль доданий(викл.)"
+        },
+        {
+          "name": "Module removed (off)_cid_satel16114",
+          "lang_en": "Module removed (off)",
+          "lang_ru": "Модуль удален(выкл.)",
+          "lang_uk": "Модуль видалено (викл.)"
+        },
+        {
+          "name": "Module removed (off)_cid_satel16114",
+          "lang_en": "Module removed (off)",
+          "lang_ru": "Модуль удален(выкл.)",
+          "lang_uk": "Модуль видалено (викл.)"
+        },
+        {
+          "name": "The telephone communicator is disabled_cid_satel16115",
+          "lang_en": "The telephone communicator is disabled",
+          "lang_ru": "Телефонный коммуникатор отключен",
+          "lang_uk": "Телефонний комунікатор вимкнено"
+        },
+        {
+          "name": "Phone dialer included_cid_satel16116",
+          "lang_en": "Phone dialer included",
+          "lang_ru": "Телефонный коммуникатор включен",
+          "lang_uk": "Телефонний комунікатор увімкнено"
+        },
+        {
+          "name": "Radio transmitter included_cid_satel16118",
+          "lang_en": "Radio transmitter included",
+          "lang_ru": "Радиопередатчик включен",
+          "lang_uk": "Радіопередавач увімкнено"
+        },
+        {
+          "name": "Radio transmitter disabled_cid_satel16117",
+          "lang_en": "Radio transmitter disabled",
+          "lang_ru": "Радиопередатчик отключен",
+          "lang_uk": "Радіопередавач вимкнено"
+        },
+        {
+          "name": "Remote upload / download disabled_cid_satel16119",
+          "lang_en": "Remote upload / download disabled",
+          "lang_ru": "Удалённая загрузка/выгрузка отключена",
+          "lang_uk": "Віддалене завантаження/вивантаження вимкнено"
+        },
+        {
+          "name": "Remote upload / download enabled_cid_satel16120",
+          "lang_en": "Remote upload / download enabled",
+          "lang_ru": "Удалённая загрузка/выгрузка включена",
+          "lang_uk": "Видалене завантаження/вивантаження увімкнено"
+        },
+        {
+          "name": "Setting loop bypass_cid_satel16121",
+          "lang_en": "Setting loop bypass",
+          "lang_ru": "Установка обхода шлейфа",
+          "lang_uk": "Встановлення обходу шлейфу"
+        },
+        {
+          "name": "Cancel loop bypass_cid_satel16122",
+          "lang_en": "Cancel loop bypass",
+          "lang_ru": "Отмена обхода шлейфа",
+          "lang_uk": "Скасування обходу шлейфу"
+        },
+        {
+          "name": "Fire Zone Bypass_cid_satel16123",
+          "lang_en": "Fire Zone Bypass",
+          "lang_ru": "Обход пожарной зоны",
+          "lang_uk": "Обхід пожежної зони"
+        },
+        {
+          "name": "Cancel Fire Zone Bypass_cid_satel16124",
+          "lang_en": "Cancel Fire Zone Bypass",
+          "lang_ru": "Отмена обхода пожарной зоны",
+          "lang_uk": "Скасування обходу пожежної зони"
+        },
+        {
+          "name": "Bypass 24h zone_cid_satel16125",
+          "lang_en": "Bypass 24h zone",
+          "lang_ru": "Обход 24ч зоны",
+          "lang_uk": "Обхід 24год."
+        },
+        {
+          "name": "Canceling the bypass of the 24H zone_cid_satel16126",
+          "lang_en": "Canceling the bypass of the 24H zone",
+          "lang_ru": "Отмена обхода 24ч зоны",
+          "lang_uk": "Скасування обходу 24год."
+        },
+        {
+          "name": "BYPASS_INVISION_ZONE",
+          "lang_en": "Bypass invasion zone",
+          "lang_ru": "Обход зоны вторжения",
+          "lang_uk": "Обхід зони вторгнення"
+        },
+        {
+          "name": "RESTORE_BYPASS_INVISION_ZONE",
+          "lang_en": "Cancel bypass invasion zone",
+          "lang_ru": "Отмена обхода зоны вторжения",
+          "lang_uk": "Відміна обходу зони вторгнення"
+        },
+        {
+          "name": "Bypassing group bypassing zones_cid_satel16129",
+          "lang_en": "Bypassing group bypassing zones",
+          "lang_ru": "Обход группового отключения зон",
+          "lang_uk": "Обхід групового вимкнення зон"
+        },
+        {
+          "name": "Canceling the bypass of group bypassing zones_cid_satel16130",
+          "lang_en": "Canceling the bypass of group bypassing zones",
+          "lang_ru": "Отмена обхода группового отключения зон",
+          "lang_uk": "Скасування обходу групового вимкнення зон"
+        },
+        {
+          "name": "Bypass zone switching_cid_satel16131",
+          "lang_en": "Bypass zone switching",
+          "lang_ru": "Обход переключения зон",
+          "lang_uk": "Обхід перемикання зон"
+        },
+        {
+          "name": "Un-bypassing zone switching_cid_satel16132",
+          "lang_en": "Un-bypassing zone switching",
+          "lang_ru": "Отмена обхода переключения зон",
+          "lang_uk": "Скасування обходу перемикання зон"
+        },
+        {
+          "name": "Bypassing the access area_cid_satel16133",
+          "lang_en": "Bypassing the access area",
+          "lang_ru": "Обход зоны доступа",
+          "lang_uk": "Обхід зони доступу"
+        },
+        {
+          "name": "Unbypassing the access zone_cid_satel16134",
+          "lang_en": "Unbypassing the access zone",
+          "lang_ru": "Отмена обхода зоны доступа",
+          "lang_uk": "Скасування обходу зони доступу"
+        },
+        {
+          "name": "Access point bypass_cid_satel16135",
+          "lang_en": "Access point bypass",
+          "lang_ru": "Обход точки доступа",
+          "lang_uk": "Обхід точки доступу"
+        },
+        {
+          "name": "Canceling Access Point Bypass_cid_satel16136",
+          "lang_en": "Canceling Access Point Bypass",
+          "lang_ru": "Отмена обхода точки доступа",
+          "lang_uk": "Скасування обходу точки доступу"
+        },
+        {
+          "name": "Switching off control of the main power supply of the PPK (220V)_cid_satel16137",
+          "lang_en": "Switching off control of the main power supply of the PPK (220V)",
+          "lang_ru": "Выключение контроля основного питания ППК (220В)",
+          "lang_uk": "Вимкнення контролю основного живлення ППК (220В)"
+        },
+        {
+          "name": "Enabling control of the main power supply of the PPK (220V)_cid_satel16138",
+          "lang_en": "Enabling control of the main power supply of the PPK (220V)",
+          "lang_ru": "Включение контроля основного питания ППК (220В)",
+          "lang_uk": "Включення контролю основного живлення ППК (220В)"
+        },
+        {
+          "name": "Turn off siren control_cid_satel16139",
+          "lang_en": "Turn off siren control",
+          "lang_ru": "Выключение контроля сирены",
+          "lang_uk": "Вимкнення контролю сирени"
+        },
+        {
+          "name": "Enabling siren control_cid_satel16140",
+          "lang_en": "Enabling siren control",
+          "lang_ru": "Включение контроля сирены",
+          "lang_uk": "Увімкнення контролю сирени"
+        },
+        {
+          "name": "Disabling battery monitoring_cid_satel16141",
+          "lang_en": "Disabling battery monitoring",
+          "lang_ru": "Выключение контроля АКБ",
+          "lang_uk": "Вимкнення контролю АКБ"
+        },
+        {
+          "name": "Enabling battery monitoring_cid_satel16142",
+          "lang_en": "Enabling battery monitoring",
+          "lang_ru": "Включение контроля АКБ",
+          "lang_uk": "Увімкнення контролю АКБ"
+        },
+        {
+          "name": "Deactivate the relay (deactivate the function) (relay number - see loop number)_cid_satel16143",
+          "lang_en": "Deactivate the relay (deactivate the function) (relay number - see loop number)",
+          "lang_ru": "Выключение реле (выключение функции) (номер реле - см. номер шлейфа)",
+          "lang_uk": "Вимкнення реле (вимкнення функції) (номер реле - див. номер шлейфу)"
+        },
+        {
+          "name": "Relay enable (function enable)_cid_satel16144",
+          "lang_en": "Relay enable (function enable)",
+          "lang_ru": "Включение реле (включение функции)",
+          "lang_uk": "Увімкнення реле (вмикання функції)"
+        },
+        {
+          "name": "Disabling the monitoring function for monitoring communication with the monitoring station_cid_satel16145",
+          "lang_en": "Disabling the monitoring function for monitoring communication with the monitoring station",
+          "lang_ru": "Выключение функции контроля связи с ПЦН",
+          "lang_uk": "Вимкнення функції контролю зв'язку з ПЦН"
+        },
+        {
+          "name": "Enabling the function of monitoring communication with the monitoring station_cid_satel16146",
+          "lang_en": "Enabling the function of monitoring communication with the monitoring station",
+          "lang_ru": "Включение функции контроля связи с ПЦН",
+          "lang_uk": "Увімкнення функції контролю зв'язку з ПЦН"
+        },
+        {
+          "name": "Disconnecting the power supply to the sensors_cid_satel16147",
+          "lang_en": "Disconnecting the power supply to the sensors",
+          "lang_ru": "Отключение питания датчиков",
+          "lang_uk": "Вимкнення живлення датчиків"
+        },
+        {
+          "name": "Powering On the Sensors_cid_satel16148",
+          "lang_en": "Powering On the Sensors",
+          "lang_ru": "Включение питания датчиков",
+          "lang_uk": "Увімкнення живлення датчиків"
+        },
+        {
+          "name": "Turn off TAN_cid_satel16149",
+          "lang_en": "Turn off TAN",
+          "lang_ru": "Выключение ТАН",
+          "lang_uk": "Вимкнення ТАН"
+        },
+        {
+          "name": "Enabling TAN_cid_satel16150",
+          "lang_en": "Enabling TAN",
+          "lang_ru": "Включение ТАН",
+          "lang_uk": "Включення ТАН"
+        },
+        {
+          "name": "Periodic test_cid_satel16151",
+          "lang_en": "Periodic test",
+          "lang_ru": "Периодический тест",
+          "lang_uk": "Періодичний тест"
+        },
+        {
+          "name": "Power status - NO MAINS 220 on the module_cid_satel16152",
+          "lang_en": "Power status - NO MAINS 220 on the module",
+          "lang_ru": "Состояние питания - НЕТ СЕТИ 220 на модуле ",
+          "lang_uk": "Стан живлення - НІ МЕРЕЖІ 220 на модулі"
+        },
+        {
+          "name": "Manual test_cid_satel16153",
+          "lang_en": "Manual test",
+          "lang_ru": "Ручной тест",
+          "lang_uk": "Ручний тест"
+        },
+        {
+          "name": "Manual test (off)_cid_satel16154",
+          "lang_en": "Manual test (off)",
+          "lang_ru": "Ручной тест(выкл.)",
+          "lang_uk": "Ручний тест (викл.)"
+        },
+        {
+          "name": "Periodic test_cid_satel16151",
+          "lang_en": "Periodic test",
+          "lang_ru": "Периодический тест",
+          "lang_uk": "Періодичний тест"
+        },
+        {
+          "name": "Periodic test_cid_satel16151",
+          "lang_en": "Periodic test",
+          "lang_ru": "Периодический тест",
+          "lang_uk": "Періодичний тест"
+        },
+        {
+          "name": "Fire test_cid_satel16162",
+          "lang_en": "Fire test",
+          "lang_ru": "Пожарный тест",
+          "lang_uk": "Пожежний тест"
+        },
+        {
+          "name": "Fire test (off)_cid_satel16163",
+          "lang_en": "Fire test (off)",
+          "lang_ru": "Пожарный тест(выкл.)",
+          "lang_uk": "Пожежний тест (викл.)"
+        },
+        {
+          "name": "Status report_cid_satel16165",
+          "lang_en": "Status report",
+          "lang_ru": "Отчет состояния",
+          "lang_uk": "Звіт стану"
+        },
+        {
+          "name": "Status report (off)_cid_satel16166",
+          "lang_en": "Status report (off)",
+          "lang_ru": "Отчет состояния(выкл.)",
+          "lang_uk": "Звіт стану (викл.)"
+        },
+        {
+          "name": "Voice connection_cid_satel16168",
+          "lang_en": "Voice connection",
+          "lang_ru": "Голосовая связь",
+          "lang_uk": "Голосовий зв'язок"
+        },
+        {
+          "name": "Voice communication (off)_cid_satel16169",
+          "lang_en": "Voice communication (off)",
+          "lang_ru": "Голосовая связь(выкл.)",
+          "lang_uk": "Голосовий зв'язок (викл.)"
+        },
+        {
+          "name": "Test bypass mode_cid_satel16171",
+          "lang_en": "Test bypass mode",
+          "lang_ru": "Тестовый режим обхода",
+          "lang_uk": "Тестовий режим обходу"
+        },
+        {
+          "name": "Bypass Test Mode (Off)_cid_satel16172",
+          "lang_en": "Bypass Test Mode (Off)",
+          "lang_ru": "Тестовый режим обхода(выкл.)",
+          "lang_uk": "Тестовий режим обходу (викл.)"
+        },
+        {
+          "name": "Periodic test - System fault present_cid_satel16174",
+          "lang_en": "Periodic test - System fault present",
+          "lang_ru": "Периодический тест - Системная неисправность присутствует",
+          "lang_uk": "Періодичний тест - Системна несправність присутня"
+        },
+        {
+          "name": "Periodic test - No system fault_cid_satel16175",
+          "lang_en": "Periodic test - No system fault",
+          "lang_ru": "Периодический тест - Системная неисправность отсутствует",
+          "lang_uk": "Періодичний тест - Системна несправність відсутня"
+        },
+        {
+          "name": "Video transmission activated_cid_satel16177",
+          "lang_en": "Video transmission activated",
+          "lang_ru": "Видеопередача активирована",
+          "lang_uk": "Відеопередача активована"
+        },
+        {
+          "name": "Video transmission deactivated_cid_satel16178",
+          "lang_en": "Video transmission deactivated",
+          "lang_ru": "Видеопередача деактивирована",
+          "lang_uk": "Відеопередача деактивована"
+        },
+        {
+          "name": "Report: there is a connection with the device._cid_satel16180",
+          "lang_en": "Report: there is a connection with the device.",
+          "lang_ru": "Отчет: связь с прибором есть.",
+          "lang_uk": "Звіт: зв'язок із приладом є."
+        },
+        {
+          "name": "Checkpoint violation_cid_satel16181",
+          "lang_en": "Checkpoint violation",
+          "lang_ru": "Нарушение контрольной точки",
+          "lang_uk": "Порушення контрольної точки"
+        },
+        {
+          "name": "Checkpoint rate_cid_satel16182",
+          "lang_en": "Checkpoint rate",
+          "lang_ru": "Норма контрольной точки",
+          "lang_uk": "Норма контрольної точки"
+        },
+        {
+          "name": "Checkpoint not tested_cid_satel16184",
+          "lang_en": "Checkpoint not tested",
+          "lang_ru": "Контрольная точка не протестирована",
+          "lang_uk": "Контрольна точка не протестована"
+        },
+        {
+          "name": "Checkpoint tested_cid_satel16185",
+          "lang_en": "Checkpoint tested",
+          "lang_ru": "Контрольная точка протестирована",
+          "lang_uk": "Контрольна точка протестована"
+        },
+        {
+          "name": "Violation of test bypass mode_cid_satel16187",
+          "lang_en": "Violation of test bypass mode",
+          "lang_ru": "Нарушение тестового режима обхода",
+          "lang_uk": "Порушення тестового режиму обходу"
+        },
+        {
+          "name": "Restoring Test Bypass Mode_cid_satel16188",
+          "lang_en": "Restoring Test Bypass Mode",
+          "lang_ru": "Восстановление тестового режима обхода",
+          "lang_uk": "Відновлення тестового режиму обходу"
+        },
+        {
+          "name": "Fire Zone Test Bypass Violation_cid_satel16190",
+          "lang_en": "Fire Zone Test Bypass Violation",
+          "lang_ru": "Нарушение тестового обхода пожарной зоны",
+          "lang_uk": "Порушення тестового обходу пожежної зони"
+        },
+        {
+          "name": "Fire zone tested in Test-Pass mode_cid_satel16191",
+          "lang_en": "Fire zone tested in Test-Pass mode",
+          "lang_ru": "Пожарная зона протестирована в режиме Тест-Проход",
+          "lang_uk": "Пожежна зона протестована у режимі Тест-Прохід"
+        },
+        {
+          "name": "Checking the panic button from the keyboard # GGGG by user # ZZZ_cid_satel16193",
+          "lang_en": "Checking the panic button from the keyboard # GGGG by user # ZZZ",
+          "lang_ru": "Проверка тревожной кнопки с клавиатуры №GGGG пользователем №ZZZ",
+          "lang_uk": "Перевірка тривожної кнопки з клавіатури №GGGG користувачем №ZZZ"
+        },
+        {
+          "name": "Panic zone tested in Test-Pass mode_cid_satel16194",
+          "lang_en": "Panic zone tested in Test-Pass mode",
+          "lang_ru": "Зона Паника протестирована в режиме Тест-Проход",
+          "lang_uk": "Зона Паніка протестована у режимі Тест-Прохід"
+        },
+        {
+          "name": "Service call_cid_satel16196",
+          "lang_en": "Service call",
+          "lang_ru": "Вызов сервисной службы",
+          "lang_uk": "Виклик сервісної служби"
+        },
+        {
+          "name": "Canceling a service call_cid_satel16197",
+          "lang_en": "Canceling a service call",
+          "lang_ru": "Отмена вызова сервисной службы",
+          "lang_uk": "Скасування виклику сервісної служби"
+        },
+        {
+          "name": "Reset event memory_cid_satel16199",
+          "lang_en": "Reset event memory",
+          "lang_ru": "Сброс памяти событий",
+          "lang_uk": "Скидання пам'яті подій"
+        },
+        {
+          "name": "Memory is 50% full_cid_satel16202",
+          "lang_en": "Memory is 50% full",
+          "lang_ru": "Память заполнена на 50%",
+          "lang_uk": "Пам'ять заповнена на 50%"
+        },
+        {
+          "name": "Memory 50% full (off)_cid_satel16203",
+          "lang_en": "Memory 50% full (off)",
+          "lang_ru": "Память заполнена на 50%(выкл)",
+          "lang_uk": "Пам'ять заповнена на 50% (викл)"
+        },
+        {
+          "name": "Memory 90% full_cid_satel16204",
+          "lang_en": "Memory 90% full",
+          "lang_ru": "Память заполнена на 90%",
+          "lang_uk": "Пам'ять заповнена на 90%"
+        },
+        {
+          "name": "Memory 90% full (off)_cid_satel16205",
+          "lang_en": "Memory 90% full (off)",
+          "lang_ru": "Память заполнена на 90%(выкл)",
+          "lang_uk": "Пам'ять заповнена на 90% (викл)"
+        },
+        {
+          "name": "Overflow of event memory of the device_cid_satel16206",
+          "lang_en": "Overflow of event memory of the device",
+          "lang_ru": "Переполнение памяти событий устройства",
+          "lang_uk": "Переповнення пам'яті подій пристрою"
+        },
+        {
+          "name": "Reset Time / Date_cid_satel16207",
+          "lang_en": "Reset Time / Date",
+          "lang_ru": "Сброс Время/Дата",
+          "lang_uk": "Скидання Час/Дата"
+        },
+        {
+          "name": "Cancel Reset Time / Date_cid_satel16208",
+          "lang_en": "Cancel Reset Time / Date",
+          "lang_ru": "Отмена сброса Время/Дата",
+          "lang_uk": "Скасування скидання Час/Дата"
+        },
+        {
+          "name": "System time / date is not correct_cid_satel16209",
+          "lang_en": "System time / date is not correct",
+          "lang_ru": "Системное время/дата не корректны",
+          "lang_uk": "Системний час/дата не коректні"
+        },
+        {
+          "name": "System time / date is correct_cid_satel16210",
+          "lang_en": "System time / date is correct",
+          "lang_ru": "Системное время/дата корректны",
+          "lang_uk": "Системний час/дата коректні"
+        },
+        {
+          "name": "Event log marker for 32 hours_cid_satel16217",
+          "lang_en": "Event log marker for 32 hours",
+          "lang_ru": "Маркер в журнале событий на 32 часа",
+          "lang_uk": "Маркер у журналі подій на 32 години"
+        },
+        {
+          "name": "Marker in the event log for 32 hours saved_cid_satel16218",
+          "lang_en": "Marker in the event log for 32 hours saved",
+          "lang_ru": "Маркер в журнале событий на 32 часа сохранен",
+          "lang_uk": "Маркер у журналі подій на 32 години збережено"
+        },
+        {
+          "name": "Schedule changed_cid_satel16219",
+          "lang_en": "Schedule changed",
+          "lang_ru": "Расписание изменено",
+          "lang_uk": "Розклад змінено"
+        },
+        {
+          "name": "Schedule changed (off)_cid_satel16220",
+          "lang_en": "Schedule changed (off)",
+          "lang_ru": "Расписание изменено (выкл.)",
+          "lang_uk": "Розклад змінено (вимк.)"
+        },
+        {
+          "name": "Exception schedule changed_cid_satel16221",
+          "lang_en": "Exception schedule changed",
+          "lang_ru": "Расписание исключений изменено",
+          "lang_uk": "Розклад винятків змінено"
+        },
+        {
+          "name": "Exception schedule changed (off)_cid_satel16222",
+          "lang_en": "Exception schedule changed (off)",
+          "lang_ru": "Расписание исключений изменено(выкл.)",
+          "lang_uk": "Розклад винятків змінено (викл.)"
+        },
+        {
+          "name": "Access Control Schedule Changed_cid_satel16223",
+          "lang_en": "Access Control Schedule Changed",
+          "lang_ru": "Расписание контроля Доступа изменено",
+          "lang_uk": "Розклад контролю Доступу змінено"
+        },
+        {
+          "name": "Access control schedule changed (off)_cid_satel16224",
+          "lang_en": "Access control schedule changed (off)",
+          "lang_ru": "Расписание контроля Доступа изменено(выкл.)",
+          "lang_uk": "Розклад контролю доступу змінено (викл.)"
+        },
+        {
+          "name": "Detector problem_cid_satel16225",
+          "lang_en": "Detector problem",
+          "lang_ru": "Проблема детектора",
+          "lang_uk": "Проблема детектора"
+        },
+        {
+          "name": "Detector rate_cid_satel16226",
+          "lang_en": "Detector rate",
+          "lang_ru": "Норма детектора",
+          "lang_uk": "Норма детектора"
+        },
+        {
+          "name": "Master key control_cid_satel16227",
+          "lang_en": "Master key control",
+          "lang_ru": "Контроль универсального ключа",
+          "lang_uk": "Контроль універсального ключа"
+        },
+        {
+          "name": "Canceling master key control_cid_satel16228",
+          "lang_en": "Canceling master key control",
+          "lang_ru": "Отмена контроля универсального ключа",
+          "lang_uk": "Скасування контролю за універсальним ключем"
+        },
+        {
+          "name": "System is not active_cid_satel16229",
+          "lang_en": "System is not active",
+          "lang_ru": "Система не активна",
+          "lang_uk": "Система не активна"
+        },
+        {
+          "name": "DOWNLOAD_SUCCESS_FIRMWARE",
+          "lang_en": "Successful firmware download",
+          "lang_ru": "Успешная загрузка прошивки",
+          "lang_uk": "Успішне завантаження прошивки"
+        },
+        {
+          "name": "UPDATING_SUCCESS_FIRMWARE",
+          "lang_en": "Successful firmware update",
+          "lang_ru": "Успешное обновление прошивки завершено",
+          "lang_uk": "Успішне оновлення прошивки завершено"
+        },
+        {
+          "name": "error in main or backup SIM card settings",
+          "lang_en": "error in main or backup SIM card settings",
+          "lang_ru": "ошибка в настройках основной или резервной SIM",
+          "lang_uk": "помилка в налаштуваннях основної або резервної SIM"
+        },
+        {
+          "name": "Change active SIM card",
+          "lang_en": "Change active SIM card",
+          "lang_ru": "Смена активной SIM-карты",
+          "lang_uk": "Зміна активної SIM-картки"
+        },
+        {
+          "name": "backup transmission channel (SIM2) is used",
+          "lang_en": "backup transmission channel (SIM2) is used",
+          "lang_ru": "используется резервный канал передачи (SIM2)",
+          "lang_uk": "використовується резервний канал передачі (SIM2)"
+        }
+      ],
+      "events": [
+        {
+          "event_by_user": "MEDICAL_ALARM",
+          "code": 100,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "PERSONAL_DANGER",
+          "code": 101,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "CANT_INALARM",
+          "code": 102,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "FIRE_ALARM",
+          "code": 110,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "SMOKE",
+          "code": 111,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "FIRE_START",
+          "code": 112,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "WATER_LEAK",
+          "code": 113,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "HEAT",
+          "code": 114,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "FIRE_KEYBOARD",
+          "code": 115,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": null,
+          "code": 116,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "FIRE",
+          "code": 117,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "POSIBLE_FIRE",
+          "code": 118,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "ALM_BTN_PRS",
+          "code": 120,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "ALM_BTN_RLZ",
+          "code": 120,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "FORCING",
+          "code": 121,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "ALM_BTN_PRS",
+          "code": 122,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "ALM_BTN_RLZ",
+          "code": 122,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Hearing alarm",
+          "code": 123,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Hearing alarm canseled",
+          "code": 123,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Duress – Access granted",
+          "code": 124,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Duress – Access granted canseled",
+          "code": 124,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Duress – Egress granted",
+          "code": 125,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Duress – Egress granted cenceled",
+          "code": 125,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "ALM_INNER_ZONE",
+          "code": 126,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Absence of a guard normal",
+          "code": 126,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Invasion, day / night zone",
+          "code": 135,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Invasion recovery, day / night zone",
+          "code": 135,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Hearing alarm",
+          "code": 136,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Hearing alarm canseled",
+          "code": 136,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "ALARM_OPEN_TMP_DEVICE",
+          "code": 137,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "NORM_TMP_DEVICE",
+          "code": 137,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Probable burglary alarm",
+          "code": 138,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Canceling a probable burglary alarm",
+          "code": 138,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Alarm, intrusion verifier",
+          "code": 139,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Recovery, penetration verifier",
+          "code": 139,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Sensor cable interrupted",
+          "code": 141,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Restoration of a broken loop of sensors",
+          "code": 141,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Sensor loop is short-circuited",
+          "code": 142,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Loop short circuit recovery",
+          "code": 142,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Expansion module defective",
+          "code": 143,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Expansion module recovery",
+          "code": 143,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Silent intrusion alarm",
+          "code": 146,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Restoring silent burglary alarm",
+          "code": 146,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "No communication with the detector",
+          "code": 147,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Restoring communication with the detector",
+          "code": 147,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Alarm 24 hour non-security zone",
+          "code": 150,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Restoring 24 hour non-security zone alarm",
+          "code": 150,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cooling",
+          "code": 152,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Cooling rate",
+          "code": 152,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Loss of heat",
+          "code": 153,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Heat rate",
+          "code": 153,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Foil break",
+          "code": 155,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Foil rate",
+          "code": 155,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Day zone malfunction",
+          "code": 156,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Day zone rate",
+          "code": 156,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Day zone rate",
+          "code": 157,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Gas level in the cylinder",
+          "code": 157,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Heat",
+          "code": 158,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "High temperature alarm recovery",
+          "code": 158,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Low temperature",
+          "code": 159,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Low temperature alarm recovery",
+          "code": 159,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Loss of airflow",
+          "code": 161,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Air flow rate",
+          "code": 161,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Incorrect tank level",
+          "code": 163,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Tank level rate",
+          "code": 163,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Fire relief",
+          "code": 200,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancel fire reset",
+          "code": 200,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Low water pressure",
+          "code": 201,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Water pressure rate",
+          "code": 201,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Low CO2 concentration",
+          "code": 202,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "CO2 concentration rate",
+          "code": 202,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Valve sensor",
+          "code": 203,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Valve sensor recovery",
+          "code": 203,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Low water level",
+          "code": 204,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Water level rate",
+          "code": 204,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Pump on",
+          "code": 205,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Pump off",
+          "code": 205,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Pump malfunction",
+          "code": 206,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Pump rate",
+          "code": 206,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Restriction of arming performed",
+          "code": 207,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Change active SIM card",
+          "code": 208,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Resetting the GSM module power supply",
+          "code": 209,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Opening the \"keybox\"",
+          "code": 220,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Opening the \"keybox\"",
+          "code": 220,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "RAM checksum error",
+          "code": 303,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "RAM checksum rate",
+          "code": 303,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "ROM checksum error",
+          "code": 304,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "ROM checksum rate",
+          "code": 304,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "PPK_CONN_OK",
+          "code": 308,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Failed battery test",
+          "code": 309,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Battery test rate",
+          "code": 309,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Ground fault",
+          "code": 310,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Grounding rate",
+          "code": 310,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Power supply overload",
+          "code": 312,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Power supply rate",
+          "code": 312,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Software reset by engineer. Device version GGGG.ZZ",
+          "code": 313,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Engineer canceled a software reset",
+          "code": 313,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Phone Communicator Code Conversion Error",
+          "code": 314,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "GSM module restart",
+          "code": 314,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Change active SIM card",
+          "code": 315,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "the main transmission channel (SIM1) is used",
+          "code": 316,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "backup transmission channel (SIM2) is used",
+          "code": 317,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Loss of communication between the telephone commun",
+          "code": 319,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Loss of communication between the telephone commun",
+          "code": 319,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Siren / relay malfunction",
+          "code": 320,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Siren / Relay Rate",
+          "code": 320,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Siren 1 malfunction",
+          "code": 321,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": null,
+          "code": 321,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": null,
+          "code": 322,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Siren rate 2",
+          "code": 322,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Signal relay defective",
+          "code": 323,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Alarm relay rate",
+          "code": 323,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Siren / relay malfunction",
+          "code": 324,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Relay rate",
+          "code": 324,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Defective reversing relay",
+          "code": 325,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Reversing relay rate",
+          "code": 325,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Siren 3 malfunction",
+          "code": 326,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Sounder rate No. 3",
+          "code": 326,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Malfunction of the siren No. 4",
+          "code": 327,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Sounder rate No. 4",
+          "code": 327,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Faulty keyboard",
+          "code": 330,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "System periphery rate",
+          "code": 330,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Sensor cable interrupted",
+          "code": 331,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Sensor loop rate",
+          "code": 331,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "KZ line TAN",
+          "code": 332,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Restoration of the short circuit of the TAN line",
+          "code": 332,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Repeater malfunction",
+          "code": 334,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Repeater rate",
+          "code": 334,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "No paper in printer",
+          "code": 335,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "There is paper in the printer",
+          "code": 335,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Printer malfunction",
+          "code": 336,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Restoring the printer",
+          "code": 336,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Reload the module",
+          "code": 339,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancel module reload",
+          "code": 339,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "No power to the module (AC)",
+          "code": 342,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Recovering Module Power (AC)",
+          "code": 342,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Telephone Line 1 Trouble",
+          "code": 351,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "PHONE_LINE_1_REST",
+          "code": 351,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Telephone Line 2 Trouble",
+          "code": 352,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "PHONE_LINE_2_REST",
+          "code": 352,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Long Range Transmitter Malfunction",
+          "code": 353,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": null,
+          "code": 353,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Loss of radio control control",
+          "code": 355,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Radio control rate",
+          "code": 355,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Lost Communication With Master",
+          "code": 356,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": null,
+          "code": 356,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "restart GSM module",
+          "code": 357,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": null,
+          "code": 357,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Short circuit addressable loop",
+          "code": 358,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": null,
+          "code": 358,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Loss of communication with PPK",
+          "code": 359,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": null,
+          "code": 359,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "The protective loop is faulty",
+          "code": 370,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Protective loop is working",
+          "code": 370,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "The protective loop is interrupted",
+          "code": 371,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Protective loop rate",
+          "code": 371,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": null,
+          "code": 372,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": null,
+          "code": 372,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Error on exit_cid_satel15939",
+          "code": 374,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Cancel error on exit_cid_satel15940",
+          "code": 374,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Panic Zone Trouble_cid_satel15941",
+          "code": 375,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Panic zone rate_cid_satel15942",
+          "code": 375,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Invasion Zone Malfunction_cid_satel15943",
+          "code": 376,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Invasion Zone Rate_cid_satel15944",
+          "code": 376,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Fault in linked zones_cid_satel15947",
+          "code": 378,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Fault in linked zones_cid_satel15947",
+          "code": 378,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Fault in linked zones_cid_satel15947",
+          "code": 380,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Rate of linked zones_cid_satel15948",
+          "code": 380,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Loss of communication RPM_cid_satel15953",
+          "code": 382,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Communication rate RPM_cid_satel15954",
+          "code": 382,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "ALARM_TMP_DETECTOR",
+          "code": 383,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "NORM_TMP_DETECTOR",
+          "code": 383,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "High sensitivity of the smoke detector_cid_satel15959",
+          "code": 385,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": null,
+          "code": 385,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Low sensitivity of the smoke detector_cid_satel15961",
+          "code": 386,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Smoke detector sensitivity rate_cid_satel15960",
+          "code": 386,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "High sensitivity intrusion detector_cid_satel15963",
+          "code": 387,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Intrusion detection sensitivity rate_cid_satel15964",
+          "code": 387,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Low sensitivity of the intrusion detector_cid_satel15965",
+          "code": 388,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Intrusion detection sensitivity rate_cid_satel15964",
+          "code": 388,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": null,
+          "code": 392,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Frequency drift compensation rate_cid_satel15972",
+          "code": 392,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "GROUP_OFF",
+          "code": 400,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "GROUP_ON",
+          "code": 400,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "GROUP_OFF",
+          "code": 401,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "GROUP_ON",
+          "code": 401,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "GROUP_OFF",
+          "code": 402,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "GROUP_ON",
+          "code": 402,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "AUTO_OFF",
+          "code": 403,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "AUTO_ON",
+          "code": 403,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "OFF_DELAY",
+          "code": 404,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "OFF_LATER",
+          "code": 405,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "ON_LATER",
+          "code": 405,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "OFF_CANCEL",
+          "code": 406,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "OFF_DISTANT",
+          "code": 407,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "ON_DISTANT",
+          "code": 407,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "ON_QUICK",
+          "code": 408,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "GROUP_OFF",
+          "code": 409,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "GROUP_ON",
+          "code": 409,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "DOWNLOAD - start_cid_satel15993",
+          "code": 410,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "DOWNLOAD - end_cid_satel15994",
+          "code": 410,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Callback request_cid_satel15995",
+          "code": 411,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling a call back request_cid_satel15996",
+          "code": 411,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "End of the loading function_cid_satel15998",
+          "code": 412,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "End of the download function (off)_cid_satel15999",
+          "code": 412,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Unsuccessful remote access attempt_cid_satel16001",
+          "code": 413,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Unsuccessful remote access attempt (off)_cid_satel16002",
+          "code": 413,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "System stop command received_cid_satel16003",
+          "code": 414,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling a system stop command_cid_satel16004",
+          "code": 414,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Dialer (typesetter) stop command received_cid_satel16005",
+          "code": 415,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancellation of the command to stop the dialer (typesetter)_cid_satel16006",
+          "code": 415,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "End of remote programming_cid_satel16007",
+          "code": 416,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling the end of remote programming_cid_satel16008",
+          "code": 416,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Access denied_cid_satel16011",
+          "code": 421,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancel access denied_cid_satel16012",
+          "code": 421,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "User access message_cid_satel16014",
+          "code": 422,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling a User Access Message_cid_satel16015",
+          "code": 422,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Exit Denied_cid_satel16020",
+          "code": 424,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling an exit ban_cid_satel16021",
+          "code": 424,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Exit allowed_cid_satel16023",
+          "code": 425,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Revoke permission to exit_cid_satel16024",
+          "code": 425,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Door left open_cid_satel16026",
+          "code": 426,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancel Door left open_cid_satel16027",
+          "code": 426,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Malfunction of control of a status of a door_cid_satel16029",
+          "code": 427,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Door state control rate_cid_satel16030",
+          "code": 427,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Request-to-exit device malfunction_cid_satel16032",
+          "code": 428,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "device norm \"request to exit\"_cid_satel16033",
+          "code": 428,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Access programming started_cid_satel16035",
+          "code": 429,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancel Access programming started_cid_satel16036",
+          "code": 429,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Access programming complete_cid_satel16038",
+          "code": 430,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancel Access programming finished_cid_satel16039",
+          "code": 430,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Changing the threat level of access_cid_satel16041",
+          "code": 431,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Arming with a key fob_cid_satel16042",
+          "code": 431,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Access relay not triggered_cid_satel16044",
+          "code": 432,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Access relay rate_cid_satel16045",
+          "code": 432,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Request to Exit RTE_cid_satel16047",
+          "code": 433,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling an RTE Logout Request_cid_satel16048",
+          "code": 433,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "DSM Logout Request_cid_satel16050",
+          "code": 434,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling a DSM Logout Request_cid_satel16051",
+          "code": 434,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Restriction of arming performed_cid_satel16057",
+          "code": 450,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling the prohibition of arming_cid_satel16058",
+          "code": 450,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Failure of automatic arming_cid_satel16067",
+          "code": 455,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancellation of automatic disarming failure_cid_satel16068",
+          "code": 455,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "User error on logout_cid_satel16071",
+          "code": 457,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancel error on user logout_cid_satel16072",
+          "code": 457,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "User in the room_cid_satel16073",
+          "code": 458,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "User exit from the premises_cid_satel16074",
+          "code": 458,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Last arming_cid_satel16075",
+          "code": 459,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Last disarmed_cid_satel16076",
+          "code": 459,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "The entered password is correct_cid_satel16080",
+          "code": 462,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Correct password entered (off)_cid_satel16081",
+          "code": 462,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Re-arming after alarm_cid_satel16082",
+          "code": 463,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Re-arm after alarm (off)_cid_satel16083",
+          "code": 463,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Automatic arming extended_cid_satel16084",
+          "code": 464,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Automatic arming extended (off)_cid_satel16085",
+          "code": 464,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Alarm clearing Panic_cid_satel16086",
+          "code": 465,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Canceling alarm clearing Panic_cid_satel16087",
+          "code": 465,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Activation of the security by the service department_cid_satel16088",
+          "code": 466,
+          "type_event": "E",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Disarming by service_cid_satel16089",
+          "code": 466,
+          "type_event": "R",
+          "additional_type": 2,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Access control reader locked_cid_satel16090",
+          "code": 501,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Access control reader unlocked_cid_satel16091",
+          "code": 501,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Relay off (relay number - see loop number)_cid_satel16092",
+          "code": 520,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Relay on (relay number - see loop number)_cid_satel16093",
+          "code": 520,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Siren 1 disabled_cid_satel16094",
+          "code": 521,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Siren 1 on_cid_satel16095",
+          "code": 521,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Siren 2 disabled_cid_satel16096",
+          "code": 522,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Siren 2 on_cid_satel16097",
+          "code": 522,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Alarm relay disabled_cid_satel16098",
+          "code": 523,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Alarm relay enabled_cid_satel16099",
+          "code": 523,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Alarm relay disabled_cid_satel16100",
+          "code": 524,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Alarm relay enabled_cid_satel16101",
+          "code": 524,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Reversing relay disconnected_cid_satel16102",
+          "code": 525,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Reversing relay switched on_cid_satel16103",
+          "code": 525,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Annunciator # 3 disabled_cid_satel16104",
+          "code": 526,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Annunciator # 3 is on_cid_satel16105",
+          "code": 526,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Annunciator # 4 disabled_cid_satel16106",
+          "code": 527,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Annunciator # 4 is on_cid_satel16107",
+          "code": 527,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Turn off AUX_cid_satel16108",
+          "code": 528,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Switching off the control panel function (control panel, panel)_cid_satel16109",
+          "code": 530,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Enabling the control panel function (control panel, panel)_cid_satel16110",
+          "code": 530,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Module added_cid_satel16111",
+          "code": 531,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Module added (off)_cid_satel16112",
+          "code": 531,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Module removed (off)_cid_satel16114",
+          "code": 532,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Module removed (off)_cid_satel16114",
+          "code": 532,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "The telephone communicator is disabled_cid_satel16115",
+          "code": 551,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Phone dialer included_cid_satel16116",
+          "code": 551,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Radio transmitter included_cid_satel16118",
+          "code": 552,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Radio transmitter disabled_cid_satel16117",
+          "code": 552,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Remote upload / download disabled_cid_satel16119",
+          "code": 553,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Remote upload / download enabled_cid_satel16120",
+          "code": 553,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Setting loop bypass_cid_satel16121",
+          "code": 570,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancel loop bypass_cid_satel16122",
+          "code": 570,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Fire Zone Bypass_cid_satel16123",
+          "code": 571,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancel Fire Zone Bypass_cid_satel16124",
+          "code": 571,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Bypass 24h zone_cid_satel16125",
+          "code": 572,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling the bypass of the 24H zone_cid_satel16126",
+          "code": 572,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "BYPASS_INVISION_ZONE",
+          "code": 573,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "RESTORE_BYPASS_INVISION_ZONE",
+          "code": 573,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Bypassing group bypassing zones_cid_satel16129",
+          "code": 574,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling the bypass of group bypassing zones_cid_satel16130",
+          "code": 574,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Bypass zone switching_cid_satel16131",
+          "code": 575,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Un-bypassing zone switching_cid_satel16132",
+          "code": 575,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Bypassing the access area_cid_satel16133",
+          "code": 576,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Unbypassing the access zone_cid_satel16134",
+          "code": 576,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Access point bypass_cid_satel16135",
+          "code": 577,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling Access Point Bypass_cid_satel16136",
+          "code": 577,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Switching off control of the main power supply of the PPK (220V)_cid_satel16137",
+          "code": 580,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Enabling control of the main power supply of the PPK (220V)_cid_satel16138",
+          "code": 580,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Turn off siren control_cid_satel16139",
+          "code": 581,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Enabling siren control_cid_satel16140",
+          "code": 581,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Disabling battery monitoring_cid_satel16141",
+          "code": 582,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Enabling battery monitoring_cid_satel16142",
+          "code": 582,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Deactivate the relay (deactivate the function) (relay number - see loop number)_cid_satel16143",
+          "code": 583,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Relay enable (function enable)_cid_satel16144",
+          "code": 583,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Disabling the monitoring function for monitoring communication with the monitoring station_cid_satel16145",
+          "code": 584,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Enabling the function of monitoring communication with the monitoring station_cid_satel16146",
+          "code": 584,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Disconnecting the power supply to the sensors_cid_satel16147",
+          "code": 585,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Powering On the Sensors_cid_satel16148",
+          "code": 585,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Turn off TAN_cid_satel16149",
+          "code": 586,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Enabling TAN_cid_satel16150",
+          "code": 586,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Periodic test_cid_satel16151",
+          "code": 600,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Power status - NO MAINS 220 on the module_cid_satel16152",
+          "code": 600,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Manual test_cid_satel16153",
+          "code": 601,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Manual test (off)_cid_satel16154",
+          "code": 601,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Periodic test_cid_satel16151",
+          "code": 602,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+		{
+          "event_by_user": "Periodic test_cid_satel16151",
+          "code": 602,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "PING",
+          "code": 603,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Periodic test_cid_satel16151",
+          "code": 603,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Fire test_cid_satel16162",
+          "code": 604,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Fire test (off)_cid_satel16163",
+          "code": 604,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Status report_cid_satel16165",
+          "code": 605,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Status report (off)_cid_satel16166",
+          "code": 605,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Voice connection_cid_satel16168",
+          "code": 606,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Voice communication (off)_cid_satel16169",
+          "code": 606,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Test bypass mode_cid_satel16171",
+          "code": 607,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Bypass Test Mode (Off)_cid_satel16172",
+          "code": 607,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Periodic test - System fault present_cid_satel16174",
+          "code": 608,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Periodic test - No system fault_cid_satel16175",
+          "code": 608,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Video transmission activated_cid_satel16177",
+          "code": 609,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Video transmission deactivated_cid_satel16178",
+          "code": 609,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Report: there is a connection with the device._cid_satel16180",
+          "code": 610,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Checkpoint violation_cid_satel16181",
+          "code": 611,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Checkpoint rate_cid_satel16182",
+          "code": 611,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Checkpoint not tested_cid_satel16184",
+          "code": 612,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Checkpoint tested_cid_satel16185",
+          "code": 612,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Violation of test bypass mode_cid_satel16187",
+          "code": 613,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Restoring Test Bypass Mode_cid_satel16188",
+          "code": 613,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Fire Zone Test Bypass Violation_cid_satel16190",
+          "code": 614,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Fire zone tested in Test-Pass mode_cid_satel16191",
+          "code": 614,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Checking the panic button from the keyboard # GGGG by user # ZZZ_cid_satel16193",
+          "code": 615,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Panic zone tested in Test-Pass mode_cid_satel16194",
+          "code": 615,
+          "type_event": "R",
+          "additional_type": 1,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Service call_cid_satel16196",
+          "code": 616,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Canceling a service call_cid_satel16197",
+          "code": 616,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Reset event memory_cid_satel16199",
+          "code": 621,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": null,
+          "code": 621,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Memory is 50% full_cid_satel16202",
+          "code": 622,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Memory 50% full (off)_cid_satel16203",
+          "code": 622,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Memory 90% full_cid_satel16204",
+          "code": 623,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Memory 90% full (off)_cid_satel16205",
+          "code": 623,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Overflow of event memory of the device_cid_satel16206",
+          "code": 624,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "Reset Time / Date_cid_satel16207",
+          "code": 625,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Cancel Reset Time / Date_cid_satel16208",
+          "code": 625,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "System time / date is not correct_cid_satel16209",
+          "code": 626,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "System time / date is correct_cid_satel16210",
+          "code": 626,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Event log marker for 32 hours_cid_satel16217",
+          "code": 629,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Marker in the event log for 32 hours saved_cid_satel16218",
+          "code": 629,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Schedule changed_cid_satel16219",
+          "code": 630,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Schedule changed (off)_cid_satel16220",
+          "code": 630,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Exception schedule changed_cid_satel16221",
+          "code": 631,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Exception schedule changed (off)_cid_satel16222",
+          "code": 631,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Access Control Schedule Changed_cid_satel16223",
+          "code": 632,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Access control schedule changed (off)_cid_satel16224",
+          "code": 632,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Detector problem_cid_satel16225",
+          "code": 641,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Detector rate_cid_satel16226",
+          "code": 641,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Master key control_cid_satel16227",
+          "code": 642,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Canceling master key control_cid_satel16228",
+          "code": 642,
+          "type_event": "R",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "System is not active_cid_satel16229",
+          "code": 654,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "DOWNLOAD_SUCCESS_FIRMWARE",
+          "code": 660,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "UPDATING_SUCCESS_FIRMWARE",
+          "code": 661,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "error in main or backup SIM card settings",
+          "code": 760,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "Change active SIM card",
+          "code": 345,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "backup transmission channel (SIM2) is used",
+          "code": 317,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "PPK_NO_CONN",
+          "code": 350,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        }
+      ]
+    }
+  ]
+}

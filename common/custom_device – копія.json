@@ -1,0 +1,64 @@
+{
+  "export_date": "2023-4-27",
+  "type": "custom_device_type",
+  "data": [
+    {
+      "device": {
+        "name": "CID_Satel_c54598f6-bfcd-4056-a890-515b96f58b49_ac73cec9-fdb3-43e0-be1f-f3f39bb62c19",
+        "lang_en": "Satel",
+        "lang_ru": "Satel",
+        "lang_uk": "Satel"
+      },
+      "dictionary_add": [
+        {
+          "name": "PERSONAL_DANGER",
+          "lang_en": "Personal danger",
+          "lang_ru": "Персональная опасность",
+          "lang_uk": "Персональна небезпека"
+        },
+        {
+          "name": "CANT_INALARM",
+          "lang_en": "Can`t send in alarm",
+          "lang_ru": "Невозможность передачи при тревоге",
+          "lang_uk": "Неможливість передачі під час тривоги"
+        },
+        {
+          "name": "FIRE_ALARM",
+          "lang_en": "Fire alarm",
+          "lang_ru": "Пожарная тривога",
+          "lang_uk": "Пожежна тривога"
+        } 
+      ],
+      "events": [
+        {
+          "event_by_user": "MEDICAL_ALARM",
+          "code": 100,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "PERSONAL_DANGER",
+          "code": 101,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 1
+        },
+        {
+          "event_by_user": "CANT_INALARM",
+          "code": 102,
+          "type_event": "E",
+          "additional_type": 0,
+          "is_alarm": 0
+        },
+        {
+          "event_by_user": "FIRE_ALARM",
+          "code": 110,
+          "type_event": "E",
+          "additional_type": 1,
+          "is_alarm": 1
+        }
+      ]
+    }
+  ]
+}
