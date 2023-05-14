@@ -20,12 +20,14 @@ import platform
 
 from PySide6.QtGui import QColor
 
+
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
 from modules import *
 from net.retranslator_asyncio.runner import RetranslatorThread
 from net.retranslator_asyncio.tcp_server import ConnectionState
 from common.read_events_name_from_json import *
+from common.surguad_codes import get_color_by_event
 from widgets import *
 
 os.environ["QT_FONT_DPI"] = "96"  # FIX Problem for High DPI and Scale above 100%
@@ -204,31 +206,17 @@ class MainWindow(QMainWindow):
 
     @Slot(tuple, dict)
     def add_row_to_incoming_widget(self, peer_name, message, event_message):
-        current_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-        ppk_id = message[7:11]
-        line = message[3]
-        event_type = message[11]
-        event_code = message[12:15]
-        group = message[15:17]
-        zone = message[17:20]
-        background_color = QColor(0, 0, 0)
-        forground_color = QColor(255, 255, 255)
-        try:
-            if event_message['is_alarm'] == 1:
-                background_color = QColor(231, 76, 60)
-                forground_color = QColor(236, 240, 241)
-            else:
-                background_color = QColor(236, 240, 241)
-                forground_color = QColor(44, 62, 80)
-
-            if event_message['additional_type'] == 2:
-                background_color = QColor(41, 128, 185)
-                forground_color = QColor(44, 62, 80)
-        except KeyError as err:
-            logger.debug(err)
-            background_color = QColor(0, 0, 0)
-            forground_color = QColor(255, 255, 255)
-
+        current_time: str = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        ppk_id: str = message[7:11]
+        line: str = message[3]
+        event_type: str = message[11]
+        event_code: str = message[12:15]
+        group: str = message[15:17]
+        zone: str = message[17:20]
+        background_color, forground_color = get_color_by_event(
+            event_message["contactId_code"]
+        )
+        event_text: str = f'{event_message["CodeMes_UK"]} ({event_type}{event_code})'
 
         if self.left_row_counter <= 10:
             self.customize_left_table_widgets()
@@ -244,16 +232,16 @@ class MainWindow(QMainWindow):
             QTableWidgetItem(current_time),
             QTableWidgetItem(ppk_id),
             QTableWidgetItem(line),
-            QTableWidgetItem("Contact ID"),
-            QTableWidgetItem(f"{event_message['message']} ({event_message['event_code']})"),
+            QTableWidgetItem(f'{event_message["TypeCodeMes_UK"]}'),
+            QTableWidgetItem(event_text),
             QTableWidgetItem(group),
             QTableWidgetItem(zone),
             QTableWidgetItem(f"{peer_name[0]}:{peer_name[1]}"),
         ]
-        # read_json.find_event_name_by_type_and_code(events, dictionary_add, event_type, int(event_code))
+
         for i, item in enumerate(items):
-            item.setBackground(background_color)
-            item.setForeground(forground_color)
+            item.setBackground(QColor(background_color))
+            item.setForeground(QColor(forground_color))
             self.left_table_widget.setItem(row, i, item)
         if not self.left_table_widget.hasFocus():
             self.left_table_widget.scrollToItem(
@@ -266,6 +254,7 @@ class MainWindow(QMainWindow):
 
     @Slot(tuple, str)
     def add_row_to_outgoing_widget(self, peer_name, message, event_message):
+        event_message = event_message
         current_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         ppk_id = message[7:11]
         line = message[3]
@@ -273,17 +262,10 @@ class MainWindow(QMainWindow):
         event_code = message[12:15]
         group = message[15:17]
         zone = message[17:20]
-        background_color = QColor(0, 0, 0)
-        forground_color = QColor(255, 255, 255)
-
-        if event_message['is_alarm'] == 1:
-            background_color = QColor(231, 76, 60)
-            forground_color = QColor(236, 240, 241)
-        else:
-            background_color = QColor(236, 240, 241)
-            forground_color = QColor(44, 62, 80)
-
-        # event_message = read_json.find_event_name_by_type_and_code(events, dictionary_add, event_type, int(event_code))
+        background_color, forground_color = get_color_by_event(
+            event_message["contactId_code"]
+        )
+        event_text = f'{event_message["CodeMes_UK"]} ({event_type}{event_code})'
 
         if self.right_table_widget.rowCount() <= 10:
             self.customize_right_table_widgets()
@@ -300,17 +282,17 @@ class MainWindow(QMainWindow):
             QTableWidgetItem(current_time),
             QTableWidgetItem(ppk_id),
             QTableWidgetItem(line),
-            QTableWidgetItem("Contact ID"),
-            QTableWidgetItem(f"{event_message['message']} ({event_message['event_code']})"),
+            QTableWidgetItem(f'{event_message["TypeCodeMes_UK"]}'),
+            QTableWidgetItem(event_text),
             QTableWidgetItem(group),
             QTableWidgetItem(zone),
             QTableWidgetItem(f"{peer_name[0]}:{peer_name[1]}"),
         ]
-        # read_json.find_event_name_by_type_and_code(events, dictionary_add, event_type, int(event_code))
+
         for i, item in enumerate(items):
             self.right_table_widget.setItem(row, i, item)
-            item.setBackground(background_color)
-            item.setForeground(forground_color)
+            item.setBackground(QColor(background_color))
+            item.setForeground(QColor(forground_color))
         if not self.right_table_widget.hasFocus():
             self.right_table_widget.scrollToItem(
                 items[0], QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible
@@ -318,7 +300,7 @@ class MainWindow(QMainWindow):
         self.right_row_counter += 1
         self.message_sent_count += 1
         self.update_receive_send_count()
-        # self.ui.label_message_send_count.setText(str(self.message_sent_count))
+
 
     @Slot(str)
     def fill_log_window(self, message):
@@ -357,9 +339,11 @@ class MainWindow(QMainWindow):
         self.retranslator.start()
         # self.ui.pushButton_conn_disconn.setText("Stop server")
 
-
-if __name__ == "__main__":
+def main():
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("icon.ico"))
     window = MainWindow()
     sys.exit(app.exec())
+
+if __name__ == "__main__":
+    main()

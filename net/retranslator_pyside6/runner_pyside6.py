@@ -1,8 +1,8 @@
 from PySide6.QtCore import QThread
 
 from common.yaml_config import YamlConfig
-from net.retranslator_pyside6.tcp_client import TcpClient
-from net.retranslator_pyside6.tcp_server import MyTcpServer
+from net.retranslator_pyside6.tcp_client_pyside6 import TcpClient
+from net.retranslator_pyside6.tcp_server_pyside6 import MyTcpServer
 from common.logger_config import logger
 
 

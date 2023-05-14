@@ -16,11 +16,15 @@
 from datetime import datetime
 
 from PySide6 import QtWidgets
-from PySide6.QtGui import QIcon
+from PySide6.QtCore import QPropertyAnimation, QEasingCurve, QParallelAnimationGroup, QEvent, QTimer
+from PySide6.QtGui import QIcon, Qt, QColor
+from PySide6.QtWidgets import QPushButton, QGraphicsDropShadowEffect, QSizeGrip
 
 # MAIN FILE
 # ///////////////////////////////////////////////////////////////
-from main import *
+from main import MainWindow
+from modules import Settings
+from widgets import CustomGrip
 
 # GLOBALS
 # ///////////////////////////////////////////////////////////////
@@ -285,92 +289,4 @@ class UIFunctions(MainWindow):
     # ///////////////////////////////////////////////////////////////
     # END - GUI DEFINITIONS
 
-    def customize_left_table_widgets(self):
-        self.left_tree_widget.autoScrollMargin()
-        for i in range(9):
-            self.left_tree_widget.resizeColumnToContents(i)
-
-    def customize_right_table_widgets(self):
-        self.right_tree_widget.autoScrollMargin()
-        for i in range(9):
-            self.right_tree_widget.resizeColumnToContents(i)
-
-    @Slot(tuple, str)
-    def add_row_to_incoming_widget(self, peer_name, message):
-        current_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-        if self.left_row_counter <= 10:
-            self.customize_left_table_widgets()
-
-        if (
-                self.left_tree_widget.rowCount()
-                >= self.config["other"]["left_window_row_count"]
-        ):
-            self.left_tree_widget.removeRow(0)
-        row = self.left_tree_widget.rowCount()
-        self.left_tree_widget.insertRow(row)
-        items = [
-            QTableWidgetItem(current_time),
-            QTableWidgetItem(message[7:11]),
-            QTableWidgetItem(message[3]),
-            QTableWidgetItem("Contact ID"),
-            QTableWidgetItem(message[11]),
-            QTableWidgetItem(message[12:15]),
-            QTableWidgetItem(message[15:17]),
-            QTableWidgetItem(message[17:20]),
-            QTableWidgetItem(f"{peer_name[7:]}"),
-        ]
-        for i, item in enumerate(items):
-            self.left_tree_widget.setItem(row, i, item)
-        if not self.left_tree_widget.hasFocus():
-            self.left_tree_widget.scrollToItem(
-                items[0], QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible
-            )
-        self.left_row_counter += 1
-        self.message_received_count += 1
-        self.ui.label_message_receviced_count.setText(str(self.message_received_count))
-
-    @Slot(tuple, str)
-    def add_row_to_outgoing_widget(self, peer_name, message):
-        current_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-
-        if self.right_tree_widget.rowCount() <= 10:
-            self.customize_right_table_widgets()
-
-        if (
-                self.right_tree_widget.rowCount()
-                >= self.config["other"]["right_window_row_count"]
-        ):
-            self.right_tree_widget.removeRow(0)
-
-        row = self.right_tree_widget.rowCount()
-        self.right_tree_widget.insertRow(row)
-        items = [
-            QTableWidgetItem(current_time),
-            QTableWidgetItem(message[7:11]),
-            QTableWidgetItem(message[3]),
-            QTableWidgetItem("Contact ID"),
-            QTableWidgetItem(message[11]),
-            QTableWidgetItem(message[12:15]),
-            QTableWidgetItem(message[15:17]),
-            QTableWidgetItem(message[17:20]),
-            QTableWidgetItem(f"{peer_name}"),
-        ]
-        for i, item in enumerate(items):
-            self.right_tree_widget.setItem(row, i, item)
-        if not self.right_tree_widget.hasFocus():
-            self.right_tree_widget.scrollToItem(
-                items[0], QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible
-            )
-        self.right_row_counter += 1
-        self.message_sent_count += 1
-        self.ui.label_message_send_count.setText(str(self.message_sent_count))
-
-    @Slot(str)
-    def fill_log_window(self, message):
-        time_now = datetime.now().strftime("%d/%m/%Y | %H:%M:%S.%f")
-        msg = QListWidgetItem(f"{time_now} | {message}")
-        if self.log_window.count() >= self.config["other"]["log_window_row_count"]:
-            self.log_window.takeItem(0)
-        self.log_window.addItem(msg)
-        if not self.log_window.hasFocus():
-            self.log_window.scrollToBottom()
+    

@@ -8,9 +8,9 @@ class TCPClient:
     def __init__(self, server_host, server_port, signals):
         self.writer = None
         self.reader = None
-        self.retry_count = None
-        self.server_host = server_host
-        self.server_port = server_port
+        self.retry_count: int = 0
+        self.server_host: str = server_host
+        self.server_port: int = server_port
         self.signals = signals
 
     async def establish_connection(self, timeout=3):
@@ -50,10 +50,12 @@ class TCPClient:
                 f"Sent data: {data}, Received response: {response}"
             )
             decoded_data = data.decode()
-            event_type = decoded_data[11]
-            event_code = decoded_data[12:15]
-            event_message = await read_json.find_event_name_by_type_and_code(events, dictionary_add, event_type,
-                                                                       int(event_code))
+            # event_type = decoded_data[11]
+            # event_code = decoded_data[12:15]
+            event_code = f'{decoded_data[11]}{decoded_data[12:15]}'
+            event_message = get_event_from_json.read_events(event_code)
+            # event_message = await read_json.find_event_name_by_type_and_code(events, dictionary_add, event_type,
+            #                                                            int(event_code))
             self.signals.data_send.emit(
                 self.writer.get_extra_info("peername"), data.decode(), event_message
             )

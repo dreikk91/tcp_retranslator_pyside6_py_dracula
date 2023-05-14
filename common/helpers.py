@@ -1,7 +1,7 @@
-import logging
 import time
 
 from common.logger_config import logger
+
 
 def check_message_format(message):
     new_message = message.decode().rstrip()
@@ -14,14 +14,18 @@ def check_message_format(message):
 
 
 # noinspection SpellCheckingInspection
-def split_message_stream(message):
+def split_message_stream(message: bytes):
     try:
-        new_message = message.decode()
-        splited_message_list = new_message.split('\x14')
-        new_message_list = []
+        new_message: str = message.decode()
+        splited_message_list: list = new_message.split("\x14")
+        new_message_list: list = []
+
+        if not splited_message_list:  # перевірка чи список не порожній
+            return new_message_list  # якщо так, повертаємо порожній список
+
         for msg in splited_message_list:
             if len(msg) == 20:
-                msg += '\x14'
+                msg += "\x14"
                 encoded_message = msg.encode()
                 new_message_list.append(encoded_message)
         return new_message_list
@@ -29,10 +33,9 @@ def split_message_stream(message):
         logger.debug(err)
 
 
-
 class SurGard:
-    def __init__(self, message):
-        self.message = message.decode()
+    def __init__(self, message: bytes):
+        self.message: str = message.decode()
 
     def is_valid(self):
         try:
@@ -65,6 +68,11 @@ class SurGard:
         except IndexError as err:
             logger.error(err)
             return False
+
+    def __eq__(self, other):
+        if isinstance(other, SurGard):
+            return self.message == other.message
+        return False
 
 
 def split_data(data):
@@ -102,7 +110,7 @@ def parse_surguard_message(message):
             "event_code": event_code,
             "group_number": group_number,
             "zone_or_sensor_number": zone_or_sensor_number,
-            "event_description": event_description
+            "event_description": event_description,
         }
     elif protocol_number == "0":
         if message == "0x06":
@@ -129,3 +137,5 @@ async def calculate_speed(stream):
     else:
         received_speed = data_size / elapsed_time
         return received_speed
+
+

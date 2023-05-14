@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+
+################################################################################
+## Form generated from reading UI file 'mainnTeHCD.ui'
+##
+## Created by: Qt User Interface Compiler version 6.5.0
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
+
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
@@ -5,19 +15,20 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QGroupBox,
-    QHBoxLayout, QHeaderView, QLabel, QListWidget,
-    QListWidgetItem, QMainWindow, QPushButton, QSizePolicy,
-    QStackedWidget, QTableWidget, QTableWidgetItem, QTextEdit,
-    QVBoxLayout, QWidget)
-from . resources_rc import *
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QFrame,
+    QGridLayout, QGroupBox, QHBoxLayout, QHeaderView,
+    QLabel, QListView, QListWidget, QListWidgetItem,
+    QMainWindow, QPushButton, QSizePolicy, QStackedWidget,
+    QTableWidget, QTableWidgetItem, QTextEdit, QVBoxLayout,
+    QWidget)
+import modules.resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1280, 778)
-        MainWindow.setMinimumSize(QSize(940, 560))
+        MainWindow.resize(1167, 763)
+        MainWindow.setMinimumSize(QSize(948, 763))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
         font = QFont()
@@ -1073,15 +1084,17 @@ class Ui_MainWindow(object):
 
         self.pagesContainer = QFrame(self.content)
         self.pagesContainer.setObjectName(u"pagesContainer")
+        self.pagesContainer.setMinimumSize(QSize(866, 666))
         self.pagesContainer.setStyleSheet(u"")
         self.pagesContainer.setFrameShape(QFrame.NoFrame)
         self.pagesContainer.setFrameShadow(QFrame.Raised)
         self.verticalLayout_15 = QVBoxLayout(self.pagesContainer)
         self.verticalLayout_15.setSpacing(0)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
-        self.verticalLayout_15.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
         self.stackedWidget = QStackedWidget(self.pagesContainer)
         self.stackedWidget.setObjectName(u"stackedWidget")
+        self.stackedWidget.setMinimumSize(QSize(882, 646))
         self.stackedWidget.setStyleSheet(u"background: transparent;")
         self.widget_retranslator = QWidget()
         self.widget_retranslator.setObjectName(u"widget_retranslator")
@@ -1122,6 +1135,18 @@ class Ui_MainWindow(object):
         __qtablewidgetitem8 = QTableWidgetItem()
         self.tableWidget_left.setHorizontalHeaderItem(8, __qtablewidgetitem8)
         self.tableWidget_left.setObjectName(u"tableWidget_left")
+        self.tableWidget_left.setFont(font)
+        self.tableWidget_left.setFocusPolicy(Qt.NoFocus)
+        self.tableWidget_left.setContextMenuPolicy(Qt.NoContextMenu)
+        self.tableWidget_left.setFrameShape(QFrame.NoFrame)
+        self.tableWidget_left.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
+        self.tableWidget_left.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tableWidget_left.setTabKeyNavigation(False)
+        self.tableWidget_left.setProperty("showDropIndicator", False)
+        self.tableWidget_left.setDragDropOverwriteMode(False)
+        self.tableWidget_left.setSelectionMode(QAbstractItemView.NoSelection)
+        self.tableWidget_left.setWordWrap(False)
+        self.tableWidget_left.setCornerButtonEnabled(False)
         self.tableWidget_left.setColumnCount(9)
 
         self.horizontalLayout_7.addWidget(self.tableWidget_left)
@@ -1156,6 +1181,19 @@ class Ui_MainWindow(object):
         __qtablewidgetitem17 = QTableWidgetItem()
         self.tableWidget_right_2.setHorizontalHeaderItem(8, __qtablewidgetitem17)
         self.tableWidget_right_2.setObjectName(u"tableWidget_right_2")
+        self.tableWidget_right_2.setFont(font)
+        self.tableWidget_right_2.setFocusPolicy(Qt.NoFocus)
+        self.tableWidget_right_2.setContextMenuPolicy(Qt.NoContextMenu)
+        self.tableWidget_right_2.setAutoFillBackground(True)
+        self.tableWidget_right_2.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
+        self.tableWidget_right_2.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tableWidget_right_2.setTabKeyNavigation(False)
+        self.tableWidget_right_2.setProperty("showDropIndicator", False)
+        self.tableWidget_right_2.setDragDropOverwriteMode(False)
+        self.tableWidget_right_2.setSelectionMode(QAbstractItemView.NoSelection)
+        self.tableWidget_right_2.setSelectionBehavior(QAbstractItemView.SelectItems)
+        self.tableWidget_right_2.setWordWrap(False)
+        self.tableWidget_right_2.setCornerButtonEnabled(False)
         self.tableWidget_right_2.setColumnCount(9)
 
         self.gridLayout_2.addWidget(self.tableWidget_right_2, 0, 0, 1, 1)
@@ -1181,6 +1219,14 @@ class Ui_MainWindow(object):
         self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.listWidget_log = QListWidget(self.frame_log)
         self.listWidget_log.setObjectName(u"listWidget_log")
+        self.listWidget_log.setFocusPolicy(Qt.NoFocus)
+        self.listWidget_log.setContextMenuPolicy(Qt.NoContextMenu)
+        self.listWidget_log.setAutoFillBackground(True)
+        self.listWidget_log.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.listWidget_log.setProperty("showDropIndicator", False)
+        self.listWidget_log.setAlternatingRowColors(True)
+        self.listWidget_log.setViewMode(QListView.ListMode)
+        self.listWidget_log.setModelColumn(0)
 
         self.horizontalLayout_10.addWidget(self.listWidget_log)
 
@@ -1255,7 +1301,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

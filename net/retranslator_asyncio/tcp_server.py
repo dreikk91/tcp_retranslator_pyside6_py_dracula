@@ -67,7 +67,7 @@ class TCPServer:
                 await self._handle_new_client(reader, writer)
                 while ConnectionState.is_running.is_set():
                     await asyncio.sleep(0.001)
-                    data = await self._read_from_client(reader)
+                    data: bytes = await self._read_from_client(reader)
                     await self._process_message_stream(data, writer)
                     await self._send_ack(writer)
                 self._handle_client_disconnect(writer)
@@ -97,34 +97,42 @@ class TCPServer:
         await logger.complete()
         return data
 
-    async def _process_message_stream(self, data, writer):
-        await self._check_connection_state()
-        for msg in split_message_stream(data):
-            sg = SurGard(msg)
-            if not data:
-                break
-            message = msg.decode().strip()
-            if sg.is_valid():
-                logger.info(f"{message} append to queue")
-                self.signals.log_data.emit(f"{message} append to queue")
-                await insert_into_buffer(message)
-                sg_message = parse_surguard_message(message)
-                await insert_event(sg_message, writer.get_extra_info("peername"))
-                event_type = message[11]
-                event_code = message[12:15]
-                event_message = await read_json.find_event_name_by_type_and_code(events, dictionary_add, event_type,
-                                                                           int(event_code))
-                self.signals.data_receive.emit(
-                    writer.get_extra_info("peername"), msg.decode(), event_message
-                )
-                await logger.complete()
+    async def _process_message_stream(self, data:bytes, writer):
+        if data is not None:
+            await self._check_connection_state()
+            splited_data = split_message_stream(data)
+            if not splited_data:
+                logger.error(splited_data)
             else:
-                logger.error(f"Invalid message format {msg} {len(data)} send NAK")
-                self.signals.log_data.emit(
-                    f"Invalid message format {msg} {len(data)} send NAK"
-                )
-                writer.write(MSG_NAK)
-                await logger.complete()
+                for msg in split_message_stream(data):
+                    sg = SurGard(msg)
+                    if not data:
+                        break
+                    message:str = msg.decode().strip()
+                    if sg.is_valid():
+                        logger.info(f"{message} append to queue")
+                        self.signals.log_data.emit(f"{message} append to queue")
+                        await insert_into_buffer(message)
+                        sg_message: dict = parse_surguard_message(message)
+                        await insert_event(sg_message, writer.get_extra_info("peername"))
+                        event_code: str = f'{message[11]}{message[12:15]}'
+                        # event_type = message[11]
+                        # event_code = message[12:15]
+
+                        # event_message = await read_json.find_event_name_by_type_and_code(events, dictionary_add, event_type,
+                        #                                                            int(event_code))
+                        event_message: dict = get_event_from_json.read_events(event_code)
+                        self.signals.data_receive.emit(
+                            writer.get_extra_info("peername"), msg.decode(), event_message
+                        )
+                        await logger.complete()
+                    else:
+                        logger.error(f"Invalid message format {msg} {len(data)} send NAK")
+                        self.signals.log_data.emit(
+                            f"Invalid message format {msg} {len(data)} send NAK"
+                        )
+                        writer.write(MSG_NAK)
+                        await logger.complete()
 
     async def _send_ack(self, writer):
         await self._check_connection_state()
