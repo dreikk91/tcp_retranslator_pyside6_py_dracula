@@ -13,33 +13,36 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-
-import sys
+import logging
 import os
-import platform
+import sys
+import tracemalloc
+from datetime import datetime
 
-from PySide6.QtGui import QColor
-
+from PySide6 import QtWidgets
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
 from modules import *
+from modules.app_settings import Settings
 from net.retranslator_asyncio.runner import RetranslatorThread
 from net.retranslator_asyncio.tcp_server import ConnectionState
-from common.read_events_name_from_json import *
 from common.surguad_codes import get_color_by_event
-from widgets import *
+from net.retranslator_pyside6.tcp_client_pyside6 import TcpClient
+from net.retranslator_pyside6.tcp_server_pyside6 import MyTcpServer
 
 os.environ["QT_FONT_DPI"] = "96"  # FIX Problem for High DPI and Scale above 100%
 
 # SET AS GLOBAL WIDGETS
 # ///////////////////////////////////////////////////////////////
 widgets = None
+logger = logging.getLogger(__name__)
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
+        tracemalloc.start()
 
         # SET AS GLOBAL WIDGETS
         # ///////////////////////////////////////////////////////////////
@@ -66,9 +69,7 @@ class MainWindow(QMainWindow):
 
         self.message_received_count = 0
         self.message_sent_count = 0
-        #
-        # self.start_tcp_client_thread()
-        # self.start_tcp_server_thread()
+
         ConnectionState.is_running.set()
         self.retranslator = RetranslatorThread(self.signals)
         self.start_retranslator_async_thread()
@@ -175,6 +176,12 @@ class MainWindow(QMainWindow):
 
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
+        snapshot = tracemalloc.take_snapshot()
+        top_stats = snapshot.statistics('lineno')
+
+        print("[ Top 10 ]")
+        for stat in top_stats[:10]:
+            print(stat)
 
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////
@@ -243,10 +250,13 @@ class MainWindow(QMainWindow):
             item.setBackground(QColor(background_color))
             item.setForeground(QColor(forground_color))
             self.left_table_widget.setItem(row, i, item)
+        print(self.left_table_widget.hasFocus())
         if not self.left_table_widget.hasFocus():
             self.left_table_widget.scrollToItem(
                 items[0], QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible
             )
+        else:
+            self.left_table_widget.setAutoScroll(False)
         self.left_row_counter += 1
         self.message_received_count += 1
         self.update_receive_send_count()
@@ -276,6 +286,7 @@ class MainWindow(QMainWindow):
         ):
             self.right_table_widget.removeRow(0)
 
+
         row = self.right_table_widget.rowCount()
         self.right_table_widget.insertRow(row)
         items = [
@@ -301,7 +312,6 @@ class MainWindow(QMainWindow):
         self.message_sent_count += 1
         self.update_receive_send_count()
 
-
     @Slot(str)
     def fill_log_window(self, message):
         time_now = datetime.now().strftime("%d/%m/%Y | %H:%M:%S.%f")
@@ -309,9 +319,9 @@ class MainWindow(QMainWindow):
         if self.log_window.count() >= self.config["other"]["log_window_row_count"]:
             self.log_window.takeItem(0)
         self.log_window.addItem(msg)
+        self.log_window.setUniformItemSizes(True)
         if not self.log_window.hasFocus():
             self.log_window.scrollToBottom()
-        self.retranslator.stop()
 
     def update_receive_send_count(self):
         self.ui.label_receive_send_count.setText(
@@ -337,13 +347,15 @@ class MainWindow(QMainWindow):
         self.signals.data_send.connect(self.add_row_to_outgoing_widget)
         self.signals.log_data.connect(self.fill_log_window)
         self.retranslator.start()
-        # self.ui.pushButton_conn_disconn.setText("Stop server")
+
 
 def main():
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("icon.ico"))
     window = MainWindow()
+    window.show()
     sys.exit(app.exec())
+
 
 if __name__ == "__main__":
     main()

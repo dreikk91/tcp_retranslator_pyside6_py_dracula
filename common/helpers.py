@@ -1,6 +1,7 @@
+import logging
 import time
-
-from common.logger_config import logger
+import logging
+logger = logging.getLogger(__name__)
 
 
 def check_message_format(message):
@@ -66,7 +67,7 @@ class SurGard:
 
             return True
         except IndexError as err:
-            logger.error(err)
+            logger.exception(err)
             return False
 
     def __eq__(self, other):

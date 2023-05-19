@@ -13,9 +13,7 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-from datetime import datetime
 
-from PySide6 import QtWidgets
 from PySide6.QtCore import QPropertyAnimation, QEasingCurve, QParallelAnimationGroup, QEvent, QTimer
 from PySide6.QtGui import QIcon, Qt, QColor
 from PySide6.QtWidgets import QPushButton, QGraphicsDropShadowEffect, QSizeGrip
@@ -285,6 +283,7 @@ class UIFunctions(MainWindow):
             self.right_grip.setGeometry(self.width() - 10, 10, 10, self.height())
             self.top_grip.setGeometry(0, 0, self.width(), 10)
             self.bottom_grip.setGeometry(0, self.height() - 10, self.width(), 10)
+
 
     # ///////////////////////////////////////////////////////////////
     # END - GUI DEFINITIONS

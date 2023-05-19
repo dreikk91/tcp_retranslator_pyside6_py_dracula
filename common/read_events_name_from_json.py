@@ -1,4 +1,5 @@
-import json
+# import json
+import rapidjson as json
 from typing import Dict, List, Optional, Union
 
 from common.logger_config import logger
@@ -121,8 +122,9 @@ class GetEventFromJson:
             "GroupSent": None,
             "AutoReset": None,
         }
-        self.cache[event_code] = default_event
+        # self.cache[event_code] = default_event
         return default_event
+
 
 
 get_event_from_json = GetEventFromJson("common/events.json")

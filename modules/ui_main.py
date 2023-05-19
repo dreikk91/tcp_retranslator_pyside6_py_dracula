@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainnTeHCD.ui'
+## Form generated from reading UI file 'mainSePtSc.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.5.0
 ##
@@ -1136,11 +1136,10 @@ class Ui_MainWindow(object):
         self.tableWidget_left.setHorizontalHeaderItem(8, __qtablewidgetitem8)
         self.tableWidget_left.setObjectName(u"tableWidget_left")
         self.tableWidget_left.setFont(font)
-        self.tableWidget_left.setFocusPolicy(Qt.NoFocus)
         self.tableWidget_left.setContextMenuPolicy(Qt.NoContextMenu)
         self.tableWidget_left.setFrameShape(QFrame.NoFrame)
         self.tableWidget_left.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
-        self.tableWidget_left.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tableWidget_left.setEditTriggers(QAbstractItemView.SelectedClicked)
         self.tableWidget_left.setTabKeyNavigation(False)
         self.tableWidget_left.setProperty("showDropIndicator", False)
         self.tableWidget_left.setDragDropOverwriteMode(False)
@@ -1182,11 +1181,10 @@ class Ui_MainWindow(object):
         self.tableWidget_right_2.setHorizontalHeaderItem(8, __qtablewidgetitem17)
         self.tableWidget_right_2.setObjectName(u"tableWidget_right_2")
         self.tableWidget_right_2.setFont(font)
-        self.tableWidget_right_2.setFocusPolicy(Qt.NoFocus)
         self.tableWidget_right_2.setContextMenuPolicy(Qt.NoContextMenu)
         self.tableWidget_right_2.setAutoFillBackground(True)
         self.tableWidget_right_2.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
-        self.tableWidget_right_2.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tableWidget_right_2.setEditTriggers(QAbstractItemView.SelectedClicked)
         self.tableWidget_right_2.setTabKeyNavigation(False)
         self.tableWidget_right_2.setProperty("showDropIndicator", False)
         self.tableWidget_right_2.setDragDropOverwriteMode(False)
@@ -1301,7 +1299,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

@@ -1,13 +1,13 @@
 import asyncio
-import time
 from PySide6.QtCore import QThread
 
-from common.logger_config import logger
-from common.sql_part import create_buffer_table
+# from common.logger_config import logger
+from common.sql_part import create_buffer_table_sync
 from common.yaml_config import YamlConfig
 from net.retranslator_asyncio.tcp_server import TCPServer
 from net.retranslator_asyncio.tcp_client import TCPClient
-
+import logging
+logger = logging.getLogger(__name__)
 
 class RetranslatorThread(QThread):
     def __init__(self, signals):
@@ -35,8 +35,9 @@ class RetranslatorThread(QThread):
         # self.signals.stop_signal.connect(self.stop)
         self.signals.log_data.emit("Worker data receiver start")
         try:
-            with asyncio.Runner() as self.runner:
-                self.runner.run(self.setup_tasks())
+            # with asyncio.Runner() as self.runner:
+            #     self.runner.run(self.setup_tasks())
+            asyncio.run(self.setup_tasks(), debug=True)
         except KeyboardInterrupt:
             print("Server and client stopped by user")
             self.signals.log_data.emit("Server and client stopped by user")
@@ -51,13 +52,13 @@ class RetranslatorThread(QThread):
         # self.cnt +=1
 
     async def setup_tasks(self):
-        await create_buffer_table()
+        # await create_buffer_table()
+        create_buffer_table_sync()
         self.tasks.append(asyncio.create_task(self.server.run()))
         self.tasks.append(asyncio.create_task(self.client.start_tcp_client()))
         self.tasks.append(asyncio.create_task(self.server.keepalive()))
         self.tasks.append(asyncio.create_task(self.server.check_connection_state()))
-
+        # self.tasks.append(asyncio.create_task(commit_every_second()))
         self.group = asyncio.gather(*self.tasks)
-        print(self.group)
         await self.group
 

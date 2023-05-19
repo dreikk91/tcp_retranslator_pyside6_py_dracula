@@ -2,9 +2,11 @@ import logging
 import yaml
 import pathlib
 import socket
-from common.logger_config import logger
+import logging
+
 from typing import Dict, Union
 
+logger = logging.getLogger(__name__)
 
 class YamlConfig:
     def __init__(self) -> None:

@@ -17,7 +17,7 @@
 # MAIN FILE
 # ///////////////////////////////////////////////////////////////
 from main import MainWindow
-from modules import Settings
+from modules.app_settings import Settings
 
 
 # WITH ACCESS TO MAIN WINDOW WIDGETS

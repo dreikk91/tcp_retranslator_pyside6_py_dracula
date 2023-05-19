@@ -18,11 +18,13 @@ Presentation and tutorial video with the main functions of the user interface.
 # High DPI
 > Qt Widgets is an old technology and does not have a good support for high DPI settings, making these images look distorted when your system has DPI applied above 100%.
 You can minimize this problem using a workaround by applying this code below in "main.py" just below the import of the Qt modules.
+
 ```python
 # ADJUST QT FONT DPI FOR HIGHT SCALE
 # ///////////////////////////////////////////////////////////////
 from modules import *
 from widgets import *
+
 os.environ["QT_FONT_DPI"] = "96"
 ```
 
