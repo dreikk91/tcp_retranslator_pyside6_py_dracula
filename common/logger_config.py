@@ -270,7 +270,7 @@ file_formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(name)s:%(fun
 
 # Створення об'єкту обробника логів для виводу на консоль
 console_handler = logging.StreamHandler(sys.stdout)
-console_handler.setLevel(logging.DEBUG)
+console_handler.setLevel(logging.WARNING)
 console_handler.setFormatter(console_formatter)
 
 # Створення об'єкту обробника логів для зберігання у файлі

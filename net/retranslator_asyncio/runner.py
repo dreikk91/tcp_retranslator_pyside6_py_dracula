@@ -57,8 +57,8 @@ class RetranslatorThread(QThread):
         self.tasks.append(asyncio.create_task(self.server.run()))
         self.tasks.append(asyncio.create_task(self.client.start_tcp_client()))
         self.tasks.append(asyncio.create_task(self.server.keepalive()))
-        self.tasks.append(asyncio.create_task(self.server.check_connection_state()))
+        # self.tasks.append(asyncio.create_task(self.server.check_connection_state()))
         # self.tasks.append(asyncio.create_task(commit_every_second()))
-        self.group = asyncio.gather(*self.tasks)
+        self.group = asyncio.gather(*self.tasks, return_exceptions=True)
         await self.group
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainSePtSc.ui'
+## Form generated from reading UI file 'main_19052023dnBtwN.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.5.0
 ##
@@ -29,6 +29,7 @@ class Ui_MainWindow(object):
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1167, 763)
         MainWindow.setMinimumSize(QSize(948, 763))
+        MainWindow.setFocusPolicy(Qt.NoFocus)
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
         font = QFont()
@@ -619,6 +620,7 @@ class Ui_MainWindow(object):
 
         self.leftMenuFrame = QFrame(self.leftMenuBg)
         self.leftMenuFrame.setObjectName(u"leftMenuFrame")
+        self.leftMenuFrame.setFocusPolicy(Qt.NoFocus)
         self.leftMenuFrame.setFrameShape(QFrame.NoFrame)
         self.leftMenuFrame.setFrameShadow(QFrame.Raised)
         self.verticalMenuLayout = QVBoxLayout(self.leftMenuFrame)
@@ -912,6 +914,7 @@ class Ui_MainWindow(object):
         self.titleRightInfo.setSizePolicy(sizePolicy2)
         self.titleRightInfo.setMaximumSize(QSize(16777215, 45))
         self.titleRightInfo.setFont(font)
+        self.titleRightInfo.setFocusPolicy(Qt.NoFocus)
         self.titleRightInfo.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_3.addWidget(self.titleRightInfo)
@@ -1256,6 +1259,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5.addWidget(self.label_receive_send_count)
 
+        self.label_receive_send_speed = QLabel(self.bottomBar)
+        self.label_receive_send_speed.setObjectName(u"label_receive_send_speed")
+
+        self.horizontalLayout_5.addWidget(self.label_receive_send_speed)
+
         self.creditsLabel = QLabel(self.bottomBar)
         self.creditsLabel.setObjectName(u"creditsLabel")
         self.creditsLabel.setMaximumSize(QSize(16777215, 16))
@@ -1339,7 +1347,7 @@ class Ui_MainWindow(object):
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-in"
                         "dent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600; color:#ff79c6;\">Convert QRC</span></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt; color:#ffffff;\">pyside6-rcc resources.qrc -o resources_rc.py</span></p></body></html>", None))
-        self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"PyDracula APP - Theme with colors based on Dracula for Python.", None))
+        self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700;\">PyDracula APP - Theme with colors based on Dracula for Python.</span></p></body></html>", None))
 #if QT_CONFIG(tooltip)
         self.settingsTopBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Settings", None))
 #endif // QT_CONFIG(tooltip)
@@ -1397,7 +1405,8 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"IP", None));
         ___qtablewidgetitem17 = self.tableWidget_right_2.horizontalHeaderItem(8)
         ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"Status", None));
-        self.label_receive_send_count.setText(QCoreApplication.translate("MainWindow", u"Receive 0 / Send 0", None))
+        self.label_receive_send_count.setText(QCoreApplication.translate("MainWindow", u"Total Receive/Send: 0 / 0", None))
+        self.label_receive_send_speed.setText(QCoreApplication.translate("MainWindow", u"Recieve/Send speed: 0 /  0", None))
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Wanderson M. Pimenta", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
     # retranslateUi

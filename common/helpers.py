@@ -29,6 +29,10 @@ def split_message_stream(message: bytes):
                 msg += "\x14"
                 encoded_message = msg.encode()
                 new_message_list.append(encoded_message)
+            else:
+                pass
+            if len(new_message_list) == 0:
+                return None
         return new_message_list
     except UnicodeDecodeError as err:
         logger.debug(err)

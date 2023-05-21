@@ -1,84 +1,12 @@
 # import json
+import logging
+import os
+
 import rapidjson as json
 from typing import Dict, List, Optional, Union
 
-from common.logger_config import logger
 
-
-class ReadJson:
-    def __init__(self, json_file):
-        """_summary_
-
-        Args:
-            json_file (_type_): _description_
-        """
-        self.json_file:list = json_file
-        self.cache:dict = {}
-        self.result:str = ""
-        self.messages_by_name:dict = {}
-
-    def open_json(self):
-        with open(self.json_file, "r", encoding="utf8") as f:
-            json_file = f.read()
-            json_dict = json.loads(json_file)
-            return json_dict
-
-    def create_messages_dict(self, message_dict):
-        for message in message_dict:
-            self.messages_by_name[message["name"]] = message
-
-    async def find_event_name_by_type_and_code(
-        self, event_dict:dict, message_dict:dict, event_type:str, event_code:str
-    ):
-        """_summary_
-
-        Args:
-            event_dict (dict): _description_
-            message_dict (dict): _description_
-            event_type (str): _description_
-            event_code (str): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        key = f"{event_type}_{event_code}"
-        result = self.cache.get(key)
-        print(result)
-        print(self.cache)
-        if result is not None:
-            return result
-
-        if not self.messages_by_name:
-            self.create_messages_dict(message_dict)
-
-        events_filtered = (
-            event
-            for event in event_dict
-            if event["type_event"] == event_type and event["code"] == event_code
-        )
-        event_by_user = next(events_filtered, None)
-        if event_by_user is not None:
-            message = self.messages_by_name.get(event_by_user["event_by_user"])
-            additional_type = event_by_user["additional_type"]
-            is_alarm = event_by_user["is_alarm"]
-            if message is not None:
-                event_code_merged = f"{event_type}{event_code}"
-                # result = await asyncio.to_thread(self._get_result, message, event_type, event_code, additional_type, is_alarm)
-                result = {
-                    "message": message["lang_uk"],
-                    "event_code": event_code_merged,
-                    "additional_type": additional_type,
-                    "is_alarm": is_alarm,
-                }
-                self.cache[key] = result
-                return result
-
-    def _get_result(self, message, event_type, event_code, additional_type, is_alarm):
-        logger.info(
-            f"{message['lang_uk']} ({event_type}{event_code} {additional_type} {is_alarm})"
-        )
-        return f"{message['lang_uk']} ({event_type}{event_code} {additional_type} {is_alarm})"
-
+logger = logging.getLogger(__name__)
 
 class GetEventFromJson:
     def __init__(self, json_file: str) -> None:
@@ -125,6 +53,7 @@ class GetEventFromJson:
         # self.cache[event_code] = default_event
         return default_event
 
+base_dir = os.path.dirname(os.path.abspath(__file__))
+events_file_path = os.path.join(base_dir, "events.json")
 
-
-get_event_from_json = GetEventFromJson("common/events.json")
+get_event_from_json = GetEventFromJson(events_file_path)

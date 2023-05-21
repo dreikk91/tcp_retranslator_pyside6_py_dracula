@@ -16,10 +16,12 @@
 import logging
 import os
 import sys
+import time
 import tracemalloc
 from datetime import datetime
 
 from PySide6 import QtWidgets
+from PySide6.QtCore import QTranslator, QLocale, Qt
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
@@ -42,6 +44,7 @@ logger = logging.getLogger(__name__)
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
+
         tracemalloc.start()
 
         # SET AS GLOBAL WIDGETS
@@ -74,14 +77,29 @@ class MainWindow(QMainWindow):
         self.retranslator = RetranslatorThread(self.signals)
         self.start_retranslator_async_thread()
 
+        self.message_received_count = 0
+        self.message_received_count_per_second = 0
+        self.message_send_count_per_second = 0
+        self.send_messages_per_second = 0
+        self.received_messages_per_second = 0
+        self.start_time_send = time.time()
+        self.start_time_receive = time.time()
+
+        #Add translations
+        widgets.toggleButton.setText(self.tr('Hide'))
+        widgets.btn_exit.setText(self.tr('Exit'))
+        widgets.btn_home.setText(self.tr('Retranslator'))
+        widgets.btn_log.setText(self.tr('log'))
+
+
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         # ///////////////////////////////////////////////////////////////
         Settings.ENABLE_CUSTOM_TITLE_BAR = True
 
         # APP NAME
         # ///////////////////////////////////////////////////////////////
-        title = "TCP Surgurad Retranslator"
-        description = "TCP Surgurad Retranslator APP"
+        title = self.tr("TCP Surgurad Retranslator")
+        description = self.tr("TCP Surgurad Retranslator APP")
         # APPLY TEXTS
         self.setWindowTitle(title)
         widgets.titleRightInfo.setText(description)
@@ -250,7 +268,6 @@ class MainWindow(QMainWindow):
             item.setBackground(QColor(background_color))
             item.setForeground(QColor(forground_color))
             self.left_table_widget.setItem(row, i, item)
-        print(self.left_table_widget.hasFocus())
         if not self.left_table_widget.hasFocus():
             self.left_table_widget.scrollToItem(
                 items[0], QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible
@@ -259,6 +276,13 @@ class MainWindow(QMainWindow):
             self.left_table_widget.setAutoScroll(False)
         self.left_row_counter += 1
         self.message_received_count += 1
+        self.message_received_count_per_second += 1
+        elapsed_time = time.time() - self.start_time_receive
+        if elapsed_time >= 1:
+            self.received_messages_per_second = self.message_received_count_per_second / elapsed_time
+            self.start_time_receive = time.time()
+            self.message_received_count_per_second = 0
+            # print(f"Messages per second: {round(self.received_messages_per_second, 2)}")
         self.update_receive_send_count()
         # self.ui.label_message_receviced_count.setText(str(self.message_received_count))
 
@@ -310,7 +334,15 @@ class MainWindow(QMainWindow):
             )
         self.right_row_counter += 1
         self.message_sent_count += 1
+        self.message_send_count_per_second += 1
+        elapsed_time = time.time() - self.start_time_send
+        if elapsed_time >= 1:
+            self.send_messages_per_second = self.message_send_count_per_second / elapsed_time
+            self.start_time_send = time.time()
+            self.message_send_count_per_second = 0
+            # print(f"Messages per second: {round(self.send_messages_per_second, 2)}")
         self.update_receive_send_count()
+
 
     @Slot(str)
     def fill_log_window(self, message):
@@ -325,8 +357,12 @@ class MainWindow(QMainWindow):
 
     def update_receive_send_count(self):
         self.ui.label_receive_send_count.setText(
-            f"Receive: {self.message_received_count} / Send: {self.message_sent_count}"
+            self.tr(f"Total Receive/Send: {self.message_received_count} / {self.message_sent_count}"
+        ))
+        self.ui.label_receive_send_speed.setText(
+            f"Recieve/Send speed: {round(self.received_messages_per_second, 2)} / {round(self.send_messages_per_second, 2)}"
         )
+
 
     def start_tcp_client_thread(self):
         # self.signals.data_receive.connect(self.add_row_to_incoming_widget)
@@ -352,6 +388,10 @@ class MainWindow(QMainWindow):
 def main():
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("icon.ico"))
+    translator = QTranslator()
+    translator.load("tcp_retranslator.qm", 'translations')  # Завантажте ваш перекладовий файл
+    app.installTranslator(translator)  # Встановіть перекладача для додатку
+
     window = MainWindow()
     window.show()
     sys.exit(app.exec())
