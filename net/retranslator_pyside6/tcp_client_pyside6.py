@@ -1,10 +1,7 @@
-import sys
 from PySide6.QtCore import *
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
 from PySide6.QtNetwork import *
 
-from common.sql_part import select_from_buffer_sync, create_buffer_table_sync, delete_from_buffer_sync
+from database.sql_part_postgres import select_from_buffer_sync, delete_from_buffer_sync
 from common.yaml_config import YamlConfig
 from common.logger_config import logger
 
@@ -19,7 +16,7 @@ class TcpClient(QObject):
         self.host = self.config["client"]["host"]
         self.port = self.config["client"]["port"]
 
-        create_buffer_table_sync()
+
 
         self.check_db_timer = QTimer(self)
         self.check_db_timer.timeout.connect(self.read_messages_from_buffer)

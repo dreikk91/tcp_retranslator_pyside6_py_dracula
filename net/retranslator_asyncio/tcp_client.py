@@ -2,7 +2,8 @@ import asyncio
 import logging
 
 from common.read_events_name_from_json import get_event_from_json
-from common.sql_part import select_from_buffer_sync, delete_from_buffer_sync
+from database.sql_part_postgres import select_from_buffer_sync, delete_from_buffer_sync
+# from database.sql_part_sqlite import select_from_buffer_sync, delete_from_buffer_sync
 
 logger = logging.getLogger(__name__)
 
@@ -89,7 +90,7 @@ class TCPClient:
                 self.signals.log_data.emit(f"Retrying in {delay} seconds...")
                 await asyncio.sleep(delay)
         else:
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.1)
 
     async def send_messages_from_buffer(self) -> None:
         rows = select_from_buffer_sync()

@@ -4,7 +4,8 @@ from typing import Any, Set, Union
 
 from common.helpers import split_message_stream, SurGard, parse_surguard_message
 from common.read_events_name_from_json import get_event_from_json
-from common.sql_part import insert_into_buffer_sync, insert_event_sync
+from database.sql_part_postgres import insert_into_buffer_sync, insert_event_sync
+# from database.sql_part_sqlite import insert_into_buffer_sync, insert_event_sync
 from common.yaml_config import YamlConfig
 import logging
 
@@ -102,6 +103,8 @@ class TCPServer:
                             writer.get_extra_info("peername"), msg.decode(), event_message
                         )
                         self.signals.log_data.emit(f"Message accepted {msg} {len(data)} send ACK")
+                    elif msg == b'1001           @    \x14':
+                        logger.info("Receive periodic test by station")
                     else:
                         # Помилка: некоректний формат повідомлення
                         logger.error(f"Invalid message format {msg} {len(data)} send NAK")

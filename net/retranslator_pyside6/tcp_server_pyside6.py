@@ -2,7 +2,7 @@ from PySide6.QtCore import *
 from PySide6.QtNetwork import *
 from common.helpers import split_message_stream, SurGard, parse_surguard_message
 from common.logger_config import logger
-from common.sql_part import insert_into_buffer, insert_event, insert_into_buffer_sync, insert_event_sync, create_buffer_table_sync
+from database.sql_part_postgres import insert_into_buffer_sync, insert_event_sync, create_buffer_table_sync
 from common.yaml_config import YamlConfig
 
 

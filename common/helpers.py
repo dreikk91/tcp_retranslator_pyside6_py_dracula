@@ -1,6 +1,10 @@
-import logging
 import time
 import logging
+
+import numba
+import numba as nb
+from numba import jit, types, njit, byte, char
+
 logger = logging.getLogger(__name__)
 
 
@@ -15,11 +19,11 @@ def check_message_format(message):
 
 
 # noinspection SpellCheckingInspection
-def split_message_stream(message: bytes):
+def split_message_stream(message:bytes):
     try:
-        new_message: str = message.decode()
-        splited_message_list: list = new_message.split("\x14")
-        new_message_list: list = []
+        new_message = str(message, "utf-8")
+        splited_message_list = new_message.split("\x14")
+        new_message_list = []
 
         if not splited_message_list:  # перевірка чи список не порожній
             return new_message_list  # якщо так, повертаємо порожній список
@@ -34,9 +38,8 @@ def split_message_stream(message: bytes):
             if len(new_message_list) == 0:
                 return None
         return new_message_list
-    except UnicodeDecodeError as err:
-        logger.debug(err)
-
+    except UnicodeDecodeError:
+        logger.exception("Error")
 
 class SurGard:
     def __init__(self, message: bytes):
@@ -65,9 +68,6 @@ class SurGard:
             area_number = self.message[15:17]
 
             zone_number = self.message[17:20]
-            # terminator = self.message[21:]
-            # if terminator != "\14":
-            #     return False
 
             return True
         except IndexError as err:
@@ -126,21 +126,5 @@ def parse_surguard_message(message):
             return "Unknown Protocol Number"
     else:
         return "Unknown Protocol Number"
-
-
-async def calculate_speed(stream):
-    start_time = time.monotonic()
-    data_size = 0
-    while True:
-        data = await stream.read(1024)
-        if not data:
-            break
-        data_size += len(data)
-    elapsed_time = time.monotonic() - start_time
-    if elapsed_time == 0:
-        return 0.0
-    else:
-        received_speed = data_size / elapsed_time
-        return received_speed
 
 

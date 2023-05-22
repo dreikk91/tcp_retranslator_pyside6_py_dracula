@@ -50,6 +50,7 @@ async def send_message_to_server(message_count):
 surgard_codes = [*event_guard, *event_disguard, *event_alarm, *event_ok, *other_events]
 
 count = 0
+
 def generate_message():
     global count
     ppk_number = random.randint(1000, 9999)

@@ -1,4 +1,5 @@
 from typing import List
+from numba import jit
 
 
 def get_color_by_event(text_event: str) -> List[str]:
