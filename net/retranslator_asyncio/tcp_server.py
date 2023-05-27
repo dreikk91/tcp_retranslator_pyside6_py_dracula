@@ -4,7 +4,7 @@ from typing import Any, Set, Union
 
 from common.helpers import split_message_stream, SurGard, parse_surguard_message
 from common.read_events_name_from_json import get_event_from_json
-from database.sql_part_postgres import insert_into_buffer_sync, insert_event_sync
+from database.sql_part_postgres import insert_into_buffer_sync, insert_event_sync, insert_into_buffer_async
 # from database.sql_part_sqlite import insert_into_buffer_sync, insert_event_sync
 from common.yaml_config import YamlConfig
 import logging

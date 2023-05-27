@@ -22,14 +22,18 @@ async def establish_connection(timeout=3):
         return reader, writer
 
     except asyncio.TimeoutError as ex:
-        raise ConnectionError(
+        logger.error(
             f"Connection to {server_host}:{server_port} timed out"
-        ) from ex
+        )
+        logger.info("Reconnecting after 10 seconds")
+        await asyncio.sleep(10)
+        await establish_connection(3)
     except OSError as e:
-        logger.exception(f"Error connecting to server:")
-        raise ConnectionError(
+        logger.exception(
             f"Error connecting to {server_host}:{server_port}: {e}"
-        ) from e
+        )
+        await asyncio.sleep(10)
+        await establish_connection(3)
 
 async def send_message_to_server(message_count):
     try:
@@ -44,7 +48,7 @@ async def send_message_to_server(message_count):
                 logger.exception(err)
                 writer.close()
             # if response == MSG_ACK:
-            logger.info(f"Sent data: {data}, Received response: {response}")
+            # logger.info(f"Sent data: {data}, Received response: {response}")
             await asyncio.sleep(0)
     except Exception:
         logger.exception("error")

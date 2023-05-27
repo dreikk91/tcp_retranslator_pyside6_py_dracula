@@ -7,7 +7,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 
 logger = logging.getLogger(__name__)
 
-engine = create_engine("postgresql+psycopg2://postgres:Ap15021991@localhost/rdb", echo=False)
+engine = create_engine("postgresql+psycopg2://postgres:Ap15021991@localhost/postgres", echo=False)
 async_session = sessionmaker(engine)
 Base = declarative_base()
 
@@ -59,7 +59,11 @@ def insert_into_buffer_sync(messages):
     with async_session() as session:
         session.add_all(buffer_objs)
         session.commit()
-
+async def insert_into_buffer_async(messages):
+    buffer_objs = [Buffer(message) for message in messages]
+    async with async_session() as session:
+        session.add_all(buffer_objs)
+        await session.commit()
 
 def select_from_buffer_sync():
     new_list = []
