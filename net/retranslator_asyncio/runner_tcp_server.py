@@ -49,7 +49,6 @@ class TCPServerThread(QThread):
         # await create_buffer_table()
         create_buffer_table_sync()
         self.tasks.append(asyncio.create_task(self.server.run()))
-        self.tasks.append(asyncio.create_task(self.server.write_from_buffer_to_db()))
         # self.tasks.append(asyncio.create_task(self.client.start_tcp_client()))
         self.tasks.append(asyncio.create_task(self.server.keepalive()))
         # self.tasks.append(asyncio.create_task(self.server.check_connection_state()))
