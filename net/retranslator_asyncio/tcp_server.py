@@ -187,3 +187,7 @@ class TCPServer:
 class ConnectionState:
     # Клас, що відстежує стан підключення серверу
     is_running: Event = asyncio.Event()
+
+
+class Buffer:
+    queue = asyncio.Queue()

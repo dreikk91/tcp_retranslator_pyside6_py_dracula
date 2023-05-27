@@ -250,7 +250,7 @@ if os.path.isfile("logs\\retranslator.log"):
 
 # Встановлення рівня логування
 logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.WARNING)
 
 # Створення об'єкту форматування
 console_formatter = colorlog.ColoredFormatter(

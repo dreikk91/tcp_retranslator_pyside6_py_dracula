@@ -2,7 +2,7 @@
 import logging
 import os
 
-import rapidjson as json
+import json
 from typing import Dict, List, Optional, Union
 
 

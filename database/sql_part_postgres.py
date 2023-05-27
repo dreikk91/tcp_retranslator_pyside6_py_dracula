@@ -7,7 +7,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 
 logger = logging.getLogger(__name__)
 
-engine = create_engine("postgresql+psycopg2://postgres:Ap15021991@localhost/postgres", echo=False)
+engine = create_engine("postgresql+psycopg2://postgres:Ap15021991@localhost/rdb", echo=False)
 async_session = sessionmaker(engine)
 Base = declarative_base()
 

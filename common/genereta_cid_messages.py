@@ -2,7 +2,7 @@ import asyncio
 import logging
 import random
 
-from common.surguad_codes import *
+from surguad_codes import *
 
 logger = logging.getLogger(__name__)
 
@@ -38,8 +38,11 @@ async def send_message_to_server(message_count):
             data = generate_message()
             writer.write(data)
             await writer.drain()
-
-            response = await asyncio.wait_for(reader.read(1024), timeout=1024)
+            try:
+                 response = await asyncio.wait_for(reader.read(1024), timeout=1024)
+            except ConnectionResetError as err:
+                logger.exception(err)
+                writer.close()
             # if response == MSG_ACK:
             logger.info(f"Sent data: {data}, Received response: {response}")
             await asyncio.sleep(0)

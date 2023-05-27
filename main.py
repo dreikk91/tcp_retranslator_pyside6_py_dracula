@@ -21,17 +21,20 @@ import tracemalloc
 from datetime import datetime
 
 from PySide6 import QtWidgets
-from PySide6.QtCore import QTranslator, QLocale, Qt
+from PySide6.QtCore import QLocale, Qt, QTranslator
 
+from common.surguad_codes import get_color_by_event
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
 from modules import *
 from modules.app_settings import Settings
 from net.retranslator_asyncio.runner import RetranslatorThread
 from net.retranslator_asyncio.tcp_server import ConnectionState
-from common.surguad_codes import get_color_by_event
-from net.retranslator_pyside6.tcp_client_pyside6 import TcpClient
-from net.retranslator_pyside6.tcp_server_pyside6 import MyTcpServer
+from net.retranslator_asyncio.runner_tcp_server import TCPServerThread
+from net.retranslator_asyncio.runner_tcp_client import TCPClientThread
+# from net.retranslator_pyside6.runner_pyside6 import TCPClientThread, TCPServerThread
+# from net.retranslator_pyside6.tcp_client_pyside6 import TcpClient
+# from net.retranslator_pyside6.tcp_server_pyside6 import MyTcpServer
 
 os.environ["QT_FONT_DPI"] = "96"  # FIX Problem for High DPI and Scale above 100%
 
@@ -74,8 +77,12 @@ class MainWindow(QMainWindow):
         self.message_sent_count = 0
 
         ConnectionState.is_running.set()
-        self.retranslator = RetranslatorThread(self.signals)
-        self.start_retranslator_async_thread()
+        # self.retranslator = RetranslatorThread(self.signals)
+        self.tcp_server_thread = TCPServerThread(self.signals)
+        self.tcp_client_thread = TCPClientThread(self.signals)
+        self.start_tcp_server_thread() 
+        self.start_tcp_client_thread()
+        # self.start_retranslator_async_thread()
 
         self.message_received_count = 0
         self.message_received_count_per_second = 0
@@ -378,11 +385,20 @@ class MainWindow(QMainWindow):
         self.tcp_server.run_server()
         # self.ui.pushButton_conn_disconn.setText("Stop server")
 
-    def start_retranslator_async_thread(self):
+    # def start_retranslator_async_thread(self):
+    #     # self.signals.data_receive.connect(self.add_row_to_incoming_widget)
+    #     # self.signals.data_send.connect(self.add_row_to_outgoing_widget)
+    #     # self.signals.log_data.connect(self.fill_log_window)
+    #     self.retranslator.start()
+
+    def start_tcp_server_thread(self):
         self.signals.data_receive.connect(self.add_row_to_incoming_widget)
-        self.signals.data_send.connect(self.add_row_to_outgoing_widget)
         self.signals.log_data.connect(self.fill_log_window)
-        self.retranslator.start()
+        self.tcp_server_thread.start()
+        
+    def start_tcp_client_thread(self):
+        self.signals.data_send.connect(self.add_row_to_outgoing_widget)
+        self.tcp_client_thread.start()
 
 
 def main():

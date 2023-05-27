@@ -1,9 +1,6 @@
 import time
 import logging
 
-import numba
-import numba as nb
-from numba import jit, types, njit, byte, char
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +15,6 @@ def check_message_format(message):
         return True
 
 
-# noinspection SpellCheckingInspection
 def split_message_stream(message:bytes):
     try:
         new_message = str(message, "utf-8")
