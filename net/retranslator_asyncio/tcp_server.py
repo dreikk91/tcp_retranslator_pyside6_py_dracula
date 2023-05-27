@@ -91,11 +91,7 @@ class TCPServer:
                     if sg.is_valid():
                         # Додавання повідомлення до черги та обробка події
                         logger.info(f"{message} append to queue")
-                        self.signals.log_data.emit(f"{message} append to queue")
-                        insert_into_buffer_sync(message)
-
-                        sg_message = parse_surguard_message(message)
-                        insert_event_sync(sg_message, writer.get_extra_info("peername"))
+                        await Buffer.queue.put({"message": message, "ip": writer.get_extra_info('peername')})
                         event_code = f"{message[11]}{message[12:15]}"
 
                         event_message = get_event_from_json.read_events(event_code)
@@ -149,16 +145,39 @@ class TCPServer:
             if ConnectionState.is_running.is_set():
                 for client in self.clients.copy():
                     try:
+                        await asyncio.sleep(10)
                         client.write(b"\x01")
                         logger.info(f"send keep-alive to {client.get_extra_info('peername')}")
                         self.signals.log_data.emit(f"send keep-alive to {client.get_extra_info('peername')}")
                         await client.drain()
-                        await asyncio.sleep(10)
+
                     except ConnectionError as err:
                         logger.exception(f"Keepalive failed {err}")
                         self.clients.remove(client)
 
             await asyncio.sleep(self.keepalive_interval)
+
+    async def write_from_buffer_to_db(self):
+        while True:
+            message_list = []
+            ip_list = []
+            sg_message_list = []
+            while not Buffer.queue.empty():
+                message = await Buffer.queue.get()
+                sg_message = parse_surguard_message(message['message'])
+                message_list.append(message['message'])
+                ip_list.append(message['ip'])
+                sg_message_list.append(sg_message)
+
+            if len(message_list)>0:
+                insert_into_buffer_sync(message_list)
+            await asyncio.sleep(1)
+
+            #
+            # insert_event_sync(sg_message, message['ip'])
+            # await asyncio.sleep(1)
+
+
 
     async def run(self) -> None:
         # Запуск серверу

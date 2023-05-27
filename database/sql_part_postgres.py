@@ -54,10 +54,10 @@ def create_buffer_table_sync():
         Base.metadata.create_all(conn)
 
 
-def insert_into_buffer_sync(message):
-    buffer_obj = Buffer(message)
+def insert_into_buffer_sync(messages):
+    buffer_objs = [Buffer(message) for message in messages]
     with async_session() as session:
-        session.add(buffer_obj)
+        session.add_all(buffer_objs)
         session.commit()
 
 
