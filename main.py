@@ -207,6 +207,8 @@ class MainWindow(QMainWindow):
         print("[ Top 10 ]")
         for stat in top_stats[:10]:
             print(stat)
+        self.tcp_server_thread.stop()
+        self.tcp_server_thread.terminate()
 
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////
@@ -395,6 +397,7 @@ class MainWindow(QMainWindow):
         self.signals.data_receive.connect(self.add_row_to_incoming_widget)
         self.signals.log_data.connect(self.fill_log_window)
         self.tcp_server_thread.start()
+
         
     def start_tcp_client_thread(self):
         self.signals.data_send.connect(self.add_row_to_outgoing_widget)

@@ -22,8 +22,8 @@ class TCPServerThread(QThread):
         self.check_connection_status_task = None
         self.cnt = 0
         self.tasks = []
-        
-        
+        self.loop = asyncio.get_event_loop()
+
     def run(self) -> None:
         logger.info("Worker data receiver start")
         # self.signals.stop_signal.connect(self.stop)
@@ -31,19 +31,18 @@ class TCPServerThread(QThread):
         try:
             # with asyncio.Runner() as self.runner:
             #     self.runner.run(self.setup_tasks())
-            asyncio.run(self.setup_tasks(), debug=True)
+            # asyncio.run(self.setup_tasks(), debug=True)
+            self.loop.run_until_complete(self.setup_tasks())
         except KeyboardInterrupt:
             print("Server and client stopped by user")
             self.signals.log_data.emit("Server and client stopped by user")
 
     def stop(self):
-        pass
-        # if self.cnt >= 30:
-        #     for task in self.group:
-        #         self.cnt = 0
-        #         task.cancel()
-        #
-        # self.cnt +=1
+        self.loop.call_soon_threadsafe(self._stop)
+
+    def _stop(self):
+        for task in self.tasks:
+            task.cancel()
 
     async def setup_tasks(self):
         # await create_buffer_table()
@@ -55,6 +54,11 @@ class TCPServerThread(QThread):
         # self.tasks.append(asyncio.create_task(self.server.check_connection_state()))
         # self.tasks.append(asyncio.create_task(commit_every_second()))
         self.group = asyncio.gather(*self.tasks, return_exceptions=True)
-        await self.group
+
+        try:
+            await self.group
+        except asyncio.CancelledError:
+            print("Tasks cancelled")
+
         
 

@@ -5,9 +5,18 @@ from sqlalchemy import Column, Integer, String, select, delete, Float, create_en
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-logger = logging.getLogger(__name__)
+from common.yaml_config import YamlConfig
 
-engine = create_engine("postgresql+psycopg2://postgres:Ap15021991@localhost/postgres", echo=False)
+logger = logging.getLogger(__name__)
+yc = YamlConfig()
+config = yc.config_open()
+username = config['databases']['postgres']['postgres_user']
+password = config['databases']['postgres']['postgres_password']
+server_address = config['databases']['postgres']["postgres_address"]
+server_port = config['databases']['postgres']["postgres_port"]
+postgres_database = config['databases']['postgres']["postgres_database"]
+
+engine = create_engine(f"postgresql+psycopg2://{username}:{password}@{server_address}/{postgres_database}", echo=False)
 async_session = sessionmaker(engine)
 Base = declarative_base()
 

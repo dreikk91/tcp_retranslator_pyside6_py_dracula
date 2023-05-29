@@ -129,7 +129,7 @@ class TCPServer:
     ) -> bytes:
         # Читання даних до роздільника
         try:
-            data = await asyncio.wait_for(reader.readuntil(separator=separator), timeout=timeout)
+            data = await asyncio.wait_for(reader.read(1024), timeout=timeout)
             return data
         except (
             asyncio.exceptions.TimeoutError,
