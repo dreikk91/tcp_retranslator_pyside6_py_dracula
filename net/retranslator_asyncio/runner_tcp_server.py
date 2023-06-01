@@ -7,7 +7,9 @@ from common.yaml_config import YamlConfig
 from net.retranslator_asyncio.tcp_server import TCPServer
 from net.retranslator_asyncio.tcp_client import TCPClient
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 class TCPServerThread(QThread):
     def __init__(self, signals):
@@ -60,5 +62,5 @@ class TCPServerThread(QThread):
         except asyncio.CancelledError:
             print("Tasks cancelled")
 
-        
+
 

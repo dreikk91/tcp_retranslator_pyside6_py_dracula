@@ -32,6 +32,7 @@ from net.retranslator_asyncio.runner import RetranslatorThread
 from net.retranslator_asyncio.tcp_server import ConnectionState
 from net.retranslator_asyncio.runner_tcp_server import TCPServerThread
 from net.retranslator_asyncio.runner_tcp_client import TCPClientThread
+
 # from net.retranslator_pyside6.runner_pyside6 import TCPClientThread, TCPServerThread
 # from net.retranslator_pyside6.tcp_client_pyside6 import TcpClient
 # from net.retranslator_pyside6.tcp_server_pyside6 import MyTcpServer
@@ -80,7 +81,7 @@ class MainWindow(QMainWindow):
         # self.retranslator = RetranslatorThread(self.signals)
         self.tcp_server_thread = TCPServerThread(self.signals)
         self.tcp_client_thread = TCPClientThread(self.signals)
-        self.start_tcp_server_thread() 
+        self.start_tcp_server_thread()
         self.start_tcp_client_thread()
         # self.start_retranslator_async_thread()
 
@@ -92,12 +93,11 @@ class MainWindow(QMainWindow):
         self.start_time_send = time.time()
         self.start_time_receive = time.time()
 
-        #Add translations
+        # Add translations
         widgets.toggleButton.setText(self.tr('Hide'))
         widgets.btn_exit.setText(self.tr('Exit'))
         widgets.btn_home.setText(self.tr('Retranslator'))
         widgets.btn_log.setText(self.tr('log'))
-
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         # ///////////////////////////////////////////////////////////////
@@ -130,6 +130,7 @@ class MainWindow(QMainWindow):
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
         widgets.btn_log.clicked.connect(self.buttonClick)
+
         # widgets.btn_new.clicked.connect(self.buttonClick)
         # widgets.btn_save.clicked.connect(self.buttonClick)
 
@@ -256,8 +257,8 @@ class MainWindow(QMainWindow):
             self.customize_left_table_widgets()
 
         if (
-            self.left_table_widget.rowCount()
-            >= self.config["other"]["left_window_row_count"]
+                self.left_table_widget.rowCount()
+                >= self.config["other"]["left_window_row_count"]
         ):
             self.left_table_widget.removeRow(0)
         row = self.left_table_widget.rowCount()
@@ -314,11 +315,10 @@ class MainWindow(QMainWindow):
             self.customize_right_table_widgets()
 
         if (
-            self.right_table_widget.rowCount()
-            >= self.config["other"]["right_window_row_count"]
+                self.right_table_widget.rowCount()
+                >= self.config["other"]["right_window_row_count"]
         ):
             self.right_table_widget.removeRow(0)
-
 
         row = self.right_table_widget.rowCount()
         self.right_table_widget.insertRow(row)
@@ -352,7 +352,6 @@ class MainWindow(QMainWindow):
             # print(f"Messages per second: {round(self.send_messages_per_second, 2)}")
         self.update_receive_send_count()
 
-
     @Slot(str)
     def fill_log_window(self, message):
         time_now = datetime.now().strftime("%d/%m/%Y | %H:%M:%S.%f")
@@ -367,11 +366,10 @@ class MainWindow(QMainWindow):
     def update_receive_send_count(self):
         self.ui.label_receive_send_count.setText(
             self.tr(f"Total Receive/Send: {self.message_received_count} / {self.message_sent_count}"
-        ))
+                    ))
         self.ui.label_receive_send_speed.setText(
             f"Recieve/Send speed: {round(self.received_messages_per_second, 2)} / {round(self.send_messages_per_second, 2)}"
         )
-
 
     def start_tcp_client_thread(self):
         # self.signals.data_receive.connect(self.add_row_to_incoming_widget)
@@ -398,7 +396,6 @@ class MainWindow(QMainWindow):
         self.signals.log_data.connect(self.fill_log_window)
         self.tcp_server_thread.start()
 
-        
     def start_tcp_client_thread(self):
         self.signals.data_send.connect(self.add_row_to_outgoing_widget)
         self.tcp_client_thread.start()

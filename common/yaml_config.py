@@ -8,6 +8,7 @@ from typing import Dict, Union
 
 logger = logging.getLogger(__name__)
 
+
 class YamlConfig:
     def __init__(self) -> None:
         self.file = pathlib.Path("retranslate.yaml")
@@ -25,14 +26,13 @@ class YamlConfig:
             left_window_row_count: int = 1000
             right_window_row_count: int = 1000
             log_window_row_count: int = 1000
-            database_engine:str = 'sqlite'
+            database_engine: str = 'sqlite'
             postgres_address: str = 'localhost'
             postgres_port: int = 5432
             postgres_database_name: str = 'postgres'
-            postgres_user:str = 'root'
+            postgres_user: str = 'root'
             postgres_password: str = 'password'
             sqlite_db_name: str = "base.db"
-            
 
             # add checks for valid IP addresses and ports
             if not is_valid_ip(clien_host):
@@ -59,7 +59,7 @@ class YamlConfig:
                     "log_window_row_count": log_window_row_count,
                 },
                 'databases': {
-                    "active_engine": database_engine, 
+                    "active_engine": database_engine,
                     "postgres": {
                         "postgres_user": postgres_user,
                         "postgres_password": postgres_password,
@@ -67,7 +67,7 @@ class YamlConfig:
                         "postgres_database": postgres_database_name,
                         "postgres_port": postgres_port
                     },
-                    'sqlite':{
+                    'sqlite': {
                         "sqlite_database_name": sqlite_db_name
                     }
                 }
