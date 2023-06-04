@@ -76,8 +76,15 @@ class YamlConfig:
                 yaml.dump(to_yaml, f, default_flow_style=False)
 
     def config_open(self) -> Dict[str, Dict[str, Union[str, int]]]:
-        with open("retranslate.yaml") as f:
-            yaml_config = yaml.safe_load(f)
+        try:
+            with open("retranslate.yaml") as f:
+                yaml_config = yaml.safe_load(f)
+        except FileNotFoundError as err:
+            logger.exception("Config not found? generating new")
+            self.config_init()
+            with open("retranslate.yaml") as f:
+                yaml_config = yaml.safe_load(f)
+
 
         # add checks for valid IP addresses and ports
         if not is_valid_ip(yaml_config['client']['host']):

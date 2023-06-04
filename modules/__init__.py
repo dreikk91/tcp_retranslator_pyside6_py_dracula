@@ -30,8 +30,4 @@ from modules.ui_functions import *
 from modules.app_functions import *
 
 
-from net.retranslator_pyside6.tcp_client_pyside6 import TcpClient
-from net.retranslator_pyside6.tcp_server_pyside6 import MyTcpServer
-
 from common.worker_signals import WorkerSignals
-from common.yaml_config import YamlConfig

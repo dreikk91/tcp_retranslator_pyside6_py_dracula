@@ -24,6 +24,11 @@ class WorkerSignals(QObject):
     data_receive = Signal(tuple, str, dict)
     data_send = Signal(tuple, str, dict)
     log_data = Signal(str)
+    
+    start_signal = Signal()
+    start_client_signal = Signal()
+    stop_server_signal = Signal()
+    stop_client_signal = Signal()
 
     stop_signal = Signal()
 

@@ -13,25 +13,36 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
+import asyncio
 import logging
 import os
+import signal
 import sys
 import time
 import tracemalloc
 from datetime import datetime
 
-from PySide6 import QtWidgets
-from PySide6.QtCore import QLocale, Qt, QTranslator
+import qtinter
 
+from PySide6 import QtWidgets
+from PySide6.QtCore import Qt, Slot
+from PySide6.QtWidgets import QApplication, QMainWindow
+
+from common.async_helper import AsyncHelper
 from common.surguad_codes import get_color_by_event
+from common.yaml_config import YamlConfig
+from database.sql_part_postgres import create_buffer_table_sync
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
 from modules import *
 from modules.app_settings import Settings
+from modules.log_window import LogWindow
+from modules.table_widgets import TableManager
 from net.retranslator_asyncio.runner import RetranslatorThread
-from net.retranslator_asyncio.tcp_server import ConnectionState
-from net.retranslator_asyncio.runner_tcp_server import TCPServerThread
 from net.retranslator_asyncio.runner_tcp_client import TCPClientThread
+from net.retranslator_asyncio.runner_tcp_server import TCPServerThread
+from net.retranslator_asyncio.tcp_client import TCPClient
+from net.retranslator_asyncio.tcp_server import ConnectionState, TCPServer
 
 # from net.retranslator_pyside6.runner_pyside6 import TCPClientThread, TCPServerThread
 # from net.retranslator_pyside6.tcp_client_pyside6 import TcpClient
@@ -46,10 +57,15 @@ logger = logging.getLogger(__name__)
 
 
 class MainWindow(QMainWindow):
+    
+    start_signal = Signal()
+    done_signal = Signal()
+    
     def __init__(self):
         QMainWindow.__init__(self)
 
         tracemalloc.start()
+        
 
         # SET AS GLOBAL WIDGETS
         # ///////////////////////////////////////////////////////////////
@@ -59,30 +75,37 @@ class MainWindow(QMainWindow):
         widgets = self.ui
 
         self.signals = WorkerSignals()
+        self.table_manager = TableManager(widgets)
+        self.log_window = LogWindow(widgets)
 
         self.yc = YamlConfig()
         self.yc.config_init()
         self.config = self.yc.config_open()
+        
+        self.server = TCPServer(self.signals)
+        self.client = TCPClient(
+        self.config["client"]["host"], self.config["client"]["port"], self.signals
+        )
+        self.server_tasks = []
+        self.client_tasks = []
 
         self.left_table_widget = widgets.tableWidget_left
         self.right_table_widget = widgets.tableWidget_right_2
-        self.log_window = widgets.listWidget_log
+        # self.log_window = widgets.listWidget_log
 
         self.left_row_counter = 0
         self.right_row_counter = 0
 
-        self.tcp_client = TcpClient(self.signals)
-        self.tcp_server = MyTcpServer(self.signals)
-
         self.message_received_count = 0
         self.message_sent_count = 0
+        QTimer.singleShot(3, self.setup_server_tasks)
 
         ConnectionState.is_running.set()
         # self.retranslator = RetranslatorThread(self.signals)
-        self.tcp_server_thread = TCPServerThread(self.signals)
-        self.tcp_client_thread = TCPClientThread(self.signals)
-        self.start_tcp_server_thread()
-        self.start_tcp_client_thread()
+        # self.tcp_server_thread = TCPServerThread(self.signals)
+        # self.tcp_client_thread = TCPClientThread(self.signals)
+        # self.start_tcp_server_thread()
+        # self.start_tcp_client_thread()
         # self.start_retranslator_async_thread()
 
         self.message_received_count = 0
@@ -92,6 +115,7 @@ class MainWindow(QMainWindow):
         self.received_messages_per_second = 0
         self.start_time_send = time.time()
         self.start_time_receive = time.time()
+        
 
         # Add translations
         widgets.toggleButton.setText(self.tr('Hide'))
@@ -130,6 +154,7 @@ class MainWindow(QMainWindow):
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
         widgets.btn_log.clicked.connect(self.buttonClick)
+        widgets.btn_exit.clicked.connect(self.setup_server_tasks)
 
         # widgets.btn_new.clicked.connect(self.buttonClick)
         # widgets.btn_save.clicked.connect(self.buttonClick)
@@ -208,8 +233,12 @@ class MainWindow(QMainWindow):
         print("[ Top 10 ]")
         for stat in top_stats[:10]:
             print(stat)
-        self.tcp_server_thread.stop()
-        self.tcp_server_thread.terminate()
+        # self.tcp_server_thread.stop()
+        # self.tcp_server_thread.terminate()
+        
+    
+
+
 
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////
@@ -228,148 +257,6 @@ class MainWindow(QMainWindow):
             print("Mouse click: LEFT CLICK")
         if event.buttons() == Qt.RightButton:
             print("Mouse click: RIGHT CLICK")
-
-    def customize_left_table_widgets(self):
-        self.left_table_widget.autoScrollMargin()
-        for i in range(8):
-            self.left_table_widget.resizeColumnToContents(i)
-
-    def customize_right_table_widgets(self):
-        self.right_table_widget.autoScrollMargin()
-        for i in range(8):
-            self.right_table_widget.resizeColumnToContents(i)
-
-    @Slot(tuple, dict)
-    def add_row_to_incoming_widget(self, peer_name, message, event_message):
-        current_time: str = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-        ppk_id: str = message[7:11]
-        line: str = message[3]
-        event_type: str = message[11]
-        event_code: str = message[12:15]
-        group: str = message[15:17]
-        zone: str = message[17:20]
-        background_color, forground_color = get_color_by_event(
-            event_message["contactId_code"]
-        )
-        event_text: str = f'{event_message["CodeMes_UK"]} ({event_type}{event_code})'
-
-        if self.left_row_counter <= 10:
-            self.customize_left_table_widgets()
-
-        if (
-                self.left_table_widget.rowCount()
-                >= self.config["other"]["left_window_row_count"]
-        ):
-            self.left_table_widget.removeRow(0)
-        row = self.left_table_widget.rowCount()
-        self.left_table_widget.insertRow(row)
-        items = [
-            QTableWidgetItem(current_time),
-            QTableWidgetItem(ppk_id),
-            QTableWidgetItem(line),
-            QTableWidgetItem(f'{event_message["TypeCodeMes_UK"]}'),
-            QTableWidgetItem(event_text),
-            QTableWidgetItem(group),
-            QTableWidgetItem(zone),
-            QTableWidgetItem(f"{peer_name[0]}:{peer_name[1]}"),
-        ]
-
-        for i, item in enumerate(items):
-            item.setBackground(QColor(background_color))
-            item.setForeground(QColor(forground_color))
-            self.left_table_widget.setItem(row, i, item)
-        if not self.left_table_widget.hasFocus():
-            self.left_table_widget.scrollToItem(
-                items[0], QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible
-            )
-        else:
-            self.left_table_widget.setAutoScroll(False)
-        self.left_row_counter += 1
-        self.message_received_count += 1
-        self.message_received_count_per_second += 1
-        elapsed_time = time.time() - self.start_time_receive
-        if elapsed_time >= 1:
-            self.received_messages_per_second = self.message_received_count_per_second / elapsed_time
-            self.start_time_receive = time.time()
-            self.message_received_count_per_second = 0
-            # print(f"Messages per second: {round(self.received_messages_per_second, 2)}")
-        self.update_receive_send_count()
-        # self.ui.label_message_receviced_count.setText(str(self.message_received_count))
-
-    @Slot(tuple, str)
-    def add_row_to_outgoing_widget(self, peer_name, message, event_message):
-        event_message = event_message
-        current_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-        ppk_id = message[7:11]
-        line = message[3]
-        event_type = message[11]
-        event_code = message[12:15]
-        group = message[15:17]
-        zone = message[17:20]
-        background_color, forground_color = get_color_by_event(
-            event_message["contactId_code"]
-        )
-        event_text = f'{event_message["CodeMes_UK"]} ({event_type}{event_code})'
-
-        if self.right_table_widget.rowCount() <= 10:
-            self.customize_right_table_widgets()
-
-        if (
-                self.right_table_widget.rowCount()
-                >= self.config["other"]["right_window_row_count"]
-        ):
-            self.right_table_widget.removeRow(0)
-
-        row = self.right_table_widget.rowCount()
-        self.right_table_widget.insertRow(row)
-        items = [
-            QTableWidgetItem(current_time),
-            QTableWidgetItem(ppk_id),
-            QTableWidgetItem(line),
-            QTableWidgetItem(f'{event_message["TypeCodeMes_UK"]}'),
-            QTableWidgetItem(event_text),
-            QTableWidgetItem(group),
-            QTableWidgetItem(zone),
-            QTableWidgetItem(f"{peer_name[0]}:{peer_name[1]}"),
-        ]
-
-        for i, item in enumerate(items):
-            self.right_table_widget.setItem(row, i, item)
-            item.setBackground(QColor(background_color))
-            item.setForeground(QColor(forground_color))
-        if not self.right_table_widget.hasFocus():
-            self.right_table_widget.scrollToItem(
-                items[0], QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible
-            )
-        self.right_row_counter += 1
-        self.message_sent_count += 1
-        self.message_send_count_per_second += 1
-        elapsed_time = time.time() - self.start_time_send
-        if elapsed_time >= 1:
-            self.send_messages_per_second = self.message_send_count_per_second / elapsed_time
-            self.start_time_send = time.time()
-            self.message_send_count_per_second = 0
-            # print(f"Messages per second: {round(self.send_messages_per_second, 2)}")
-        self.update_receive_send_count()
-
-    @Slot(str)
-    def fill_log_window(self, message):
-        time_now = datetime.now().strftime("%d/%m/%Y | %H:%M:%S.%f")
-        msg = QListWidgetItem(f"{time_now} | {message}")
-        if self.log_window.count() >= self.config["other"]["log_window_row_count"]:
-            self.log_window.takeItem(0)
-        self.log_window.addItem(msg)
-        self.log_window.setUniformItemSizes(True)
-        if not self.log_window.hasFocus():
-            self.log_window.scrollToBottom()
-
-    def update_receive_send_count(self):
-        self.ui.label_receive_send_count.setText(
-            self.tr(f"Total Receive/Send: {self.message_received_count} / {self.message_sent_count}"
-                    ))
-        self.ui.label_receive_send_speed.setText(
-            f"Recieve/Send speed: {round(self.received_messages_per_second, 2)} / {round(self.send_messages_per_second, 2)}"
-        )
 
     def start_tcp_client_thread(self):
         # self.signals.data_receive.connect(self.add_row_to_incoming_widget)
@@ -391,27 +278,64 @@ class MainWindow(QMainWindow):
     #     # self.signals.log_data.connect(self.fill_log_window)
     #     self.retranslator.start()
 
-    def start_tcp_server_thread(self):
-        self.signals.data_receive.connect(self.add_row_to_incoming_widget)
-        self.signals.log_data.connect(self.fill_log_window)
-        self.tcp_server_thread.start()
+    def setup_server_tasks(self):
+        self.signals.data_receive.connect(self.table_manager.add_row_to_incoming_widget)
+        self.signals.data_send.connect(self.table_manager.add_row_to_outgoing_widget)
+        self.signals.log_data.connect(self.log_window.fill_log_window)
+        create_buffer_table_sync()
+        self.server_tasks.append(asyncio.create_task(self.server.run()))
+        self.server_tasks.append(asyncio.create_task(self.server.write_from_buffer_to_db()))
+        self.server_tasks.append(asyncio.create_task(self.server.keepalive()))
+        self.server_tasks.append(asyncio.create_task(self.client.start_tcp_client()))
+        self.group_server = asyncio.gather(*self.server_tasks, return_exceptions=True)
+        
+        # try:
+        #     await self.group_server
+        # except asyncio.CancelledError:
+        #     print("Tasks cancelled")
+        
+    async def setup_client_tasks(self):
+        create_buffer_table_sync()
+        self.client_tasks.append(asyncio.create_task(self.client.start_tcp_client()))
+        self.group_client = asyncio.gather(*self.client_tasks, return_exceptions=True)
+        
+        try:
+            await self.group_client
+        except asyncio.CancelledError:
+            print("Tasks cancelled")
+        
+    async def start_server(self):
+        await self.setup_server_tasks() 
+        
+        
+    async def start_client(self):
+        await self.setup_client_tasks() 
+    
+    @Slot()
+    def async_start(self):
+        self.signals.data_receive.connect(self.table_manager.add_row_to_incoming_widget)
+        self.signals.data_send.connect(self.table_manager.add_row_to_outgoing_widget)
+        self.signals.log_data.connect(self.log_window.fill_log_window)
+        self.start_signal.emit()
 
-    def start_tcp_client_thread(self):
-        self.signals.data_send.connect(self.add_row_to_outgoing_widget)
-        self.tcp_client_thread.start()
+    # def start_tcp_server_thread(self):
+    #     self.signals.data_receive.connect(self.add_row_to_incoming_widget)
+    #     self.signals.log_data.connect(self.fill_log_window)
+    #     self.tcp_server_thread.start()
 
+    # def start_tcp_client_thread(self):
+    #     self.signals.data_send.connect(self.add_row_to_outgoing_widget)
+    #     self.tcp_client_thread.start()
 
-def main():
-    app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("icon.ico"))
-    translator = QTranslator()
-    translator.load("tcp_retranslator.qm", 'translations')  # Завантажте ваш перекладовий файл
-    app.installTranslator(translator)  # Встановіть перекладача для додатку
-
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
 
 
 if __name__ == "__main__":
-    main()
+    app = QApplication(sys.argv)
+    main_window = MainWindow()
+    # async_server_helper = AsyncHelper(main_window, main_window.start_server)
+    # async_client_helper = AsyncHelper(main_window, main_window.start_client)
+    with qtinter.using_asyncio_from_qt():  # <-- enable asyncio in qt code
+        main_window.show()
+
+        signal.signal(signal.SIGINT, signal.SIG_DFL)
+        app.exec()

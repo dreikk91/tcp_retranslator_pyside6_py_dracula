@@ -81,7 +81,9 @@ class TCPServer:
             splited_data = split_message_stream(data)
             if not splited_data:
                 # Помилка: некоректний формат повідомлення
-                logger.error(f"Incorrect message format {data}")
+                logger.error(f"Incorrect message format {data}, send NAK")
+                writer.write(MSG_NAK) 
+                await writer.drain()
             else:
                 for msg in split_message_stream(data):
                     sg = SurGard(msg)
@@ -106,6 +108,7 @@ class TCPServer:
                         logger.error(f"Invalid message format {msg} {len(data)} send NAK")
                         self.signals.log_data.emit(f"Invalid message format {msg} {len(data)} send NAK")
                         writer.write(MSG_NAK)
+                        await writer.drain()
 
     async def _send_ack(self, writer: asyncio.StreamWriter) -> None:
         # Відправка підтвердження
