@@ -174,3 +174,16 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+output/*
+logs/*
+net/old/*
+.idea/workspace.xml
+*.db
+main_04062023_ui.py
+main_19052023_ui.py
+common/generate_cid_messages.ts
+net/retranslator_pyside6_001/__init__.py
+net/retranslator_pyside6_001/runner_pyside6.py
+net/retranslator_pyside6_001/tcp_client_pyside6.py
+net/retranslator_pyside6_001/tcp_server_pyside6.py
