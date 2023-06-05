@@ -16,22 +16,14 @@
 import asyncio
 import logging
 import os
-import signal
 import sys
-import time
 import tracemalloc
-from datetime import datetime
 
-import qtinter
-
-from PySide6 import QtWidgets
 from PySide6.QtCore import Qt, Slot
 from PySide6.QtWidgets import QApplication, QMainWindow
 
-from common.async_helper import AsyncHelper
-from common.surguad_codes import get_color_by_event
 from common.yaml_config import YamlConfig
-from database.sql_part_postgres import create_buffer_table_async, create_buffer_table_sync
+# from database.sql_part_postgres_async import create_buffer_table_async
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
 from modules import *
@@ -57,6 +49,9 @@ logger = logging.getLogger(__name__)
 
 
 class MainWindow(QMainWindow):
+
+    start_signal = Signal()
+    done_signal = Signal()
     
     def __init__(self):
         QMainWindow.__init__(self)
@@ -72,7 +67,7 @@ class MainWindow(QMainWindow):
         widgets = self.ui
 
         self.signals = WorkerSignals()
-        self.signals.start_signal.connect(self.handle_server_status)
+        # self.signals.start_signal.connect(self.handle_server_status)
         
         self.table_manager = TableManager(widgets)
         self.log_window = LogWindow(widgets)
@@ -81,12 +76,12 @@ class MainWindow(QMainWindow):
         self.yc.config_init()
         self.config = self.yc.config_open()
         
-        self.server = TCPServer(self.signals)
-        self.client = TCPClient(
-        self.config["client"]["host"], self.config["client"]["port"], self.signals
-        )
-        self.server_tasks = []
-        self.client_tasks = []
+        # self.server = TCPServer(self.signals)
+        # self.client = TCPClient(
+        # self.config["client"]["host"], self.config["client"]["port"], self.signals
+        # )
+        # self.server_tasks = []
+        # self.client_tasks = []
         
         self.server_status = True
         
@@ -94,8 +89,17 @@ class MainWindow(QMainWindow):
         self.signals.data_send.connect(self.table_manager.add_row_to_outgoing_widget)
         self.signals.log_data.connect(self.log_window.fill_log_window)
         
+        # # self.start_tcp_client_thread()
+        # self.start_tcp_server_thread()
+        self.tcp_server_thread = TCPServerThread(self.signals)
+        self.tcp_client_thread = TCPClientThread(self.signals)
+        self.start_tcp_server_thread()
+        self.start_tcp_client_thread()
+        
+        # QTimer.singleShot(3, self.start_tcp_client_thread)
+        # QTimer.singleShot(3, self.start_tcp_server_thread)
 
-        QTimer.singleShot(3, self.setup_server_tasks)
+        # QTimer.singleShot(3, self.async_start)
 
         ConnectionState.is_running.set()
 
@@ -159,7 +163,7 @@ class MainWindow(QMainWindow):
         # SET CUSTOM THEME
         # ///////////////////////////////////////////////////////////////
         useCustomTheme = True
-        themeFile = "themes\\py_dracula_light.qss"
+        themeFile = "themes/py_dracula_light.qss"
 
         # SET THEME AND HACKS
         if useCustomTheme:
@@ -242,26 +246,35 @@ class MainWindow(QMainWindow):
         if event.buttons() == Qt.RightButton:
             print("Mouse click: RIGHT CLICK")
 
-    def setup_server_tasks(self):
+    # async def setup_server_tasks(self):
 
-        self.server_tasks.append(asyncio.create_task(create_buffer_table_async()))
-        self.server_tasks.append(asyncio.create_task(self.server.run()))
-        self.server_tasks.append(asyncio.create_task(self.server.write_from_buffer_to_db()))
-        self.server_tasks.append(asyncio.create_task(self.server.keepalive()))
-        self.server_tasks.append(asyncio.create_task(self.client.start_tcp_client()))
-        self.server_tasks.append(asyncio.create_task(self.server.check_connection_state()))
-        # self.group_server = asyncio.create_task(*self.server_tasks, return_exceptions=True)
-        
-    def stop_server_tasks(self):
-        while ConnectionState.ready_for_closed:
-            for task in self.server_tasks:
-                task.cancel()
-                print(task)
+    #     self.server_tasks.append(asyncio.create_task(create_buffer_table_async()))
+    #     self.server_tasks.append(asyncio.create_task(self.server.run()))
+    #     self.server_tasks.append(asyncio.create_task(self.server.write_from_buffer_to_db()))
+    #     self.server_tasks.append(asyncio.create_task(self.server.keepalive()))
+    #     self.server_tasks.append(asyncio.create_task(self.client.start_tcp_client()))
+    #     self.server_tasks.append(asyncio.create_task(self.server.check_connection_state()))
+    #     self.group_server = asyncio.create_task(*self.server_tasks, return_exceptions=True)
+    #     self.group = asyncio.gather(*self.server_tasks, return_exceptions=True)
+
+    #     try:
+    #         await self.group
+    #     except asyncio.CancelledError:
+    #         print("Tasks cancelled")
+
+    # def stop_server_tasks(self):
+    #     while ConnectionState.ready_for_closed:
+    #         for task in self.server_tasks:
+    #             task.cancel()
+    #             print(task)
         
     def handle_server_status(self):
         if self.server_status:
             ConnectionState.server_is_running = False
-            self.stop_server_tasks()
+            self.tcp_server_thread.stop()
+            self.tcp_client_thread.stop()
+            
+            
             widgets.btn_start_stop.setText("Start server")
             widgets.btn_start_stop.setStyleSheet("background-image: url(:/icons/images/icons/cil-media-play.png);")
             self.server_status = False
@@ -269,19 +282,27 @@ class MainWindow(QMainWindow):
         elif not self.server_status:
             ConnectionState.server_is_running = True
             ConnectionState.ready_for_closed = False
-            self.setup_server_tasks()
+            self.tcp_server_thread.start()
+            self.tcp_client_thread.start()
             widgets.btn_start_stop.setText("Stop server")
             widgets.btn_start_stop.setStyleSheet("background-image: url(:/icons/images/icons/cil-media-pause.png);")
             self.server_status = True
             
+    # @Slot()
+    # def async_start(self):
+    #     self.start_signal.emit()
+            
+    def start_tcp_server_thread(self):
+        # tcp_server_thread = TCPServerThread(self.signals)
+        self.tcp_server_thread.start()
+        
+    def start_tcp_client_thread(self):
+        # tcp_client_thread = TCPClientThread(self.signals)
+        self.tcp_client_thread.start()
             
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    main_window = MainWindow()
-    # async_server_helper = AsyncHelper(main_window, main_window.start_server)
-    # async_client_helper = AsyncHelper(main_window, main_window.start_client)
-    with qtinter.using_asyncio_from_qt():  # <-- enable asyncio in qt code
-        main_window.show()
-
-        signal.signal(signal.SIGINT, signal.SIG_DFL)
-        app.exec()
+    app.setWindowIcon(QIcon("icon.ico"))
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())

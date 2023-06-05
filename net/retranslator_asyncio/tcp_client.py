@@ -2,7 +2,7 @@ import asyncio
 import logging
 
 from common.read_events_name_from_json import get_event_from_json
-from database.sql_part_postgres import delete_from_buffer_async, select_from_buffer_async, select_from_buffer_sync, delete_from_buffer_sync
+from database.sql_part_postgres_sync import select_from_buffer_sync, delete_from_buffer_sync
 # from database.sql_part_sqlite import select_from_buffer_sync, delete_from_buffer_sync
 
 logger = logging.getLogger(__name__)
@@ -68,6 +68,7 @@ class TCPClient:
             try:
                 await self.ensure_connection()
                 await self.send_messages_from_buffer()
+                await asyncio.sleep(0.01)
             except Exception as e:
                 logger.exception(e)
                 # Handle OS-related errors during the client execution
@@ -93,7 +94,7 @@ class TCPClient:
             await asyncio.sleep(0.1)
 
     async def send_messages_from_buffer(self) -> None:
-        rows = await select_from_buffer_async()
+        rows = select_from_buffer_sync()
         if rows is not None:
             for row in rows:
                 row_id: int = row[0]
@@ -101,7 +102,7 @@ class TCPClient:
                 # Send each message from the buffer to the server
                 await self.send_data_to_server(message.encode())
                 # Delete the sent message from the buffer
-                await delete_from_buffer_async(row_id)
+                delete_from_buffer_sync(row_id)
                 logger.debug(f"Delete from buffer by id {row_id}")
                 self.signals.log_data.emit(f"Delete from buffer by id {row_id}")
         else:

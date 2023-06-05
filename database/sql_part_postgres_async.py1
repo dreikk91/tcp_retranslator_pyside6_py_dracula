@@ -17,7 +17,7 @@ server_address = config['databases']['postgres']["postgres_address"]
 server_port = config['databases']['postgres']["postgres_port"]
 postgres_database = config['databases']['postgres']["postgres_database"]
 
-engine = create_async_engine(f"postgresql+asyncpg://{username}:{password}@{server_address}/{postgres_database}", echo=False, future=True)
+engine = create_async_engine(f"postgresql+psycopg2://{username}:{password}@{server_address}/{postgres_database}", echo=False, future=True)
 async_session = sessionmaker(engine, class_=AsyncSession)
 
 GLOBAL_COUNT: int = 0
@@ -79,10 +79,11 @@ async def insert_into_buffer_async(messages):
 async def select_from_buffer_async():
     new_list = []
     async with async_session() as session:
-        result = await session.execute(select(Buffer).limit(300))
-        result = result.scalars() if result else None
+        query = await session.execute(select(Buffer).limit(300))
+        result = query.scalars()
         if result:
             for data in result:
+                print(data)
                 new_list.append([data.id, data.message])
     return new_list
 

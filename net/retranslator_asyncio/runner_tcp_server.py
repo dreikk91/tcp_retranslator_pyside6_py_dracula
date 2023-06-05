@@ -2,7 +2,7 @@ import asyncio
 from PySide6.QtCore import QThread
 
 # from common.logger_config import logger
-from database.sql_part_postgres import create_buffer_table_sync
+from database.sql_part_postgres_sync import create_buffer_table_sync
 from common.yaml_config import YamlConfig
 from net.retranslator_asyncio.tcp_server import TCPServer
 from net.retranslator_asyncio.tcp_client import TCPClient
@@ -51,10 +51,8 @@ class TCPServerThread(QThread):
         create_buffer_table_sync()
         self.tasks.append(asyncio.create_task(self.server.run()))
         self.tasks.append(asyncio.create_task(self.server.write_from_buffer_to_db()))
-        # self.tasks.append(asyncio.create_task(self.client.start_tcp_client()))
         self.tasks.append(asyncio.create_task(self.server.keepalive()))
-        # self.tasks.append(asyncio.create_task(self.server.check_connection_state()))
-        # self.tasks.append(asyncio.create_task(commit_every_second()))
+        self.tasks.append(asyncio.create_task(self.server.check_connection_state()))
         self.group = asyncio.gather(*self.tasks, return_exceptions=True)
 
         try:
