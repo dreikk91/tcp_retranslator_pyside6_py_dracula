@@ -173,14 +173,30 @@ class TCPServer:
                 sg_message_list.append(sg_message)
 
             if len(message_list)>0:
-                insert_into_buffer_sync(message_list)
+                await insert_into_buffer_async(message_list)
             await asyncio.sleep(1)
 
             #
             # insert_event_sync(sg_message, message['ip'])
             # await asyncio.sleep(1)
 
-
+    async def check_connection_state(self):
+        while True:
+            await asyncio.sleep(1)
+            if not ConnectionState.server_is_running and self.server.is_serving():
+                try:
+                    logger.info("Stopping server")
+                    self.server.close()
+                    await self.server.wait_closed()
+                    for writer in self.clients:
+                        writer.close()
+                        logger.info(
+                            f'New client connected: {writer.get_extra_info("peername")}'
+                        )
+                    logger.info("The server is stopped")
+                    ConnectionState.ready_for_closed = True
+                except Exception as err:
+                    logger.exception(err)
 
     async def run(self) -> None:
         # Запуск серверу
@@ -209,6 +225,8 @@ class TCPServer:
 class ConnectionState:
     # Клас, що відстежує стан підключення серверу
     is_running: Event = asyncio.Event()
+    server_is_running = True
+    ready_for_closed = False
 
 
 class Buffer:

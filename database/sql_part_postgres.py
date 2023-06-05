@@ -4,7 +4,8 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, select, delete, Float, create_engine, func
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base, sessionmaker
-
+from sqlalchemy.ext.asyncio import AsyncAttrs
+from sqlalchemy.orm import DeclarativeBase
 from common.yaml_config import YamlConfig
 
 logger = logging.getLogger(__name__)
@@ -16,12 +17,13 @@ server_address = config['databases']['postgres']["postgres_address"]
 server_port = config['databases']['postgres']["postgres_port"]
 postgres_database = config['databases']['postgres']["postgres_database"]
 
-engine = create_engine(f"postgresql+psycopg2://{username}:{password}@{server_address}/{postgres_database}", echo=False)
-async_session = sessionmaker(engine)
-Base = declarative_base()
+engine = create_async_engine(f"postgresql+asyncpg://{username}:{password}@{server_address}/{postgres_database}", echo=False, future=True)
+async_session = sessionmaker(engine, class_=AsyncSession)
 
 GLOBAL_COUNT: int = 0
 
+class Base(AsyncAttrs, DeclarativeBase):
+    pass
 
 class Buffer(Base):
     __tablename__ = "buffer"
@@ -61,41 +63,37 @@ class Event(Base):
 def create_buffer_table_sync():
     with engine.begin() as conn:
         Base.metadata.create_all(conn)
+        
+async def create_buffer_table_async():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
 
-def insert_into_buffer_sync(messages):
-    buffer_objs = [Buffer(message) for message in messages]
-    with async_session() as session:
-        session.add_all(buffer_objs)
-        session.commit()
 async def insert_into_buffer_async(messages):
     buffer_objs = [Buffer(message) for message in messages]
     async with async_session() as session:
         session.add_all(buffer_objs)
         await session.commit()
 
-def select_from_buffer_sync():
-    new_list = []
-    with async_session() as session:
-        count = session.query(func.count()).select_from(Buffer).scalar()
-        if count >= 300:
-            result = session.execute(select(Buffer).limit(300)).scalars()
-        else:
-            result = session.execute(select(Buffer).limit(count)).scalars()
 
+async def select_from_buffer_async():
+    new_list = []
+    async with async_session() as session:
+        result = await session.execute(select(Buffer).limit(300))
+        result = result.scalars() if result else None
         if result:
             for data in result:
                 new_list.append([data.id, data.message])
     return new_list
 
 
-def delete_from_buffer_sync(id):
-    with async_session() as session:
-        session.execute(delete(Buffer).where(Buffer.id == id))
-        session.commit()
+async def delete_from_buffer_async(id):
+    async with async_session() as session:
+        await session.execute(delete(Buffer).where(Buffer.id == id))
+        await session.commit()
 
 
-def insert_event_sync(sg_dict, ip):
+async def insert_event_async(sg_dict, ip):
     protocol_number = sg_dict["protocol_number"]
     receiver_number = sg_dict["receiver_number"]
     line_number = sg_dict["line_number"]
@@ -109,7 +107,7 @@ def insert_event_sync(sg_dict, ip):
     ip = f"{ip[0]}:{ip[1]}"
     current_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
-    with async_session() as session:
+    async with async_session() as session:
         new_event = Event(
             protocol_number=protocol_number,
             receiver_number=receiver_number,
@@ -125,4 +123,22 @@ def insert_event_sync(sg_dict, ip):
             time=current_time,
         )
         session.add(new_event)
-        session.commit()
+        await session.commit()
+
+
+# Видалення синхронних методів
+
+def insert_into_buffer_sync(messages):
+    asyncio.run(insert_into_buffer_async(messages))
+
+
+def select_from_buffer_sync():
+    return asyncio.run(select_from_buffer_async())
+
+
+def delete_from_buffer_sync(id):
+    asyncio.run(delete_from_buffer_async(id))
+
+
+def insert_event_sync(sg_dict, ip):
+    asyncio.run(insert_event_async(sg_dict, ip))

@@ -31,7 +31,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 from common.async_helper import AsyncHelper
 from common.surguad_codes import get_color_by_event
 from common.yaml_config import YamlConfig
-from database.sql_part_postgres import create_buffer_table_sync
+from database.sql_part_postgres import create_buffer_table_async, create_buffer_table_sync
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
 from modules import *
@@ -58,9 +58,6 @@ logger = logging.getLogger(__name__)
 
 class MainWindow(QMainWindow):
     
-    start_signal = Signal()
-    done_signal = Signal()
-    
     def __init__(self):
         QMainWindow.__init__(self)
 
@@ -75,6 +72,8 @@ class MainWindow(QMainWindow):
         widgets = self.ui
 
         self.signals = WorkerSignals()
+        self.signals.start_signal.connect(self.handle_server_status)
+        
         self.table_manager = TableManager(widgets)
         self.log_window = LogWindow(widgets)
 
@@ -88,34 +87,18 @@ class MainWindow(QMainWindow):
         )
         self.server_tasks = []
         self.client_tasks = []
+        
+        self.server_status = True
+        
+        self.signals.data_receive.connect(self.table_manager.add_row_to_incoming_widget)
+        self.signals.data_send.connect(self.table_manager.add_row_to_outgoing_widget)
+        self.signals.log_data.connect(self.log_window.fill_log_window)
+        
 
-        self.left_table_widget = widgets.tableWidget_left
-        self.right_table_widget = widgets.tableWidget_right_2
-        # self.log_window = widgets.listWidget_log
-
-        self.left_row_counter = 0
-        self.right_row_counter = 0
-
-        self.message_received_count = 0
-        self.message_sent_count = 0
         QTimer.singleShot(3, self.setup_server_tasks)
 
         ConnectionState.is_running.set()
-        # self.retranslator = RetranslatorThread(self.signals)
-        # self.tcp_server_thread = TCPServerThread(self.signals)
-        # self.tcp_client_thread = TCPClientThread(self.signals)
-        # self.start_tcp_server_thread()
-        # self.start_tcp_client_thread()
-        # self.start_retranslator_async_thread()
 
-        self.message_received_count = 0
-        self.message_received_count_per_second = 0
-        self.message_send_count_per_second = 0
-        self.send_messages_per_second = 0
-        self.received_messages_per_second = 0
-        self.start_time_send = time.time()
-        self.start_time_receive = time.time()
-        
 
         # Add translations
         widgets.toggleButton.setText(self.tr('Hide'))
@@ -125,7 +108,7 @@ class MainWindow(QMainWindow):
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         # ///////////////////////////////////////////////////////////////
-        Settings.ENABLE_CUSTOM_TITLE_BAR = True
+        Settings.ENABLE_CUSTOM_TITLE_BAR = False
 
         # APP NAME
         # ///////////////////////////////////////////////////////////////
@@ -143,18 +126,15 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////////////////////////
         UIFunctions.uiDefinitions(self)
 
-        # QTableWidget PARAMETERS
-        # ///////////////////////////////////////////////////////////////
-        # widgets.tableWidget_left.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        # widgets.tableWidget_right_2.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-
         # BUTTONS CLICK
         # ///////////////////////////////////////////////////////////////
 
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
         widgets.btn_log.clicked.connect(self.buttonClick)
-        widgets.btn_exit.clicked.connect(self.setup_server_tasks)
+        widgets.btn_settings.clicked.connect(self.buttonClick)
+        widgets.btn_start_stop.clicked.connect(self.handle_server_status)
+        widgets.btn_exit.clicked.connect(self.buttonClick)
 
         # widgets.btn_new.clicked.connect(self.buttonClick)
         # widgets.btn_save.clicked.connect(self.buttonClick)
@@ -215,6 +195,15 @@ class MainWindow(QMainWindow):
             widgets.stackedWidget.setCurrentWidget(widgets.widget_log)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+            
+        if btnName == "btn_settings":
+            widgets.stackedWidget.setCurrentWidget(widgets.widget_setting)
+            UIFunctions.resetStyle(self, btnName)
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+            
+        if btnName == "btn_start_stop":
+            self.signals.start_signal.emit()
+            
 
         # # SHOW NEW PAGE
         # if btnName == "btn_new":
@@ -233,12 +222,7 @@ class MainWindow(QMainWindow):
         print("[ Top 10 ]")
         for stat in top_stats[:10]:
             print(stat)
-        # self.tcp_server_thread.stop()
-        # self.tcp_server_thread.terminate()
         
-    
-
-
 
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////
@@ -258,77 +242,39 @@ class MainWindow(QMainWindow):
         if event.buttons() == Qt.RightButton:
             print("Mouse click: RIGHT CLICK")
 
-    def start_tcp_client_thread(self):
-        # self.signals.data_receive.connect(self.add_row_to_incoming_widget)
-        self.signals.data_send.connect(self.add_row_to_outgoing_widget)
-        # self.signals.log_data.connect(self.fill_log_window)
-        self.tcp_client.connect_to_host("10.32.1.230", 10003)
-        # self.ui.pushButton_conn_disconn.setText("Stop server")
-
-    def start_tcp_server_thread(self):
-        self.signals.data_receive.connect(self.add_row_to_incoming_widget)
-        # self.signals.data_send.connect(self.add_row_to_outgoing_widget)
-        self.signals.log_data.connect(self.fill_log_window)
-        self.tcp_server.run_server()
-        # self.ui.pushButton_conn_disconn.setText("Stop server")
-
-    # def start_retranslator_async_thread(self):
-    #     # self.signals.data_receive.connect(self.add_row_to_incoming_widget)
-    #     # self.signals.data_send.connect(self.add_row_to_outgoing_widget)
-    #     # self.signals.log_data.connect(self.fill_log_window)
-    #     self.retranslator.start()
-
     def setup_server_tasks(self):
-        self.signals.data_receive.connect(self.table_manager.add_row_to_incoming_widget)
-        self.signals.data_send.connect(self.table_manager.add_row_to_outgoing_widget)
-        self.signals.log_data.connect(self.log_window.fill_log_window)
-        create_buffer_table_sync()
+
+        self.server_tasks.append(asyncio.create_task(create_buffer_table_async()))
         self.server_tasks.append(asyncio.create_task(self.server.run()))
         self.server_tasks.append(asyncio.create_task(self.server.write_from_buffer_to_db()))
         self.server_tasks.append(asyncio.create_task(self.server.keepalive()))
         self.server_tasks.append(asyncio.create_task(self.client.start_tcp_client()))
-        self.group_server = asyncio.gather(*self.server_tasks, return_exceptions=True)
+        self.server_tasks.append(asyncio.create_task(self.server.check_connection_state()))
+        # self.group_server = asyncio.create_task(*self.server_tasks, return_exceptions=True)
         
-        # try:
-        #     await self.group_server
-        # except asyncio.CancelledError:
-        #     print("Tasks cancelled")
+    def stop_server_tasks(self):
+        while ConnectionState.ready_for_closed:
+            for task in self.server_tasks:
+                task.cancel()
+                print(task)
         
-    async def setup_client_tasks(self):
-        create_buffer_table_sync()
-        self.client_tasks.append(asyncio.create_task(self.client.start_tcp_client()))
-        self.group_client = asyncio.gather(*self.client_tasks, return_exceptions=True)
-        
-        try:
-            await self.group_client
-        except asyncio.CancelledError:
-            print("Tasks cancelled")
-        
-    async def start_server(self):
-        await self.setup_server_tasks() 
-        
-        
-    async def start_client(self):
-        await self.setup_client_tasks() 
-    
-    @Slot()
-    def async_start(self):
-        self.signals.data_receive.connect(self.table_manager.add_row_to_incoming_widget)
-        self.signals.data_send.connect(self.table_manager.add_row_to_outgoing_widget)
-        self.signals.log_data.connect(self.log_window.fill_log_window)
-        self.start_signal.emit()
-
-    # def start_tcp_server_thread(self):
-    #     self.signals.data_receive.connect(self.add_row_to_incoming_widget)
-    #     self.signals.log_data.connect(self.fill_log_window)
-    #     self.tcp_server_thread.start()
-
-    # def start_tcp_client_thread(self):
-    #     self.signals.data_send.connect(self.add_row_to_outgoing_widget)
-    #     self.tcp_client_thread.start()
-
-
-
+    def handle_server_status(self):
+        if self.server_status:
+            ConnectionState.server_is_running = False
+            self.stop_server_tasks()
+            widgets.btn_start_stop.setText("Start server")
+            widgets.btn_start_stop.setStyleSheet("background-image: url(:/icons/images/icons/cil-media-play.png);")
+            self.server_status = False
+            
+        elif not self.server_status:
+            ConnectionState.server_is_running = True
+            ConnectionState.ready_for_closed = False
+            self.setup_server_tasks()
+            widgets.btn_start_stop.setText("Stop server")
+            widgets.btn_start_stop.setStyleSheet("background-image: url(:/icons/images/icons/cil-media-pause.png);")
+            self.server_status = True
+            
+            
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     main_window = MainWindow()

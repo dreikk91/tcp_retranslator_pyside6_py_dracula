@@ -7,6 +7,7 @@
 *.code-workspace
 # Local History for Visual Studio Code
 .history/
+.idea/
 
 # Common credential files
 **/credentials.json
@@ -28,6 +29,7 @@ creds.js
 *.tsv
 *.tsv.gz
 *.xlsx
+*.yaml
 
 
 # Mac/OSX
