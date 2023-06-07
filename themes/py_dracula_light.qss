@@ -494,132 +494,30 @@ QTableWidget {
 	background-color: transparent;
 	padding: 10px;
 	border-radius: 5px;
-	gridline-color: #9faeda;
+	gridline-color: #ecf0f1;
     outline: none;
 }
 
 QHeaderView::section{
-	background-color: #6272a4;
-	max-width: 30px;
+	background-color: #ecf0f1;
+	max-width: 24px;
 	border: none;
 	border-style: none;
 }
 QTableWidget::horizontalHeader {	
-	background-color: #6272a4;
+	background-color: #ecf0f1;
 }
 QHeaderView::section:horizontal
 {
-    border: 1px solid #6272a4;
-	background-color: #6272a4;
+    border: 1px solid #ecf0f1;
+	background-color: #bdc3c7;
 	padding: 3px;
 	border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    color: #f8f8f2;
+    color: #34495e;
 }
 QHeaderView::section:vertical
 {
     border: 1px solid #eef1f8;
 }
 
-QWidget {
-color: #34495e;
-font: 10pt "Segoe UI";
-}
-
-QToolTip {
-color: #34495e;
-background-color: #ecf0f1;
-border: 1px solid #34495e;
-border-left: 2px solid #1abc9c;
-text-align: left;
-padding-left: 8px;
-margin: 0px;
-}
-
-#bgApp {
-background-color: #ecf0f1;
-border: 1px solid #34495e;
-color: #34495e;
-}
-
-#leftMenuBg {
-background-color: #34495e;
-}
-
-#topLogo {
-background-color: #34495e;
-background-image: url(:/images/images/images/PyDracula.png);
-background-position: center;
-background-repeat: no-repeat;
-}
-
-#titleLeftApp {
-font: 63 12pt "Segoe UI Semibold";
-color: #ecf0f1;
-}
-
-#titleLeftDescription {
-font: 8pt "Segoe UI";
-color: #1abc9c;
-}
-
-#topMenu .QPushButton,
-#bottomMenu .QPushButton,
-#toggleButton {
-background-color: transparent;
-background-position: left center;
-background-repeat: no-repeat;
-border: none;
-border-left: 22px solid transparent;
-text-align: left;
-padding-left: 44px;
-color: #ecf0f1;
-}
-
-#topMenu .QPushButton:hover,
-#bottomMenu .QPushButton:hover,
-#toggleButton:hover {
-background-color: #1abc9c;
-}
-
-#topMenu .QPushButton:pressed,
-#bottomMenu .QPushButton:pressed,
-#toggleButton:pressed {
-background-color: #1abc9c;
-color: #ecf0f1;
-}
-
-#leftMenuFrame {
-border-top: 3px solid #34495e;
-}
-
-#extraLeftBox {
-background-color: #34495e;
-color: #ecf0f1;
-}
-
-#extraTopBg {
-background-color: #2c3e50;
-}
-
-#extraIcon {
-background-position: center;
-background-repeat: no-repeat;
-background-image: url(:/icons/images/icons/icon_settings.png);
-}
-
-#extraLabel {
-color: #ecf0f1;
-}
-
-#extraCloseColumnBtn {
-background-color: rgba(255, 255, 255, 0);
-border: none;
-border-radius: 5px;
-}
-
-#extraCloseColumnBtn:hover {
-background-color: #1abc9c;
-border-style: solid;
-border-radius: 4px;
-}

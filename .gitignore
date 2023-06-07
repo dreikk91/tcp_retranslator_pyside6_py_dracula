@@ -176,3 +176,17 @@ dmypy.json
 cython_debug/
 logs/*
 output/*
+net/retranslator_pyside6_001/runner_pyside6.py
+.gitignore
+net/retranslator_pyside6_001/tcp_server_pyside6.py
+.gitignore
+common/generate_cid_messages.ts
+net/old/retranslator_asyncio1.py
+net/old/retranslator_twisted.py
+net/old/retranslator.py
+database/sql_part_postgres_sync.py
+.gitignore
+net/retranslator_pyside6_001/base.db
+net/retranslator_pyside6_001/tcp_client_pyside6.py
+themes/flatui.qss
+themes/py_dracula_light.qss

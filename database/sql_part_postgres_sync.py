@@ -28,9 +28,17 @@ class Buffer(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     message = Column(String)
+    # status = Column(String)
 
     def __init__(self, message):
         self.message = message
+    #     self.status = status
+
+class DatabaseVersion(Base):
+    __tablename__ = "database_version"
+    id = Column(Integer, primary_key=True)
+    current_db_version = Column(String)
+
 
 
 class Devices(Base):
@@ -62,12 +70,23 @@ def create_buffer_table_sync():
     with engine.begin() as conn:
         Base.metadata.create_all(conn)
 
+def check_database_verison():
+    with async_session() as session:
+        query = session.execute(select(DatabaseVersion).limit(1)).scalar
+        q = query.db_version
+        for q in query: 
+            if q is None:
+                new_database_version = DatabaseVersion(current_db_version = 1)
+                session.add(new_database_version)
+                session.commit()
+
 
 def insert_into_buffer_sync(messages):
     buffer_objs = [Buffer(message) for message in messages]
     with async_session() as session:
         session.add_all(buffer_objs)
         session.commit()
+        
 async def insert_into_buffer_async(messages):
     buffer_objs = [Buffer(message) for message in messages]
     async with async_session() as session:
@@ -126,3 +145,6 @@ def insert_event_sync(sg_dict, ip):
         )
         session.add(new_event)
         session.commit()
+
+
+# check_database_verison()
