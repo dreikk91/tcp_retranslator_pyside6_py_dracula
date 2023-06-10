@@ -220,13 +220,13 @@ Content App */
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
 LineEdit */
 QLineEdit {
-	background-color: #34495e;
+	background-color: #95a5a6;
 	border-radius: 5px;
-	border: 2px solid #34495e;
+	border: 2px solid #bdc3c7;
 	padding-left: 10px;
 	selection-color: #ecf0f1;
 	selection-background-color: rgb(26, 188, 156);
-    color: #ecf0f1;
+    color: #2c3e50;
 }
 QLineEdit:hover {
 	border: 2px solid rgb(64, 71, 88);
@@ -374,22 +374,22 @@ QRadioButton::indicator:checked {
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBox */
 QComboBox{
-	background-color: #34495e;
+	background-color: #dbe3e4;
 	border-radius: 5px;
-	border: 2px solid #34495e;
+	border: 2px solid #bdc3c7;
 	padding: 5px;
 	padding-left: 10px;
-    color: #ecf0f1;
+    color: #2c3e50;
 }
 QComboBox:hover{
-	border: 2px solid #2c3e50;
+	border: 2px solid #bdc3c7;
 }
 QComboBox::drop-down {
 	subcontrol-origin: padding;
 	subcontrol-position: top right;
 	width: 25px; 
 	border-left-width: 3px;
-	border-left-color: #34495e;
+	border-left-color: #bdc3c7;
 	border-left-style: solid;
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;	
@@ -399,9 +399,9 @@ QComboBox::drop-down {
  }
 QComboBox QAbstractItemView {
 	color: rgb(26, 188, 156);	
-	background-color: #34495e;
+	background-color: #bdc3c7;
 	padding: 10px;
-	selection-background-color: #34495e;
+	selection-background-color: #333435;
 }
 
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -475,14 +475,14 @@ CommandLinkButton */
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
 Button */
 #pagesContainer QPushButton {
-	border: 2px solid #34495e;
+	border: 2px solid #95a5a6;
 	border-radius: 5px;	
-	background-color: #34495e;
-    color: #ecf0f1;
+	background-color: #95a5a6;
+    color: #2c3e50;
 }
 #pagesContainer QPushButton:hover {
-	background-color: #34495e;
-	border: 2px solid #34495e;
+	background-color: #1abc9c;
+	border: 2px solid #1abc9c;
 }
 #pagesContainer QPushButton:pressed {	
 	background-color: rgb(127, 140, 141);

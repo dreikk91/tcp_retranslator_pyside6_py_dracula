@@ -8,7 +8,7 @@ from database.sql_part_postgres_sync import select_from_buffer_sync, delete_from
 logger = logging.getLogger(__name__)
 
 
-class TCPClient:
+class EventForwarder:
     def __init__(self, server_host: str, server_port: int, signals) -> None:
         self.server_host: str = server_host
         self.server_port: int = server_port
@@ -36,6 +36,10 @@ class TCPClient:
             raise ConnectionError(f"Error connecting to {self.server_host}:{self.server_port}: {e}") from e
 
     async def send_data_to_server(self, data: bytes) -> None:
+        if self.writer is None:
+            logger.error("Не вдалося підключитися до сервера. Операція неможлива.")
+            return False
+        
         try:
             # Send data to the server and receive the response
             self.writer.write(data)
@@ -52,6 +56,7 @@ class TCPClient:
             self.signals.data_send.emit(
                 self.writer.get_extra_info("peername"), data.decode(), event_message
             )
+            return True
         except (ConnectionResetError, TimeoutError, OSError) as e:
             # Handle connection-related errors
             logger.exception(f"Error sending data:")
@@ -59,9 +64,12 @@ class TCPClient:
         except AttributeError:
             # Handle attribute error related to writer.write()
             logger.exception('Got None in self.writer.write(data)')
+            self.writer.close()
         except RuntimeError as err:
             # Handle general runtime errors
             logger.exception(err)
+            
+        return False
 
     async def start_tcp_client(self) -> None:
         while True:
@@ -100,11 +108,14 @@ class TCPClient:
                 row_id: int = row[0]
                 message: str = row[1]
                 # Send each message from the buffer to the server
-                await self.send_data_to_server(message.encode())
-                # Delete the sent message from the buffer
-                delete_from_buffer_sync(row_id)
-                logger.debug(f"Delete from buffer by id {row_id}")
-                self.signals.log_data.emit(f"Delete from buffer by id {row_id}")
+                success = await self.send_data_to_server(message.encode())
+                if success:
+                    # Delete the sent message from the buffer
+                    delete_from_buffer_sync(row_id)
+                    logger.debug(f"Delete from buffer by id {row_id}")
+                    self.signals.log_data.emit(f"Delete from buffer by id {row_id}")
+                else:
+                    logger.info(f"{message} not sended")
         else:
             await asyncio.sleep(0.01)
 

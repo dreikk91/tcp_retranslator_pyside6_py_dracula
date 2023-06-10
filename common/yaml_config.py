@@ -96,10 +96,13 @@ class YamlConfig:
         if not is_valid_port(yaml_config['server']['port']):
             raise ValueError("Invalid server port")
         if not is_valid_db_engine(yaml_config["databases"]["active_engine"]):
-            raise ValueError("Invalid database engine, must be sqlite or postgres")
+            raise ValueError(f'Invalid database engine, must be sqlite or postgres, not {yaml_config["databases"]["active_engine"]}')
 
         return yaml_config
 
+    def config_save(self, config_data: Dict[str, Dict[str, Union[str, int]]]) -> None:
+        with open("retranslate.yaml", "w") as f:
+            yaml.dump(config_data, f, default_flow_style=False)
 
 def is_valid_ip(ip: str) -> bool:
     try:

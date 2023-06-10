@@ -4,11 +4,11 @@ from PySide6.QtCore import QThread
 # from common.logger_config import logger
 from database.sql_part_postgres_sync import create_buffer_table_sync
 from common.yaml_config import YamlConfig
-from net.retranslator_asyncio.tcp_client import TCPClient
+from net.retranslator_asyncio.eventforwarder import EventForwarder
 import logging
 logger = logging.getLogger(__name__)
 
-class TCPClientThread(QThread):
+class EventForwarderThread(QThread):
     def __init__(self, signals):
         super().__init__()
         self.yc = YamlConfig()
@@ -16,7 +16,7 @@ class TCPClientThread(QThread):
         self.config = self.yc.config_open()
         self.signals = signals
         # self.server = TCPServer(self.signals)
-        self.client = TCPClient(
+        self.client = EventForwarder(
             self.config["client"]["host"], self.config["client"]["port"], self.signals
         )
         self.client.retry_count = 0

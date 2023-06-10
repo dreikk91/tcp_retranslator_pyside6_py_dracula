@@ -28,12 +28,12 @@ from common.yaml_config import YamlConfig
 # ///////////////////////////////////////////////////////////////
 from modules import *
 from modules.app_settings import Settings
+from modules.config_page import ConfigPage
 from modules.log_window import LogWindow
 from modules.table_widgets import TableManager
-from net.retranslator_asyncio.runner import RetranslatorThread
-from net.retranslator_asyncio.runner_tcp_client import TCPClientThread
+from net.retranslator_asyncio.runner_tcp_client import EventForwarderThread
 from net.retranslator_asyncio.runner_tcp_server import TCPServerThread
-from net.retranslator_asyncio.tcp_client import TCPClient
+from net.retranslator_asyncio.eventforwarder import EventForwarder
 from net.retranslator_asyncio.tcp_server import ConnectionState, TCPServer
 
 # from net.retranslator_pyside6.runner_pyside6 import TCPClientThread, TCPServerThread
@@ -57,7 +57,6 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
 
         tracemalloc.start()
-        
 
         # SET AS GLOBAL WIDGETS
         # ///////////////////////////////////////////////////////////////
@@ -71,17 +70,11 @@ class MainWindow(QMainWindow):
         
         self.table_manager = TableManager(widgets)
         self.log_window = LogWindow(widgets)
+        self.config_page = ConfigPage(widgets)
 
         self.yc = YamlConfig()
         self.yc.config_init()
         self.config = self.yc.config_open()
-        
-        # self.server = TCPServer(self.signals)
-        # self.client = TCPClient(
-        # self.config["client"]["host"], self.config["client"]["port"], self.signals
-        # )
-        # self.server_tasks = []
-        # self.client_tasks = []
         
         self.server_status = True
         
@@ -92,7 +85,7 @@ class MainWindow(QMainWindow):
         # # self.start_tcp_client_thread()
         # self.start_tcp_server_thread()
         self.tcp_server_thread = TCPServerThread(self.signals)
-        self.tcp_client_thread = TCPClientThread(self.signals)
+        self.tcp_client_thread = EventForwarderThread(self.signals)
         self.start_tcp_server_thread()
         self.start_tcp_client_thread()
         
@@ -246,27 +239,6 @@ class MainWindow(QMainWindow):
         if event.buttons() == Qt.RightButton:
             print("Mouse click: RIGHT CLICK")
 
-    # async def setup_server_tasks(self):
-
-    #     self.server_tasks.append(asyncio.create_task(create_buffer_table_async()))
-    #     self.server_tasks.append(asyncio.create_task(self.server.run()))
-    #     self.server_tasks.append(asyncio.create_task(self.server.write_from_buffer_to_db()))
-    #     self.server_tasks.append(asyncio.create_task(self.server.keepalive()))
-    #     self.server_tasks.append(asyncio.create_task(self.client.start_tcp_client()))
-    #     self.server_tasks.append(asyncio.create_task(self.server.check_connection_state()))
-    #     self.group_server = asyncio.create_task(*self.server_tasks, return_exceptions=True)
-    #     self.group = asyncio.gather(*self.server_tasks, return_exceptions=True)
-
-    #     try:
-    #         await self.group
-    #     except asyncio.CancelledError:
-    #         print("Tasks cancelled")
-
-    # def stop_server_tasks(self):
-    #     while ConnectionState.ready_for_closed:
-    #         for task in self.server_tasks:
-    #             task.cancel()
-    #             print(task)
         
     def handle_server_status(self):
         if self.server_status:

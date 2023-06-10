@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_19052023dnBtwN.ui'
+## Form generated from reading UI file 'main_07062023xuXFsW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.5.0
 ##
@@ -1395,28 +1395,22 @@ class Ui_MainWindow(object):
         self.lineEdit_settings_sqlite_path.setObjectName(u"lineEdit_settings_sqlite_path")
         self.lineEdit_settings_sqlite_path.setGeometry(QRect(620, 20, 221, 32))
         self.lineEdit_settings_sqlite_path.setMinimumSize(QSize(0, 32))
-        self.pushButton_settings_sqlite_path = QPushButton(self.groupBox_settings_database)
-        self.pushButton_settings_sqlite_path.setObjectName(u"pushButton_settings_sqlite_path")
-        self.pushButton_settings_sqlite_path.setGeometry(QRect(850, 20, 75, 32))
-        self.pushButton_settings_sqlite_path.setMinimumSize(QSize(0, 32))
         self.label_settings_database_engine = QLabel(self.groupBox_settings_database)
         self.label_settings_database_engine.setObjectName(u"label_settings_database_engine")
         self.label_settings_database_engine.setGeometry(QRect(430, 70, 181, 32))
         self.label_settings_database_engine.setMinimumSize(QSize(0, 32))
         self.comboBox_database_engine = QComboBox(self.groupBox_settings_database)
-        self.comboBox_database_engine.addItem("")
-        self.comboBox_database_engine.addItem("")
         self.comboBox_database_engine.setObjectName(u"comboBox_database_engine")
         self.comboBox_database_engine.setGeometry(QRect(620, 70, 221, 32))
         self.comboBox_database_engine.setMinimumSize(QSize(0, 32))
 
         self.verticalLayout.addWidget(self.groupBox_settings_database)
 
-        self.pushButton_2 = QPushButton(self.groupBox_settings)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setMinimumSize(QSize(0, 32))
+        self.pushButton_settings_save = QPushButton(self.groupBox_settings)
+        self.pushButton_settings_save.setObjectName(u"pushButton_settings_save")
+        self.pushButton_settings_save.setMinimumSize(QSize(0, 32))
 
-        self.verticalLayout.addWidget(self.pushButton_2)
+        self.verticalLayout.addWidget(self.pushButton_settings_save)
 
 
         self.gridLayout_3.addWidget(self.groupBox_settings, 0, 0, 1, 1)
@@ -1453,6 +1447,11 @@ class Ui_MainWindow(object):
         self.label_receive_send_speed.setObjectName(u"label_receive_send_speed")
 
         self.horizontalLayout_5.addWidget(self.label_receive_send_speed)
+
+        self.label = QLabel(self.bottomBar)
+        self.label.setObjectName(u"label")
+
+        self.horizontalLayout_5.addWidget(self.label)
 
         self.creditsLabel = QLabel(self.bottomBar)
         self.creditsLabel.setObjectName(u"creditsLabel")
@@ -1614,15 +1613,12 @@ class Ui_MainWindow(object):
         self.label_settings_postgres_database_name.setText(QCoreApplication.translate("MainWindow", u"Postgres database name", None))
         self.label_settings_postgres_username.setText(QCoreApplication.translate("MainWindow", u"Postgres username", None))
         self.label_settings_postgres_password.setText(QCoreApplication.translate("MainWindow", u"Postgres password", None))
-        self.label_settings_sqlite_path.setText(QCoreApplication.translate("MainWindow", u"Sqlite database path", None))
-        self.pushButton_settings_sqlite_path.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.label_settings_sqlite_path.setText(QCoreApplication.translate("MainWindow", u"Sqlite database name", None))
         self.label_settings_database_engine.setText(QCoreApplication.translate("MainWindow", u"Active database engine", None))
-        self.comboBox_database_engine.setItemText(0, QCoreApplication.translate("MainWindow", u"Postgres", None))
-        self.comboBox_database_engine.setItemText(1, QCoreApplication.translate("MainWindow", u"Sqlite", None))
-
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Save settings", None))
+        self.pushButton_settings_save.setText(QCoreApplication.translate("MainWindow", u"Save settings", None))
         self.label_receive_send_count.setText(QCoreApplication.translate("MainWindow", u"Total Receive/Send: 0 / 0", None))
         self.label_receive_send_speed.setText(QCoreApplication.translate("MainWindow", u"Recieve/Send speed: 0 /  0", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Messages in the buffer: 0", None))
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Wanderson M. Pimenta", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
     # retranslateUi
