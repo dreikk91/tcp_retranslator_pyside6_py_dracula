@@ -13,13 +13,12 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-import asyncio
 import logging
 import os
 import sys
 import tracemalloc
 
-from PySide6.QtCore import Qt, Slot
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QMainWindow
 
 from common.yaml_config import YamlConfig
@@ -33,26 +32,19 @@ from modules.log_window import LogWindow
 from modules.table_widgets import TableManager
 from net.retranslator_asyncio.runner_tcp_client import EventForwarderThread
 from net.retranslator_asyncio.runner_tcp_server import TCPServerThread
-from net.retranslator_asyncio.eventforwarder import EventForwarder
-from net.retranslator_asyncio.tcp_server import ConnectionState, TCPServer
+from net.retranslator_asyncio.tcp_server import ConnectionState
 
-# from net.retranslator_pyside6.runner_pyside6 import TCPClientThread, TCPServerThread
-# from net.retranslator_pyside6.tcp_client_pyside6 import TcpClient
-# from net.retranslator_pyside6.tcp_server_pyside6 import MyTcpServer
 
 os.environ["QT_FONT_DPI"] = "96"  # FIX Problem for High DPI and Scale above 100%
 
 # SET AS GLOBAL WIDGETS
 # ///////////////////////////////////////////////////////////////
-widgets = None
+
 logger = logging.getLogger(__name__)
 
 
 class MainWindow(QMainWindow):
 
-    start_signal = Signal()
-    done_signal = Signal()
-    
     def __init__(self):
         QMainWindow.__init__(self)
 
@@ -62,15 +54,15 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////////////////////////
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        global widgets
-        widgets = self.ui
+
+        self.widgets = self.ui
 
         self.signals = WorkerSignals()
         # self.signals.start_signal.connect(self.handle_server_status)
         
-        self.table_manager = TableManager(widgets)
-        self.log_window = LogWindow(widgets)
-        self.config_page = ConfigPage(widgets)
+        self.table_manager = TableManager(self.widgets)
+        self.log_window = LogWindow(self.widgets)
+        self.config_page = ConfigPage(self.widgets)
 
         self.yc = YamlConfig()
         self.yc.config_init()
@@ -81,27 +73,22 @@ class MainWindow(QMainWindow):
         self.signals.data_receive.connect(self.table_manager.add_row_to_incoming_widget)
         self.signals.data_send.connect(self.table_manager.add_row_to_outgoing_widget)
         self.signals.log_data.connect(self.log_window.fill_log_window)
+        self.signals.objects_activity.connect(self.table_manager.add_row_to_objects_table)
         
-        # # self.start_tcp_client_thread()
-        # self.start_tcp_server_thread()
         self.tcp_server_thread = TCPServerThread(self.signals)
         self.tcp_client_thread = EventForwarderThread(self.signals)
         self.start_tcp_server_thread()
         self.start_tcp_client_thread()
         
-        # QTimer.singleShot(3, self.start_tcp_client_thread)
-        # QTimer.singleShot(3, self.start_tcp_server_thread)
-
-        # QTimer.singleShot(3, self.async_start)
 
         ConnectionState.is_running.set()
 
 
         # Add translations
-        widgets.toggleButton.setText(self.tr('Hide'))
-        widgets.btn_exit.setText(self.tr('Exit'))
-        widgets.btn_home.setText(self.tr('Retranslator'))
-        widgets.btn_log.setText(self.tr('log'))
+        self.widgets.toggleButton.setText(self.tr('Hide'))
+        self.widgets.btn_exit.setText(self.tr('Exit'))
+        self.widgets.btn_home.setText(self.tr('Terminal'))
+        self.widgets.btn_log.setText(self.tr('log'))
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         # ///////////////////////////////////////////////////////////////
@@ -113,41 +100,43 @@ class MainWindow(QMainWindow):
         description = self.tr("TCP Surgurad Retranslator APP")
         # APPLY TEXTS
         self.setWindowTitle(title)
-        widgets.titleRightInfo.setText(description)
+        self.widgets.titleRightInfo.setText(description)
 
         # TOGGLE MENU
         # ///////////////////////////////////////////////////////////////
-        widgets.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
+        self.widgets.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
 
         # SET UI DEFINITIONS
         # ///////////////////////////////////////////////////////////////
-        UIFunctions.uiDefinitions(self)
+        UIFunctions.ui_definitions(self)
 
         # BUTTONS CLICK
         # ///////////////////////////////////////////////////////////////
 
         # LEFT MENUS
-        widgets.btn_home.clicked.connect(self.buttonClick)
-        widgets.btn_log.clicked.connect(self.buttonClick)
-        widgets.btn_settings.clicked.connect(self.buttonClick)
-        widgets.btn_start_stop.clicked.connect(self.handle_server_status)
-        widgets.btn_exit.clicked.connect(self.buttonClick)
+        self.widgets.btn_home.clicked.connect(self.button_click)
+        self.widgets.btn_log.clicked.connect(self.button_click)
+        self.widgets.btn_settings.clicked.connect(self.button_click)
+        self.widgets.btn_start_stop.clicked.connect(self.handle_server_status)
+        self.widgets.btn_exit.clicked.connect(self.button_click)
+        self.widgets.btn_objects.clicked.connect(self.button_click)
+    
 
         # widgets.btn_new.clicked.connect(self.buttonClick)
         # widgets.btn_save.clicked.connect(self.buttonClick)
 
         # EXTRA LEFT BOX
-        def openCloseLeftBox():
-            UIFunctions.toggleLeftBox(self, True)
+        def open_close_left_box():
+            UIFunctions.toggle_left_box(self, True)
 
-        widgets.toggleLeftBox.clicked.connect(openCloseLeftBox)
-        widgets.extraCloseColumnBtn.clicked.connect(openCloseLeftBox)
+        self.widgets.toggleLeftBox.clicked.connect(open_close_left_box)
+        self.widgets.extraCloseColumnBtn.clicked.connect(open_close_left_box)
 
         # EXTRA RIGHT BOX
-        def openCloseRightBox():
-            UIFunctions.toggleRightBox(self, True)
+        def open_close_right_box():
+            UIFunctions.toggle_right_box(self, True)
 
-        widgets.settingsTopBtn.clicked.connect(openCloseRightBox)
+        self.widgets.settingsTopBtn.clicked.connect(open_close_right_box)
 
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
@@ -155,50 +144,56 @@ class MainWindow(QMainWindow):
 
         # SET CUSTOM THEME
         # ///////////////////////////////////////////////////////////////
-        useCustomTheme = True
-        themeFile = "themes/py_dracula_light.qss"
+        use_custom_theme = True
+        theme_file = "themes/py_dracula_light.qss"
 
         # SET THEME AND HACKS
-        if useCustomTheme:
+        if use_custom_theme:
             # LOAD AND APPLY STYLE
-            UIFunctions.theme(self, themeFile, True)
+            UIFunctions.theme(self, theme_file, True)
 
             # SET HACKS
-            AppFunctions.setThemeHack(self)
+            AppFunctions.set_theme_hack(self)
 
         # SET HOME PAGE AND SELECT MENU
         # ///////////////////////////////////////////////////////////////
-        widgets.stackedWidget.setCurrentWidget(widgets.widget_retranslator)
-        widgets.btn_home.setStyleSheet(
-            UIFunctions.selectMenu(widgets.btn_home.styleSheet())
+        self.widgets.stackedWidget.setCurrentWidget(self.widgets.widget_retranslator)
+        self.widgets.btn_home.setStyleSheet(
+            UIFunctions.selectMenu(self.widgets.btn_home.styleSheet())
         )
 
     # BUTTONS CLICK
     # Post here your functions for clicked buttons
     # ///////////////////////////////////////////////////////////////
-    def buttonClick(self):
+    def button_click(self):      
         # GET BUTTON CLICKED
         btn = self.sender()
-        btnName = btn.objectName()
+        btn_name = btn.objectName()
 
         # SHOW HOME PAGE
-        if btnName == "btn_home":
-            widgets.stackedWidget.setCurrentWidget(widgets.widget_retranslator)
-            UIFunctions.resetStyle(self, btnName)
+        if btn_name == "btn_home":
+            self.widgets.stackedWidget.setCurrentWidget(self.widgets.widget_retranslator)
+            UIFunctions.resetStyle(self, btn_name)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+            
+        if btn_name == "btn_objects":
+            self.widgets.stackedWidget.setCurrentWidget(self.widgets.widget_objects)
+            UIFunctions.resetStyle(self, btn_name)
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+            
 
         # SHOW WIDGETS PAGE
-        if btnName == "btn_log":
-            widgets.stackedWidget.setCurrentWidget(widgets.widget_log)
-            UIFunctions.resetStyle(self, btnName)
+        if btn_name == "btn_log":
+            self.widgets.stackedWidget.setCurrentWidget(self.widgets.widget_log)
+            UIFunctions.resetStyle(self, btn_name)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
             
-        if btnName == "btn_settings":
-            widgets.stackedWidget.setCurrentWidget(widgets.widget_setting)
-            UIFunctions.resetStyle(self, btnName)
+        if btn_name == "btn_settings":
+            self.widgets.stackedWidget.setCurrentWidget(self.widgets.widget_setting)
+            UIFunctions.resetStyle(self, btn_name)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
             
-        if btnName == "btn_start_stop":
+        if btn_name == "btn_start_stop":
             self.signals.start_signal.emit()
             
 
@@ -212,7 +207,7 @@ class MainWindow(QMainWindow):
         #     print("Save BTN clicked!")
 
         # PRINT BTN NAME
-        print(f'Button "{btnName}" pressed!')
+        print(f'Button "{btn_name}" pressed!')
         snapshot = tracemalloc.take_snapshot()
         top_stats = snapshot.statistics('lineno')
 
@@ -247,8 +242,8 @@ class MainWindow(QMainWindow):
             self.tcp_client_thread.stop()
             
             
-            widgets.btn_start_stop.setText("Start server")
-            widgets.btn_start_stop.setStyleSheet("background-image: url(:/icons/images/icons/cil-media-play.png);")
+            self.widgets.btn_start_stop.setText("Start server")
+            self.widgets.btn_start_stop.setStyleSheet("background-image: url(:/icons/images/icons/cil-media-play.png);")
             self.server_status = False
             
         elif not self.server_status:
@@ -256,8 +251,8 @@ class MainWindow(QMainWindow):
             ConnectionState.ready_for_closed = False
             self.tcp_server_thread.start()
             self.tcp_client_thread.start()
-            widgets.btn_start_stop.setText("Stop server")
-            widgets.btn_start_stop.setStyleSheet("background-image: url(:/icons/images/icons/cil-media-pause.png);")
+            self.widgets.btn_start_stop.setText("Stop server")
+            self.widgets.btn_start_stop.setStyleSheet("background-image: url(:/icons/images/icons/cil-media-pause.png);")
             self.server_status = True
             
     # @Slot()

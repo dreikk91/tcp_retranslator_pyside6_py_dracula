@@ -192,3 +192,10 @@ main_04062023.ui
 main_07062023_ui.py
 .gitignore
 common/custom_device – копія.json
+main.py
+andromeda_events.txt
+base.db
+net/retranslator_asyncio/tcp_server.ts
+net/retranslator_twisted.py
+net/retranslator_twisted.py
+.gitignore

@@ -11,7 +11,9 @@ from common.surguad_codes import get_color_by_event
 from common.yaml_config import YamlConfig
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
+import logging
 
+logger = logging.getLogger(__name__)
 
 class TableManager:
     def __init__(self, widgets) -> None:
@@ -23,6 +25,7 @@ class TableManager:
         self.config = self.yc.config_open()
         self.left_table_widget = self.widgets.tableWidget_left
         self.right_table_widget = self.widgets.tableWidget_right_2
+        self.objects_table_widget = self.widgets.tableWidget_objects
         
         self.left_row_counter = 0
         self.right_row_counter = 0
@@ -37,6 +40,8 @@ class TableManager:
         self.received_messages_per_second = 0
         self.start_time_send = time.time()
         self.start_time_receive = time.time()
+        
+        self.object_list = []
 
 
     def customize_left_table_widgets(self):
@@ -169,3 +174,35 @@ class TableManager:
         self.widgets.label_receive_send_speed.setText(
             f"Recieve/Send speed: {round(self.received_messages_per_second, 2)} / {round(self.send_messages_per_second, 2)}"
         )
+    
+    @Slot(str, str) 
+    def add_row_to_objects_table(self, data, timestamp):
+        # data = data
+        timestamp = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S.%f')
+        
+        if data not in self.object_list:
+            row_count = self.objects_table_widget.rowCount()
+            self.objects_table_widget.insertRow(row_count)
+            self.objects_table_widget.setItem(row_count, 0, QTableWidgetItem(data))
+            self.objects_table_widget.setItem(row_count, 5, QTableWidgetItem(timestamp.strftime("%Y-%m-%d %H:%M:%S.%f")))
+            self.objects_table_widget.setItem(row_count, 3, QTableWidgetItem(''))
+            self.object_list.append(data)
+        else:
+            for row in range(self.objects_table_widget.rowCount()):
+                
+                if self.objects_table_widget.item(row, 0).text() == data:
+                    try:
+                        timedelta = timestamp - datetime.strptime(self.objects_table_widget.item(row, 5).text(), "%Y-%m-%d %H:%M:%S.%f")
+                    except AttributeError as err:
+                        logger.exception()
+                        timedelta = ''
+                    self.objects_table_widget.item(row, 5).setText(str(timestamp))
+                    
+                    self.objects_table_widget.item(row, 3).setText(str(timedelta))
+                    break
+            
+        if self.objects_table_widget.rowCount() <=10:
+            self.objects_table_widget.resizeColumnToContents(3)
+            self.objects_table_widget.resizeColumnToContents(5)
+
+                

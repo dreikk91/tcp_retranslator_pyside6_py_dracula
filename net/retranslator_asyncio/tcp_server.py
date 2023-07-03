@@ -1,10 +1,11 @@
 import asyncio
 from asyncio import Event
+from datetime import datetime
 from typing import Any, Set, Union
 
 from common.helpers import split_message_stream, SurGard, parse_surguard_message
 from common.read_events_name_from_json import get_event_from_json
-from database.sql_part_postgres_sync import insert_into_buffer_sync, insert_event_sync, insert_into_buffer_async
+from database.sql_part_sync import insert_into_buffer_sync
 # from database.sql_part_sqlite import insert_into_buffer_sync, insert_event_sync
 from common.yaml_config import YamlConfig
 import logging
@@ -14,6 +15,7 @@ logger = logging.getLogger(__name__)
 MSG_END: bytes = b"\x14"
 MSG_ACK: bytes = b"\x06"
 MSG_NAK: bytes = b"\x15"
+HEARTBEAT: bytes = b'1011           @    \x14'
 
 class TCPServer:
     def __init__(self, signals: Any) -> None:
@@ -27,6 +29,7 @@ class TCPServer:
         self.clients: Set[asyncio.StreamWriter] = set()
         self.signals = signals
         self.server: Union[None, asyncio.AbstractServer] = None
+        self.objects_activity = {}
         ConnectionState.is_running.set()
 
 
@@ -44,7 +47,7 @@ class TCPServer:
                 while ConnectionState.is_running.is_set():
                     data = await self._read_from_client(reader, writer)
                     await self._process_message_stream(data, writer)
-                    await self._send_ack(writer)
+                    # await self._send_ack(writer)
 
                 # Розірвання з'єднання після закінчення обробки
                 self._handle_client_disconnect(writer)
@@ -79,7 +82,11 @@ class TCPServer:
         if data is not None:
             await self._check_connection_state()
             splited_data = split_message_stream(data)
-            if not splited_data:
+            if data == HEARTBEAT:
+                logger.info("Receive periodic test by station")
+                self.signals.log_data.emit("Receive periodic test by station")
+                await self._send_ack(writer)
+            elif not splited_data:
                 # Помилка: некоректний формат повідомлення
                 logger.error(f"Incorrect message format {data}, send NAK")
                 writer.write(MSG_NAK) 
@@ -93,6 +100,8 @@ class TCPServer:
                     if sg.is_valid():
                         # Додавання повідомлення до черги та обробка події
                         logger.info(f"{message} append to queue")
+                        object_number = message[7:11]
+                        self.update_object_activity(object_number)
                         await Buffer.queue.put({"message": message, "ip": writer.get_extra_info('peername')})
                         event_code = f"{message[11]}{message[12:15]}"
 
@@ -101,8 +110,7 @@ class TCPServer:
                             writer.get_extra_info("peername"), msg.decode(), event_message
                         )
                         self.signals.log_data.emit(f"Message accepted {msg} {len(data)} send ACK")
-                    elif msg == b'1001           @    \x14':
-                        logger.info("Receive periodic test by station")
+                        await self._send_ack(writer)
                     else:
                         # Помилка: некоректний формат повідомлення
                         logger.error(f"Invalid message format {msg} {len(data)} send NAK")
@@ -132,7 +140,7 @@ class TCPServer:
     ) -> bytes:
         # Читання даних до роздільника
         try:
-            data = await asyncio.wait_for(reader.read(1024), timeout=timeout)
+            data = await asyncio.wait_for(reader.read(4096), timeout=timeout)
             return data
         except (
             asyncio.exceptions.TimeoutError,
@@ -159,6 +167,23 @@ class TCPServer:
                         self.clients.remove(client)
 
             await asyncio.sleep(self.keepalive_interval)
+            
+    def update_object_activity(self, object_number):
+        timestamp = str(datetime.now())
+        self.signals.objects_activity.emit(object_number, timestamp)
+            
+        
+    # async def check_object_activity(object_number):
+    #     last_event_time = self.objects_activity.get(object_number)
+    #     if last_event_time is not None:
+    #         current_time = datetime.now()
+    #         time_difference = current_time - last_event_time
+    #         if time_difference.total_seconds() > 600:  # 10 minutes
+    #             # Відправити повідомлення про несправність об'єкта
+    #             print(f"Object {object_number} is inactive for more than 10 minutes.")
+    #     else:
+    #         # Об'єкт не має жодної отриманої події
+    #         print(f"Object {object_number} has no events.")
 
     async def write_from_buffer_to_db(self):
         while True:

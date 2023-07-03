@@ -95,7 +95,7 @@ class UIFunctions(MainWindow):
 
     # TOGGLE LEFT BOX
     # ///////////////////////////////////////////////////////////////
-    def toggleLeftBox(self, enable):
+    def toggle_left_box(self, enable):
         if enable:
             # GET WIDTH
             width = self.ui.extraLeftBox.width()
@@ -124,7 +124,7 @@ class UIFunctions(MainWindow):
 
     # TOGGLE RIGHT BOX
     # ///////////////////////////////////////////////////////////////
-    def toggleRightBox(self, enable):
+    def toggle_right_box(self, enable):
         if enable:
             # GET WIDTH
             width = self.ui.extraRightBox.width()
@@ -219,7 +219,7 @@ class UIFunctions(MainWindow):
 
     # START - GUI DEFINITIONS
     # ///////////////////////////////////////////////////////////////
-    def uiDefinitions(self):
+    def ui_definitions(self):
         def dobleClickMaximizeRestore(event):
             # IF DOUBLE CLICK CHANGE STATUS
             if event.type() == QEvent.MouseButtonDblClick:

@@ -2,10 +2,14 @@ import asyncio
 import logging
 
 from common.read_events_name_from_json import get_event_from_json
-from database.sql_part_postgres_sync import select_from_buffer_sync, delete_from_buffer_sync
+from database.sql_part_sync import select_from_buffer_sync, delete_from_buffer_sync
 # from database.sql_part_sqlite import select_from_buffer_sync, delete_from_buffer_sync
 
 logger = logging.getLogger(__name__)
+
+MSG_END: bytes = b"\x14"
+MSG_ACK: bytes = b"\x06"
+MSG_NAK: bytes = b"\x15"
 
 
 class EventForwarder:
@@ -44,7 +48,7 @@ class EventForwarder:
             # Send data to the server and receive the response
             self.writer.write(data)
             await self.writer.drain()
-            response = await asyncio.wait_for(self.reader.read(1024), timeout=1)
+            response = await asyncio.wait_for(self.reader.read(1024), timeout=5)
 
             logger.info(f"Sent data: {data}, Received response: {response}")
             self.signals.log_data.emit(f"Sent data: {data}, Received response: {response}")
@@ -108,6 +112,7 @@ class EventForwarder:
                 row_id: int = row[0]
                 message: str = row[1]
                 # Send each message from the buffer to the server
+                
                 success = await self.send_data_to_server(message.encode())
                 if success:
                     # Delete the sent message from the buffer

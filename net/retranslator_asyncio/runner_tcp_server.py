@@ -2,7 +2,7 @@ import asyncio
 from PySide6.QtCore import QThread
 
 # from common.logger_config import logger
-from database.sql_part_postgres_sync import create_buffer_table_sync
+from database.sql_part_sync import create_buffer_table_sync
 from common.yaml_config import YamlConfig
 from net.retranslator_asyncio.tcp_server import TCPServer
 from net.retranslator_asyncio.eventforwarder import EventForwarder

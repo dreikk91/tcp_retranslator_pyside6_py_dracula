@@ -1,4 +1,4 @@
-class Settings():
+class Settings:
     # APP SETTINGS
     # ///////////////////////////////////////////////////////////////
     ENABLE_CUSTOM_TITLE_BAR = False
@@ -13,6 +13,6 @@ class Settings():
 
     # MENU SELECTED STYLESHEET
     MENU_SELECTED_STYLESHEET = """
-    border-left: 22px solid qlineargradient(spread:pad, x1:0.034, y1:0, x2:0.216, y2:0, stop:0.499 rgb(44, 62, 80), stop:0.5 rgb(52, 73, 94));
+    border-left: 22px solid qlineargradient(spread:pad, x1:0.034, y1:0, x2:0.216, y2:0, stop:0.499 rgba(44, 62, 80, 255), stop:0.5 rgba(52, 73, 94, 0));
     background-color: rgb(44, 62, 80);
     """

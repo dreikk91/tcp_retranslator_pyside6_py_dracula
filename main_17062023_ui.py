@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_17062023iPfRuQ.ui'
+## Form generated from reading UI file 'main_17062023.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.0
+## Created by: Qt User Interface Compiler version 6.5.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -21,8 +21,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QListWidget, QListWidgetItem, QMainWindow, QPushButton,
     QSizePolicy, QStackedWidget, QTableWidget, QTableWidgetItem,
     QTextEdit, QVBoxLayout, QWidget)
-
-import modules.resources_rc
+import resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -1148,6 +1147,8 @@ class Ui_MainWindow(object):
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tableWidget_objects.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         self.tableWidget_objects.setObjectName(u"tableWidget_objects")
+        self.tableWidget_objects.setAutoScroll(False)
+        self.tableWidget_objects.setSortingEnabled(True)
 
         self.gridLayout_5.addWidget(self.tableWidget_objects, 0, 0, 1, 1)
 

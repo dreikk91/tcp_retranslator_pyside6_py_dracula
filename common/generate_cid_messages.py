@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 async def establish_connection(timeout=3):
     server_host = 'localhost'
-    server_port = 20005
+    server_port = 5551
 
     """Підключення до сервера з можливістю встановлення таймауту"""
     try:

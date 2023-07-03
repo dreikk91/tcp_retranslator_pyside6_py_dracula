@@ -1,3 +1,4 @@
+import datetime
 import logging
 
 from PySide6.QtCore import QObject, Signal
@@ -32,10 +33,4 @@ class WorkerSignals(QObject):
 
     stop_signal = Signal()
 
-    group_info = Signal(str, str, str, str, str, str, str)
-    pipline_info = Signal(str, str, str, str, str)
-    progressBarValue = Signal(int, int)
-
-    main_info = Signal(str, str, str, str, str, str, str, str, str, str, str)
-
-    journal = Signal(str, str, str, str, str, str, int, int)
+    objects_activity = Signal(str, str)

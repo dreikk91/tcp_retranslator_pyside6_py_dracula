@@ -23,11 +23,11 @@ from modules.app_settings import Settings
 # WITH ACCESS TO MAIN WINDOW WIDGETS
 # ///////////////////////////////////////////////////////////////
 class AppFunctions(MainWindow):
-    def setThemeHack(self):
+    def set_theme_hack(self):
         Settings.BTN_LEFT_BOX_COLOR = "background-color: rgb(44, 62, 80);"
         Settings.BTN_RIGHT_BOX_COLOR = "background-color: rgb(44, 62, 80);"
         Settings.MENU_SELECTED_STYLESHEET = MENU_SELECTED_STYLESHEET = """
-        border-left: 22px solid qlineargradient(spread:pad, x1:0.034, y1:0, x2:0.216, y2:0, stop:0.499 rgb(22, 160, 133), stop:0.5 rgb(52, 73, 94));
+        border-left: 22px solid qlineargradient(spread:pad, x1:0.034, y1:0, x2:0.216, y2:0, stop:0.499 rgba(22, 160, 133, 255), stop:0.5 rgba(52, 73, 94, 0));
         background-color: rgb(44, 62, 80);
         """
 
