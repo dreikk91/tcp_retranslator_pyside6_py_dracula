@@ -6,7 +6,9 @@ from database.sql_part_sync import create_buffer_table_sync
 from common.yaml_config import YamlConfig
 from net.retranslator_asyncio.eventforwarder import EventForwarder
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 class EventForwarderThread(QThread):
     def __init__(self, signals):
@@ -50,7 +52,6 @@ class EventForwarderThread(QThread):
             task.cancel()
 
     async def setup_client_tasks(self):
-        create_buffer_table_sync()
         # await create_buffer_table_async()
         # self.tasks.append(asyncio.create_task(self.server.run()))
         self.tasks.append(asyncio.create_task(self.client.start_tcp_client()))

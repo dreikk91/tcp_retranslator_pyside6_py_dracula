@@ -1,41 +1,84 @@
 import asyncio
 import logging
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, select, delete, Float, create_engine, func
+import time
+from sqlalchemy.exc import OperationalError
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    select,
+    delete,
+    Float,
+    create_engine,
+    func,
+)
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base, sessionmaker, DeclarativeBase
+from PySide6.QtCore import QTimer
 
 from common.yaml_config import YamlConfig
 
 logger = logging.getLogger(__name__)
+
 yc = YamlConfig()
 config = yc.config_open()
-print(config.get('active_engine'))
-if config['databases']['active_engine'] == 'postgres':
-    username = config['databases']['postgres']['postgres_user']
-    password = config['databases']['postgres']['postgres_password']
-    server_address = config['databases']['postgres']["postgres_address"]
-    server_port = config['databases']['postgres']["postgres_port"]
-    postgres_database = config['databases']['postgres']["postgres_database"]
 
-    engine = create_engine(f"postgresql+psycopg2://{username}:{password}@{server_address}/{postgres_database}", echo=False)
-    Session = sessionmaker(engine)
-    
-elif config['databases']['active_engine'] == 'sqlite':
-    engine = create_engine("sqlite:///base.db", echo=False)
-    Session = sessionmaker(bind=engine)
-else:
-    logger.error('Invalid database engine, must be postgres or sqlite, by default use sqlite')
-    engine = create_engine("sqlite:///base.db", echo=False)
-    Session = sessionmaker(bind=engine)
+
+def create_engine_and_session():
+    retry_delay = 2
+    current_retry = 0
+    try:
+        if config["databases"]["active_engine"] == "postgres":
+            username = config["databases"]["postgres"]["postgres_user"]
+            password = config["databases"]["postgres"]["postgres_password"]
+            server_address = config["databases"]["postgres"]["postgres_address"]
+            server_port = config["databases"]["postgres"]["postgres_port"]
+            postgres_database = config["databases"]["postgres"]["postgres_database"]
+
+            engine = create_engine(
+                f"postgresql+psycopg2://{username}:{password}@{server_address}/{postgres_database}",
+                echo=False,
+                pool_pre_ping=True,
+            )
+            Session = sessionmaker(engine)
+            return engine, Session
+
+        elif config["databases"]["active_engine"] == "sqlite":
+            engine = create_engine("sqlite:///base.db", echo=False, pool_pre_ping=True)
+            Session = sessionmaker(bind=engine)
+            return engine, Session
+
+        else:
+            logger.error(
+                "Invalid database engine, must be postgres or sqlite, by default use sqlite"
+            )
+            engine = create_engine("sqlite:///base.db", echo=False, pool_pre_ping=True)
+            Session = sessionmaker(bind=engine)
+            return engine, Session
+    except Exception as err:
+        logger.debug(
+            f"Connection to database not exist, reconnecting in {retry_delay ** current_retry}"
+        )
+        QTimer.singleShot(
+            retry_delay**current_retry, lambda: create_engine_and_session()
+        )()
+        logger.debug(err)
+        current_retry += 1
+        create_engine_and_session()
+
+
 # Base = declarative_base()
 
 logger.info(f"current database engine is {config['databases']['active_engine']}")
 
 GLOBAL_COUNT: int = 0
+db_engine, db_Session = create_engine_and_session()
+
 
 class Base(DeclarativeBase):
     pass
+
 
 class Buffer(Base):
     __tablename__ = "buffer"
@@ -46,13 +89,15 @@ class Buffer(Base):
 
     def __init__(self, message):
         self.message = message
+
     #     self.status = status
+
 
 class DatabaseVersion(Base):
     __tablename__ = "database_version"
     id = Column(Integer, primary_key=True)
     current_db_version = Column(String)
-    
+
 
 class Devices(Base):
     __tablename__ = "devices"
@@ -79,34 +124,39 @@ class Event(Base):
     time = Column(String)
 
 
-def create_buffer_table_sync():
+def create_buffer_table_sync(engine):
     with engine.begin() as conn:
         Base.metadata.create_all(conn)
 
-def check_database_verison():
+
+def check_database_verison(Session):
     with Session() as session:
         query = session.execute(select(DatabaseVersion).limit(1)).scalar
         q = query.db_version
-        for q in query: 
+        for q in query:
             if q is None:
-                new_database_version = DatabaseVersion(current_db_version = 1)
+                new_database_version = DatabaseVersion(current_db_version=1)
                 session.add(new_database_version)
                 session.commit()
+                session.close()
 
 
-def insert_into_buffer_sync(messages):
+def insert_into_buffer_sync(Session, messages):
     buffer_objs = [Buffer(message) for message in messages]
     with Session() as session:
         session.add_all(buffer_objs)
         session.commit()
-        
+        session.close()
+
+
 # async def insert_into_buffer_async(messages):
 #     buffer_objs = [Buffer(message) for message in messages]
 #     async with Session() as session:
 #         session.add_all(buffer_objs)
 #         await session.commit()
 
-def select_from_buffer_sync():
+
+def select_from_buffer_sync(Session):
     new_list = []
     with Session() as session:
         # count = session.query(func.count()).select_from(Buffer).scalar()
@@ -119,13 +169,14 @@ def select_from_buffer_sync():
     return new_list
 
 
-def delete_from_buffer_sync(id):
+def delete_from_buffer_sync(Session, id):
     with Session() as session:
         session.execute(delete(Buffer).where(Buffer.id == id))
         session.commit()
+        session.close()
 
 
-def insert_event_sync(sg_dict, ip):
+def insert_event_sync(sg_dict, ip, Session):
     protocol_number = sg_dict["protocol_number"]
     receiver_number = sg_dict["receiver_number"]
     line_number = sg_dict["line_number"]
@@ -156,6 +207,18 @@ def insert_event_sync(sg_dict, ip):
         )
         session.add(new_event)
         session.commit()
+        session.close()
 
 
+create_buffer_table_sync(db_engine)
 # check_database_verison()
+
+
+def check_connection(engine):
+    try:
+        with engine.begin() as conn:
+            conn.scalar(select(1))
+            conn.close()
+            return True
+    except OperationalError:
+        return False

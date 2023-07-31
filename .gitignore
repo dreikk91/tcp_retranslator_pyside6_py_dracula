@@ -199,3 +199,6 @@ net/retranslator_asyncio/tcp_server.ts
 net/retranslator_twisted.py
 net/retranslator_twisted.py
 .gitignore
+decrypt.py
+test3.py
+.gitignore

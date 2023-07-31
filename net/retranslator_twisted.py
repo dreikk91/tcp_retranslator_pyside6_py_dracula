@@ -11,10 +11,10 @@ from twisted.internet.interfaces import IAddress
 from twisted.internet.protocol import Protocol, ReconnectingClientFactory
 from twisted.protocols.basic import LineReceiver
 
-from common.worker_signals import WorkerSignals
-from common.yaml_config import YamlConfig
-from common.helpers import SurGard
-from ui.ui_main_window import Ui_MainWindow
+from ..common.worker_signals import WorkerSignals
+from ..common.yaml_config import YamlConfig
+from ..common.helpers import SurGard
+
 
 MSG_END = b"\x14"
 MSG_ACK = b"\x06"

@@ -59,7 +59,11 @@ console_handler.setFormatter(console_formatter)
 today_date_str = datetime.datetime.now().strftime("%Y-%m-%d")
 log_filename = f"logs/tcp_retranslator.log"
 file_handler = logging.handlers.RotatingFileHandler(
-    filename=log_filename, maxBytes=1024 * 10240, backupCount=7
+        filename=log_filename,
+        maxBytes=9437184,
+      backupCount=20,
+      mode='w',
+      encoding='utf8'
 )
 
 file_handler.setLevel(logging.DEBUG)
@@ -69,5 +73,5 @@ file_handler.setFormatter(file_formatter)
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
-logging.getLogger("sqlite3").setLevel(logging.WARNING)
-logging.getLogger("aiosqlite").setLevel(logging.WARNING)
+logging.getLogger("sqlite3").setLevel(logging.DEBUG)
+logging.getLogger("aiosqlite").setLevel(logging.DEBUG)
