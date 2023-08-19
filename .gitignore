@@ -202,3 +202,6 @@ net/retranslator_twisted.py
 decrypt.py
 test3.py
 .gitignore
+base.db-journal
+.gitignore
+test4.py

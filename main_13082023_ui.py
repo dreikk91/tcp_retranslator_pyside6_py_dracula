@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_13082023hHVDQN.ui'
+## Form generated from reading UI file 'main_13082023.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.5.0
 ##
@@ -21,7 +21,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QListWidget, QListWidgetItem, QMainWindow, QPushButton,
     QSizePolicy, QStackedWidget, QTableWidget, QTableWidgetItem,
     QTextEdit, QVBoxLayout, QWidget)
-import modules.resources_rc
+import resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):

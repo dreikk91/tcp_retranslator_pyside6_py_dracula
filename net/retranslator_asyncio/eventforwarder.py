@@ -13,7 +13,7 @@ from database.sql_part_sync import (
 # from database.sql_part_sqlite import select_from_buffer_sync, delete_from_buffer_sync
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.WARNING)
+logger.setLevel(logging.DEBUG)
 
 MSG_END: bytes = b"\x14"
 MSG_ACK: bytes = b"\x06"
@@ -49,14 +49,14 @@ class EventForwarder:
             raise ConnectionError(
                 f"Connection to {self.server_host}:{self.server_port} timed out"
             ) from ex
-        except OSError as e:
+        except OSError as ex:
             # Handle general OS-related errors
-            logger.error(f"Error connecting to server: {e}")
+            logger.error(f"Error connecting to server: {ex}")
             # self.signals.log_data.emit(f"Error connecting to server: {e}")
-            await self.message_queues.log_message_queues.put(f"Error connecting to server: {e}")
+            await self.message_queues.log_message_queues.put(f"Error connecting to server: {ex}")
             raise ConnectionError(
-                f"Error connecting to {self.server_host}:{self.server_port}: {e}"
-            ) from e
+                f"Error connecting to {self.server_host}:{self.server_port}: {ex}"
+            ) from ex
 
     async def send_data_to_server(self, data: bytes) -> bool:
         if self.writer is None:

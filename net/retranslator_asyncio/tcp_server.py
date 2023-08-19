@@ -18,12 +18,12 @@ from common.yaml_config import YamlConfig
 
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.WARNING)
+logger.setLevel(logging.DEBUG)
 
 MSG_END: bytes = b"\x14"
 MSG_ACK: bytes = b"\x06"
 MSG_NAK: bytes = b"\x15"
-HEARTBEAT: bytes = b"1011           @    \x14"
+HEARTBEAT: str = '1001           @    \x14'
 
 
 class TCPServer:
@@ -43,6 +43,7 @@ class TCPServer:
         self.engine, self.Session = create_engine_and_session()
         self.message_queues = MessageQueues
         self.incoming_msg = ()
+        self.heartbeat = '1010           @    \x14'
 
     async def handle_client(
         self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter
@@ -120,20 +121,14 @@ class TCPServer:
         if data is not None:
             await self._check_connection_state()
             splited_data = split_message_stream(data)
-            if data == HEARTBEAT:
-                logger.info("Receive periodic test by station")
-                # self.signals.log_data.emit("Receive periodic test by station")
-                await self.message_queues.log_message_queues.put(
-                    "Receive periodic test by station"
-                )
-                await self._send_ack(writer)
-            elif not splited_data:
+            if not splited_data:
                 # Помилка: некоректний формат повідомлення
-                logger.error(f"Incorrect message format {data}, send NAK")
+                logger.debug(f"Incorrect message format {data}, send NAK")
                 await self.message_queues.log_message_queues.put(
                     f"Incorrect message format {data}, send NAK"
                 )
                 writer.write(MSG_NAK)
+                # await self._send_ack(writer)
                 await writer.drain()
             else:
                 for msg in split_message_stream(data):
@@ -141,7 +136,14 @@ class TCPServer:
                     if not data:
                         break
                     message = msg.decode().strip()
-                    if sg.is_valid():
+                    if message[0] == "1" and "@" in message and "\x14" in message:
+                        logger.info("Receive periodic test by station")
+                        # self.signals.log_data.emit("Receive periodic test by station")
+                        await self.message_queues.log_message_queues.put(
+                            "Receive periodic test by station"
+                        )
+                        await self._send_ack(writer)
+                    elif sg.is_valid():
                         # Додавання повідомлення до черги та обробка події
                         logger.info(f"{message} append to queue")
                         await self.message_queues.log_message_queues.put(
@@ -228,27 +230,29 @@ class TCPServer:
         # Відправка пакетів підтримки з'єднання
         while True:
             if ConnectionState.is_running.is_set():
-                for client in self.clients.copy():
+                for writer in self.clients.copy():
                     try:
                         await asyncio.sleep(10)
-                        client.write(b"\x01")
+                        writer.write(b"\x01")
+                        await writer.drain()
                         logger.info(
-                            f"send keep-alive to {client.get_extra_info('peername')}"
+                            f"send keep-alive to {writer.get_extra_info('peername')}"
                         )
                         # self.signals.log_data.emit(
                         #     f"send keep-alive to {client.get_extra_info('peername')}"
                         # )
                         await self.message_queues.log_message_queues.put(
-                            f"send keep-alive to {client.get_extra_info('peername')}"
+                            f"send keep-alive to {writer.get_extra_info('peername')}"
                         )
-                        await client.drain()
 
                     except ConnectionError as err:
+                        self._handle_client_disconnect(writer)
                         logger.error(f"Keepalive failed {err}")
                         await self.message_queues.log_message_queues.put(
                             f"Keepalive failed {err}"
                         )
-                        self.clients.remove(client)
+                        self._handle_client_disconnect(writer)
+                        # self.clients.remove(client)
 
             await asyncio.sleep(self.keepalive_interval)
 

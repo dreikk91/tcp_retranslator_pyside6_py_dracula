@@ -8,8 +8,8 @@ logger = logging.getLogger(__name__)
 
 
 async def establish_connection(timeout=3):
-    server_host = 'localhost'
-    server_port = 5551
+    server_host = '10.32.1.232'
+    server_port = 20005
 
     """Підключення до сервера з можливістю встановлення таймауту"""
     try:
@@ -43,7 +43,7 @@ async def send_message_to_server(message_count):
             writer.write(data)
             await writer.drain()
             try:
-                 response = await asyncio.wait_for(reader.read(1024), timeout=1024)
+                response = await asyncio.wait_for(reader.read(1024), timeout=1024)
             except ConnectionResetError as err:
                 logger.exception(err)
                 writer.close()
@@ -65,7 +65,8 @@ def generate_message():
     event_type = random.choice(["E", "R"])
 
     message = f'5010 18{ppk_number}{event_code}00000\x14'.encode()
-    print(f'{count}) {message}')
+    if count + 1 // 100 == 0:
+        print(f'{count}) {message}')
     count +=1
     return message
 

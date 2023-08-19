@@ -521,3 +521,23 @@ QHeaderView::section:vertical
     border: 1px solid #eef1f8;
 }
 
+/* Стилі для кнопки "Вибрати все" в QTableWidget */
+QTableWidget QHeaderView::section:checked {
+    background-color: rgb(0, 120, 215); /* Колір фону для обраного стану */
+    color: white; /* Колір тексту */
+}
+
+QTableWidget QHeaderView::section:unchecked {
+    background-color: white; /* Колір фону для невибраного стану */
+    color: black; /* Колір тексту */
+}
+
+QTableWidget QHeaderView::section:pressed {
+    background-color: rgb(0, 85, 150); /* Колір фону для натиснутого стану */
+    color: white; /* Колір тексту */
+}
+
+QTableWidget QHeaderView::section:!enabled {
+    background-color: rgb(200, 200, 200); /* Колір фону для неактивного стану */
+    color: gray; /* Колір тексту */
+}

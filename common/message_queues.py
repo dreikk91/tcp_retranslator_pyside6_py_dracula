@@ -75,8 +75,6 @@ class MessageQueueThread(QThread):
         self.loop = asyncio.new_event_loop()
         
     def run(self) -> None:
-        logger.info("Worker data queue start")
-
         self.signals.log_data.emit("Worker data queue start")
         try:
             logger.info("Worker data queue start")

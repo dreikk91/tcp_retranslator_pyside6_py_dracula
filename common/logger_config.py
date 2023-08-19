@@ -51,7 +51,7 @@ file_formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(name)s:%(fun
 
 # Створення об'єкту обробника логів для виводу на консоль
 console_handler = logging.StreamHandler(sys.stdout)
-console_handler.setLevel(logging.DEBUG)
+console_handler.setLevel(logging.WARNING)
 console_handler.setFormatter(console_formatter)
 
 # Створення об'єкту обробника логів для зберігання у файлі
@@ -61,10 +61,10 @@ log_filename = f"logs/tcp_retranslator.log"
 file_handler = logging.handlers.RotatingFileHandler(
         filename=log_filename,
         maxBytes=9437184,
-      backupCount=20,
-      mode='w',
-      encoding='utf8'
-)
+        backupCount=20,
+        mode='w',
+        encoding='utf8'
+    )
 
 file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(file_formatter)

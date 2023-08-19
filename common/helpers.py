@@ -35,7 +35,7 @@ def split_message_stream(message:bytes):
                 return None
         return new_message_list
     except UnicodeDecodeError:
-        logger.exception("Error")
+        logger.exception("Cannot decode none utf8 message {message}")
 
 class SurGard:
     def __init__(self, message: bytes):
