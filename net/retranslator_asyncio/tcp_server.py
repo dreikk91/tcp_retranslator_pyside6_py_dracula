@@ -53,18 +53,24 @@ class TCPServer:
             # Перевірка стану підключення
             if not ConnectionState.is_running.is_set():
                 # Розірвання з'єднання, якщо сервер неактивний
-                self._handle_client_disconnect(writer)
+                await self._handle_client_disconnect(writer)
             else:
                 # Обробка нового клієнта
                 await self._handle_new_client(reader, writer)
                 # Отримання даних від клієнта та їх обробка
-                while ConnectionState.is_running.is_set():
-                    data = await self._read_from_client(reader, writer)
-                    await self._process_message_stream(data, writer)
+                while ConnectionState.is_running.is_set() and not writer.is_closing():
+                    try:
+                        data = await self._read_from_client(reader, writer)
+                        if data:
+                            await self._process_message_stream(data, writer)
+                        else:
+                            break
+                    except asyncio.CancelledError:
+                        break
                     # await self._send_ack(writer)
 
                 # Розірвання з'єднання після закінчення обробки
-                self._handle_client_disconnect(writer)
+                await self._handle_client_disconnect(writer)
         except (
             ConnectionResetError,
             ConnectionError,
@@ -75,7 +81,10 @@ class TCPServer:
             logger.error(err)
             await self.message_queues.log_message_queues.put(str(err))
             # self.signals.log_data.emit(str(err))
-            self._handle_client_disconnect(writer)
+            await self._handle_client_disconnect(writer)
+        except asyncio.CancelledError:
+        # Зупинка таска при від'єднанні клієнта
+            pass
 
     async def _check_connection_state(self) -> None:
         # Check the connection state
@@ -88,7 +97,7 @@ class TCPServer:
         # Обробка нового підключення клієнта
         await self._check_connection_state()
         self.clients.add(writer)
-        logger.info(f"New client connected: {writer.get_extra_info('peername')}")
+        logger.error(f"New client connected: {writer.get_extra_info('peername')}")
         # self.signals.log_data.emit(
         #     f"New client connected: {writer.get_extra_info('peername')}"
         # )
@@ -192,24 +201,24 @@ class TCPServer:
         # Відправка підтвердження
         await self._check_connection_state()
         writer.write(MSG_ACK)
+        await writer.drain()
         logger.info("send ACK")
         # self.signals.log_data.emit("send ACK")
         await self.message_queues.log_message_queues.put("send ACK")
-        await writer.drain()
+        
 
-    def _handle_client_disconnect(self, writer: asyncio.StreamWriter) -> None:
+    async def _handle_client_disconnect(self, writer: asyncio.StreamWriter) -> None:
         # Обробка відключення клієнта
         if writer in self.clients:
             self.clients.remove(writer)
-            logger.info(f"Client disconnected: {writer.get_extra_info('peername')}")
-            # self.signals.log_data.emit(
-            #     f"Client disconnected: {writer.get_extra_info('peername')})"
-            # )
-            self.message_queues.log_message_queues.put_nowait(
+            logger.error(f"Client disconnected: {writer.get_extra_info('peername')}")
+            await self.message_queues.log_message_queues.put(
                 f"Client disconnected: {writer.get_extra_info('peername')})"
             )
-            writer.close()
-
+            if not writer.is_closing():
+                writer.close()
+                await writer.wait_closed()
+            
     @staticmethod
     async def read_until(
         reader: asyncio.StreamReader, separator: bytes = MSG_END, timeout: int = 3600
@@ -232,27 +241,31 @@ class TCPServer:
             if ConnectionState.is_running.is_set():
                 for writer in self.clients.copy():
                     try:
-                        await asyncio.sleep(10)
-                        writer.write(b"\x01")
-                        await writer.drain()
-                        logger.info(
-                            f"send keep-alive to {writer.get_extra_info('peername')}"
-                        )
-                        # self.signals.log_data.emit(
-                        #     f"send keep-alive to {client.get_extra_info('peername')}"
-                        # )
-                        await self.message_queues.log_message_queues.put(
-                            f"send keep-alive to {writer.get_extra_info('peername')}"
-                        )
+                        # await asyncio.sleep(10)
+                        if not writer.is_closing() or not writer:
+                            writer.write(b"\x01")
+                            await writer.drain()
+                            logger.info(
+                                f"send keep-alive to {writer.get_extra_info('peername')}"
+                            )
+                            # self.signals.log_data.emit(
+                            #     f"send keep-alive to {client.get_extra_info('peername')}"
+                            # )
+                            await self.message_queues.log_message_queues.put(
+                                f"send keep-alive to {writer.get_extra_info('peername')}"
+                            )
 
-                    except ConnectionError as err:
-                        self._handle_client_disconnect(writer)
+                    except (
+                        ConnectionResetError,
+                        ConnectionError,
+                        OSError,
+                        asyncio.IncompleteReadError,
+                        ) as err:
+                        # Обробка винятків та виведення повідомлення про помилку
                         logger.error(f"Keepalive failed {err}")
-                        await self.message_queues.log_message_queues.put(
-                            f"Keepalive failed {err}"
-                        )
-                        self._handle_client_disconnect(writer)
-                        # self.clients.remove(client)
+                        await self.message_queues.log_message_queues.put(str(err))
+                        # self.signals.log_data.emit(str(err))
+                        await self._handle_client_disconnect(writer)
 
             await asyncio.sleep(self.keepalive_interval)
 

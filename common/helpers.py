@@ -17,25 +17,28 @@ def check_message_format(message):
 
 def split_message_stream(message:bytes):
     try:
-        new_message = str(message, "utf-8")
-        splited_message_list = new_message.split("\x14")
-        new_message_list = []
+        if isinstance(message, bytes):
+            new_message = message.decode()
+            splited_message_list = new_message.split("\x14")
+            new_message_list = []
 
-        if not splited_message_list:  # перевірка чи список не порожній
-            return new_message_list  # якщо так, повертаємо порожній список
+            if not splited_message_list:  # перевірка чи список не порожній
+                return new_message_list  # якщо так, повертаємо порожній список
 
-        for msg in splited_message_list:
-            if len(msg) == 20:
-                msg += "\x14"
-                encoded_message = msg.encode()
-                new_message_list.append(encoded_message)
-            else:
-                pass
-            if len(new_message_list) == 0:
-                return None
-        return new_message_list
+            for msg in splited_message_list:
+                if len(msg) == 20:
+                    msg += "\x14"
+                    encoded_message = msg.encode()
+                    new_message_list.append(encoded_message)
+                else:
+                    pass
+                if len(new_message_list) == 0:
+                    return None
+            return new_message_list
+        else:
+            logger.debug(f"Message must be bytes not a string {message}")
     except UnicodeDecodeError:
-        logger.exception("Cannot decode none utf8 message {message}")
+        logger.exception(f"Cannot decode none utf8 message {message}")
 
 class SurGard:
     def __init__(self, message: bytes):
