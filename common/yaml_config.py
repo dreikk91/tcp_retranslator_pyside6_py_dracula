@@ -26,12 +26,12 @@ class YamlConfig:
             left_window_row_count: int = 1000
             right_window_row_count: int = 1000
             log_window_row_count: int = 1000
-            database_engine: str = 'sqlite'
-            postgres_address: str = 'localhost'
+            database_engine: str = "sqlite"
+            postgres_address: str = "localhost"
             postgres_port: int = 5432
-            postgres_database_name: str = 'postgres'
-            postgres_user: str = 'root'
-            postgres_password: str = 'password'
+            postgres_database_name: str = "postgres"
+            postgres_user: str = "root"
+            postgres_password: str = "password"
             sqlite_db_name: str = "base.db"
 
             # add checks for valid IP addresses and ports
@@ -58,19 +58,17 @@ class YamlConfig:
                     "right_window_row_count": right_window_row_count,
                     "log_window_row_count": log_window_row_count,
                 },
-                'databases': {
+                "databases": {
                     "active_engine": database_engine,
                     "postgres": {
                         "postgres_user": postgres_user,
                         "postgres_password": postgres_password,
                         "postgres_address": postgres_address,
                         "postgres_database": postgres_database_name,
-                        "postgres_port": postgres_port
+                        "postgres_port": postgres_port,
                     },
-                    'sqlite': {
-                        "sqlite_database_name": sqlite_db_name
-                    }
-                }
+                    "sqlite": {"sqlite_database_name": sqlite_db_name},
+                },
             }
             with open("retranslate.yaml", "w") as f:
                 yaml.dump(to_yaml, f, default_flow_style=False)
@@ -85,24 +83,28 @@ class YamlConfig:
             with open("retranslate.yaml") as f:
                 yaml_config = yaml.safe_load(f)
 
-
         # add checks for valid IP addresses and ports
-        if not is_valid_ip(yaml_config['client']['host']):
+        if not is_valid_ip(yaml_config["client"]["host"]):
             raise ValueError("Invalid client IP address")
-        if not is_valid_port(yaml_config['client']['port']):
+        if not is_valid_port(yaml_config["client"]["port"]):
             raise ValueError("Invalid client port")
-        if yaml_config['server']['host'] and not is_valid_ip(yaml_config['server']['host']):
+        if yaml_config["server"]["host"] and not is_valid_ip(
+            yaml_config["server"]["host"]
+        ):
             raise ValueError("Invalid server IP address")
-        if not is_valid_port(yaml_config['server']['port']):
+        if not is_valid_port(yaml_config["server"]["port"]):
             raise ValueError("Invalid server port")
         if not is_valid_db_engine(yaml_config["databases"]["active_engine"]):
-            raise ValueError(f'Invalid database engine, must be sqlite or postgres, not {yaml_config["databases"]["active_engine"]}')
+            raise ValueError(
+                f'Invalid database engine, must be sqlite or postgres, not {yaml_config["databases"]["active_engine"]}'
+            )
 
         return yaml_config
 
     def config_save(self, config_data: Dict[str, Dict[str, Union[str, int]]]) -> None:
         with open("retranslate.yaml", "w") as f:
             yaml.dump(config_data, f, default_flow_style=False)
+
 
 def is_valid_ip(ip: str) -> bool:
     try:
@@ -117,5 +119,5 @@ def is_valid_port(port: int) -> bool:
 
 
 def is_valid_db_engine(engine: str) -> bool:
-    if engine in ['sqlite', 'postgres']:
+    if engine in ["sqlite", "postgres"]:
         return True

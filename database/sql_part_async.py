@@ -10,30 +10,38 @@ from common.yaml_config import YamlConfig
 logger = logging.getLogger(__name__)
 yc = YamlConfig()
 config = yc.config_open()
-print(config.get('active_engine'))
-if config['databases']['active_engine'] == 'postgres':
-    username = config['databases']['postgres']['postgres_user']
-    password = config['databases']['postgres']['postgres_password']
-    server_address = config['databases']['postgres']["postgres_address"]
-    server_port = config['databases']['postgres']["postgres_port"]
-    postgres_database = config['databases']['postgres']["postgres_database"]
+print(config.get("active_engine"))
+if config["databases"]["active_engine"] == "postgres":
+    username = config["databases"]["postgres"]["postgres_user"]
+    password = config["databases"]["postgres"]["postgres_password"]
+    server_address = config["databases"]["postgres"]["postgres_address"]
+    server_port = config["databases"]["postgres"]["postgres_port"]
+    postgres_database = config["databases"]["postgres"]["postgres_database"]
 
-    engine = create_async_engine(f"postgresql+psycopg2://{username}:{password}@{server_address}/{postgres_database}", echo=False)
+    engine = create_async_engine(
+        f"postgresql+psycopg2://{username}:{password}@{server_address}/{postgres_database}",
+        echo=False,
+    )
     Session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
-    
-elif config['databases']['active_engine'] == 'sqlite':
+
+elif config["databases"]["active_engine"] == "sqlite":
     engine = create_async_engine("sqlite+aiosqlite:///base.db", echo=False)
     Session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
     session = Session()
 else:
-    logger.error('Invalid database engine, must be postgres or sqlite, by default use sqlite')
+    logger.error(
+        "Invalid database engine, must be postgres or sqlite, by default use sqlite"
+    )
     engine = create_async_engine("sqlite+aiosqlite:///base.db", echo=False)
     Session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
+
 
 class Base(DeclarativeBase):
     pass
 
+
 logger.info(f"current database engine is {config['databases']['active_engine']}")
+
 
 class Buffer(Base):
     __tablename__ = "buffer"
@@ -44,11 +52,12 @@ class Buffer(Base):
     def __init__(self, message):
         self.message = message
 
+
 class DatabaseVersion(Base):
     __tablename__ = "database_version"
     id = Column(Integer, primary_key=True)
     current_db_version = Column(String)
-    
+
 
 class Devices(Base):
     __tablename__ = "devices"

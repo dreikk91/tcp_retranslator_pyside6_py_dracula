@@ -19,7 +19,7 @@ import sys
 import tracemalloc
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QMainWindow
 
 from common.yaml_config import YamlConfig
 
@@ -33,8 +33,10 @@ from modules.log_window import LogWindow
 from modules.table_widgets import TableManager
 from net.retranslator_asyncio.runner_tcp_client import EventForwarderThread
 from net.retranslator_asyncio.runner_tcp_server import TCPServerThread
-from net.retranslator_asyncio.tcp_server import ConnectionState
 from common.message_queues import MessageQueueThread
+from net.retranslator_asyncio.server.check_connection import ConnectionState
+
+# from net.retranslator_pyside6_v2.runner_tcp_server import TCPServerThread
 
 
 os.environ["QT_FONT_DPI"] = "96"  # FIX Problem for High DPI and Scale above 100%

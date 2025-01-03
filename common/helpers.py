@@ -15,7 +15,7 @@ def check_message_format(message):
         return True
 
 
-def split_message_stream(message:bytes):
+def split_message_stream(message: bytes):
     try:
         if isinstance(message, bytes):
             new_message = message.decode()
@@ -39,6 +39,7 @@ def split_message_stream(message:bytes):
             logger.debug(f"Message must be bytes not a string {message}")
     except UnicodeDecodeError:
         logger.exception(f"Cannot decode none utf8 message {message}")
+
 
 class SurGard:
     def __init__(self, message: bytes):
@@ -125,5 +126,3 @@ def parse_surguard_message(message):
             return "Unknown Protocol Number"
     else:
         return "Unknown Protocol Number"
-
-

@@ -81,12 +81,11 @@ class DataReceiver(QRunnable):
         self.SEND_TO_CLIENT_QUEUE: Dict[StreamWriter, Queue] = defaultdict(Queue)
 
     def run(self):
-        logger.info('Worker data receiver start')
+        logger.info("Worker data receiver start")
         asyncio.run(self.main())
 
-
     async def on_client_connection(
-            self, server_reader: StreamReader, server_writer: StreamWriter
+        self, server_reader: StreamReader, server_writer: StreamWriter
     ):
         try:
             client_reader, client_writer = await self.open_connect_to_server()
@@ -95,14 +94,18 @@ class DataReceiver(QRunnable):
             client_reader, client_writer = await self.open_connect_to_server()
 
         self.addr: str = server_writer.get_extra_info("peername")
-        self.signals.log_data.emit(f'A new connection is established {self.addr}')
-        logger.info(f'A new connection is established {self.addr}')
+        self.signals.log_data.emit(f"A new connection is established {self.addr}")
+        logger.info(f"A new connection is established {self.addr}")
 
         self.send_to_server_task = asyncio.create_task(
-            self.send_data_to_server(client_writer, server_writer, self.SEND_TO_SERVER_QUEUE[client_writer])
+            self.send_data_to_server(
+                client_writer, server_writer, self.SEND_TO_SERVER_QUEUE[client_writer]
+            )
         )
         self.send_to_client_task = asyncio.create_task(
-            self.send_data_to_client(server_writer, self.SEND_TO_CLIENT_QUEUE[server_writer])
+            self.send_data_to_client(
+                server_writer, self.SEND_TO_CLIENT_QUEUE[server_writer]
+            )
         )
         # self.recv_from_server_task: Task[None] = asyncio.create_task(
         #     self.receive_data_from_server(
@@ -117,9 +120,13 @@ class DataReceiver(QRunnable):
         try:
             while request := await server_reader.read(1024):
                 logger.info(request)
-                self.signals.log_data.emit(f'Receiving message from client {request.decode()}')
+                self.signals.log_data.emit(
+                    f"Receiving message from client {request.decode()}"
+                )
                 if check_message_format(request):
-                    current_time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+                    current_time = datetime.datetime.now().strftime(
+                        "%m/%d/%Y, %H:%M:%S"
+                    )
                     self.message: bytes = request
                     addr = server_writer.get_extra_info("peername")
                     for msg in split_message_stream(self.message):
@@ -171,13 +178,16 @@ class DataReceiver(QRunnable):
                 await writer.drain()
                 logger.info(f"{msg} resend")
 
-        logger.debug(f'Server writer is closing in send_data_to_server {writer.is_closing()}')
+        logger.debug(
+            f"Server writer is closing in send_data_to_server {writer.is_closing()}"
+        )
         if not writer.is_closing():
             writer.close()
             await writer.wait_closed()
 
-    async def receive_data_from_server(self, client_reader, client_writer, server_writer, queue
-                                       ):
+    async def receive_data_from_server(
+        self, client_reader, client_writer, server_writer, queue
+    ):
         while True:
             print(f"Client writer is closing {client_writer.is_closing()}")
             addr = server_writer.get_extra_info("peername")
@@ -186,7 +196,9 @@ class DataReceiver(QRunnable):
             try:
                 while request := await client_reader.read(1000):
                     logger.info(request)
-                    self.signals.log_data.emit(f"Receiving from server {request.decode()}, {addr}")
+                    self.signals.log_data.emit(
+                        f"Receiving from server {request.decode()}, {addr}"
+                    )
                     if not server_writer.is_closing():
                         await self.SEND_TO_CLIENT_QUEUE[server_writer].put(request)
                         print(self.SEND_TO_CLIENT_QUEUE[server_writer])
@@ -214,24 +226,31 @@ class DataReceiver(QRunnable):
                 try:
                     writer.write(msg)
                     await writer.drain()
-                    self.signals.log_data.emit(f"Receiving from server {msg.decode()}, {addr}")
+                    self.signals.log_data.emit(
+                        f"Receiving from server {msg.decode()}, {addr}"
+                    )
                 except ConnectionResetError as error:
                     logger.debug(error)
                     reader, writer = await self.open_connect_to_server()
                     writer.write(msg)
                     await writer.drain()
                     logger.info(f"{msg} resend")
-            logger.debug(f'Server writer is closing in send_data_to_client {writer.is_closing()}')
+            logger.debug(
+                f"Server writer is closing in send_data_to_client {writer.is_closing()}"
+            )
             if not writer.is_closing():
                 writer.close()
                 await writer.wait_closed()
 
     async def open_connect_to_server(self):
         while True:
-            conn = asyncio.open_connection(self.config["client"]["host"],
-                                           self.config["client"]["port"])
-            logger.info(f'Connecting to server: {self.config["client"]["host"]}'
-                        f' on port: {self.config["client"]["port"]}')
+            conn = asyncio.open_connection(
+                self.config["client"]["host"], self.config["client"]["port"]
+            )
+            logger.info(
+                f'Connecting to server: {self.config["client"]["host"]}'
+                f' on port: {self.config["client"]["port"]}'
+            )
             try:
                 reader, writer = await asyncio.wait_for(conn, 10)
                 return reader, writer
@@ -245,7 +264,6 @@ class DataReceiver(QRunnable):
                 logger.info("Reconnecting after 10 seconds")
                 self.signals.log_data.emit(f"Remote server unavailable, {error}")
                 await asyncio.sleep(10)
-
 
     async def send_ping_to_clients(self):
         address_list: list = []
@@ -268,9 +286,11 @@ class DataReceiver(QRunnable):
                 logger.debug(err)
 
     async def main(self):
-        server = await asyncio.start_server(self.on_client_connection,
-                                            host=self.config["server"]["host"],
-                                            port=self.config["server"]["port"])
+        server = await asyncio.start_server(
+            self.on_client_connection,
+            host=self.config["server"]["host"],
+            port=self.config["server"]["port"],
+        )
         addrs = ", ".join(str(sock.getsockname()) for sock in server.sockets)
         check_connection = asyncio.create_task(self.send_ping_to_clients())
         logger.info(f"Serving on {addrs}")

@@ -6,18 +6,20 @@ from PySide6.QtCore import QThread
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+
 class MessageQueues:
     queue = asyncio.Queue()
     incoming_message_queues = asyncio.Queue(maxsize=100)
-    outgoing_message_queues = asyncio.Queue()
-    log_message_queues = asyncio.Queue()
-    object_activity_queues = asyncio.Queue()
-    
+    outgoing_message_queues = asyncio.Queue(maxsize=0)
+    log_message_queues = asyncio.Queue(maxsize=0)
+    object_activity_queues = asyncio.Queue(maxsize=0)
+
+
 class WorkWithQueues:
     def __init__(self, signals) -> None:
         self.signals = signals
         self.message_queues = MessageQueues
-    
+
     async def write_from_queue_to_log_window(self) -> None:
         while True:
             if self.message_queues.log_message_queues.empty():
@@ -25,29 +27,34 @@ class WorkWithQueues:
             else:
                 log_message = await self.message_queues.log_message_queues.get()
                 self.signals.log_data.emit(log_message)
-                await asyncio.sleep(0.001)
+                await asyncio.sleep(0.01)
                 # logger.info(f"message {log_message} get from buffer")
-                
+
     async def write_from_queue_to_incoming_window(self) -> None:
         while True:
             if self.message_queues.incoming_message_queues.empty():
                 await asyncio.sleep(1)
             else:
-
-                ip, msg, event_msg = await self.message_queues.incoming_message_queues.get()
+                (
+                    ip,
+                    msg,
+                    event_msg,
+                ) = await self.message_queues.incoming_message_queues.get()
                 self.signals.data_receive.emit(ip, msg, event_msg)
                 await asyncio.sleep(0.01)
 
-
                 # logger.info(f"message {ip}, {msg}, {event_msg} get from buffer")
-                
+
     async def write_from_queue_to_outgoing_window(self) -> None:
         while True:
             if self.message_queues.outgoing_message_queues.empty():
                 await asyncio.sleep(1)
             else:
-
-                ip, msg, event_msg = await self.message_queues.outgoing_message_queues.get()
+                (
+                    ip,
+                    msg,
+                    event_msg,
+                ) = await self.message_queues.outgoing_message_queues.get()
                 self.signals.data_send.emit(ip, msg, event_msg)
                 await asyncio.sleep(0.01)
 
@@ -58,13 +65,15 @@ class WorkWithQueues:
             if self.message_queues.object_activity_queues.empty():
                 await asyncio.sleep(1)
             else:
-
-                object_number, timestamp = await self.message_queues.object_activity_queues.get()
+                (
+                    object_number,
+                    timestamp,
+                ) = await self.message_queues.object_activity_queues.get()
                 self.signals.objects_activity.emit(object_number, timestamp)
                 await asyncio.sleep(0.01)
                 # logger.info(f"message {ip}, {msg}, {event_msg}  get from buffer")
 
-                
+
 class MessageQueueThread(QThread):
     def __init__(self, signals) -> None:
         super().__init__()
@@ -73,7 +82,7 @@ class MessageQueueThread(QThread):
         self.work_with_queues = WorkWithQueues(self.signals)
         self.tasks = []
         self.loop = asyncio.new_event_loop()
-        
+
     def run(self) -> None:
         self.signals.log_data.emit("Worker data queue start")
         try:
@@ -91,10 +100,26 @@ class MessageQueueThread(QThread):
             task.cancel()
 
     async def setup_tasks(self):
-        self.tasks.append(asyncio.create_task(self.work_with_queues.write_from_queue_to_incoming_window()))
-        self.tasks.append(asyncio.create_task(self.work_with_queues.write_from_queue_to_outgoing_window()))
-        self.tasks.append(asyncio.create_task(self.work_with_queues.write_from_queue_to_log_window()))
-        self.tasks.append((asyncio.create_task(self.work_with_queues.write_from_queue_to_object_activity_window())))
+        self.tasks.append(
+            asyncio.create_task(
+                self.work_with_queues.write_from_queue_to_incoming_window()
+            )
+        )
+        self.tasks.append(
+            asyncio.create_task(
+                self.work_with_queues.write_from_queue_to_outgoing_window()
+            )
+        )
+        self.tasks.append(
+            asyncio.create_task(self.work_with_queues.write_from_queue_to_log_window())
+        )
+        self.tasks.append(
+            (
+                asyncio.create_task(
+                    self.work_with_queues.write_from_queue_to_object_activity_window()
+                )
+            )
+        )
         self.group = asyncio.gather(*self.tasks, return_exceptions=True)
 
         try:

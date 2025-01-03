@@ -13,7 +13,7 @@ class LogWindow:
         self.yc.config_init()
         self.config = self.yc.config_open()
         self.log_window = self.widgets.listWidget_log
-    
+
     @Slot(str)
     def fill_log_window(self, message):
         time_now = datetime.now().strftime("%d/%m/%Y | %H:%M:%S.%f")

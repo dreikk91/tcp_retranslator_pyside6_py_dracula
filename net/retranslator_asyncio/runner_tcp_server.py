@@ -1,13 +1,15 @@
 import asyncio
+import logging
+import signal
+
 from PySide6.QtCore import QThread
 
 from common.message_queues import WorkWithQueues
+
 # from common.logger_config import logger
-from database.sql_part_sync import create_buffer_table_sync
 from common.yaml_config import YamlConfig
-from net.retranslator_asyncio.tcp_server import TCPServer
-from net.retranslator_asyncio.eventforwarder import EventForwarder
-import logging
+from net.retranslator_asyncio.server.keepalive_timer import KeepAliveTimer
+from net.retranslator_asyncio.server.tcp_server import TCPServer
 
 logger = logging.getLogger(__name__)
 
@@ -25,8 +27,10 @@ class TCPServerThread(QThread):
         self.check_connection_status_task = None
         self.cnt = 0
         self.tasks = []
-        self.loop = asyncio.get_event_loop()
+        self.loop = None
+
         self.work_with_queues = WorkWithQueues(self.signals)
+        self.keepalive_timer = KeepAliveTimer()
 
     def run(self) -> None:
         logger.info("Worker data receiver start")
@@ -36,6 +40,8 @@ class TCPServerThread(QThread):
             # with asyncio.Runner() as self.runner:
             #     self.runner.run(self.setup_tasks())
             # asyncio.run(self.setup_tasks(), debug=True)
+            self.loop = asyncio.new_event_loop()
+            self.loop.set_debug(False)
             self.loop.run_until_complete(self.setup_tasks())
         except KeyboardInterrupt:
             print("Server and client stopped by user")
@@ -44,21 +50,22 @@ class TCPServerThread(QThread):
     def stop(self):
         self.loop.call_soon_threadsafe(self._stop)
 
+
     def _stop(self):
-        for task in self.tasks:
+        print(">> Cancelling tasks now")
+        for task in asyncio.all_tasks():
+            print(task)
             task.cancel()
 
+        print(">> Done cancelling tasks")
+        asyncio.get_event_loop().stop()
+        self.loop = None
+
     async def setup_tasks(self):
-        # await create_buffer_table()
-        # create_buffer_table_sync()
         self.tasks.append(asyncio.create_task(self.server.run()))
         self.tasks.append(asyncio.create_task(self.server.write_from_buffer_to_db()))
-        self.tasks.append(asyncio.create_task(self.server.keepalive()))
+        self.tasks.append(asyncio.create_task(self.keepalive_timer.keepalive()))
         self.tasks.append(asyncio.create_task(self.server.check_connection_state()))
-        # self.tasks.append(asyncio.create_task(self.work_with_queues.write_from_queue_to_incoming_window()))
-        # self.tasks.append(asyncio.create_task(self.work_with_queues.write_from_queue_to_outgoing_window()))
-        # self.tasks.append(asyncio.create_task(self.work_with_queues.write_from_queue_to_log_window()))
-        # self.tasks.append(asyncio.create_task(self.work_with_queues.write_from_queue_to_object_activity_window()))
         self.group = asyncio.gather(*self.tasks)
 
         try:

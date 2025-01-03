@@ -16,8 +16,6 @@ class TcpClient(QObject):
         self.host = self.config["client"]["host"]
         self.port = self.config["client"]["port"]
 
-
-
         self.check_db_timer = QTimer(self)
         self.check_db_timer.timeout.connect(self.read_messages_from_buffer)
         self.check_db_timer.setInterval(10)
@@ -42,15 +40,15 @@ class TcpClient(QObject):
         self.timeout_timer.timeout.connect(self.handle_timeout)
 
     def connected(self):
-        logger.info(f'Connected to {self.host}:{self.port}')
-        self.signals.log_data.emit(f'Connected to {self.host}:{self.port}')
+        logger.info(f"Connected to {self.host}:{self.port}")
+        self.signals.log_data.emit(f"Connected to {self.host}:{self.port}")
         self.timeout_timer.stop()
         self.reconnect_timer.stop()
         self.check_db_timer.start()
 
     def disconnected(self):
-        logger.info(f'Disconnected from {self.host}:{self.port}')
-        self.signals.log_data.emit(f'Disconnected from {self.host}:{self.port}')
+        logger.info(f"Disconnected from {self.host}:{self.port}")
+        self.signals.log_data.emit(f"Disconnected from {self.host}:{self.port}")
         self.tcp_socket.close()
         self.check_db_timer.stop()
         self.reconnect_timer.start()
@@ -86,7 +84,8 @@ class TcpClient(QObject):
         logger.info(f"Sent data: {data}")
         self.signals.log_data.emit(f"Sent data: {data}")
         self.signals.data_send.emit(
-            f'{self.tcp_socket.peerAddress().toString()}:{self.tcp_socket.peerPort()}', data.decode()
+            f"{self.tcp_socket.peerAddress().toString()}:{self.tcp_socket.peerPort()}",
+            data.decode(),
         )
 
     def displayError(self, socketError):
@@ -103,8 +102,8 @@ class TcpClient(QObject):
     def read_messages_from_buffer(self):
         row = select_from_buffer_sync()
         if row is not None:
-            logger.info(f'Send {row.message.encode()}')
-            self.signals.log_data.emit(f'Send {row.message.encode()}')
+            logger.info(f"Send {row.message.encode()}")
+            self.signals.log_data.emit(f"Send {row.message.encode()}")
             self.send_data(row.message.encode())
             delete_from_buffer_sync(row.id)
             logger.debug(f"Delete from buffer by id {row.id}")

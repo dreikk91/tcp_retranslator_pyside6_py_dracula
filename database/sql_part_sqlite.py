@@ -2,9 +2,18 @@ import asyncio
 import logging
 from datetime import datetime
 import aiosqlite
-from sqlalchemy import Column, Integer, String, select, delete, Float, create_engine, func
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    select,
+    delete,
+    Float,
+    create_engine,
+    func,
+)
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import  sessionmaker, Session, DeclarativeBase
+from sqlalchemy.orm import sessionmaker, Session, DeclarativeBase
 from sqlalchemy import exc
 
 logger = logging.getLogger(__name__)
@@ -56,6 +65,7 @@ class Event(Base):
 engine = create_engine("sqlite:///base.db", echo=False)
 Session = sessionmaker(bind=engine)
 session = Session()
+
 
 def create_buffer_table_sync():
     # engine = create_engine("sqlite:///base.db", echo=False)

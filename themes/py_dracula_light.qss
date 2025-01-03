@@ -489,7 +489,7 @@ Button */
 	border: 2px solid #1abc9c;
 }
 
-
+/*
 QTableWidget {	
 	background-color: transparent;
 	padding: 10px;
@@ -520,11 +520,11 @@ QHeaderView::section:vertical
 {
     border: 1px solid #eef1f8;
 }
-
-/* Стилі для кнопки "Вибрати все" в QTableWidget */
+*/
+/* Стилі для кнопки "Вибрати все" в QTableWidget 
 QTableWidget QHeaderView::section:checked {
     background-color: rgb(0, 120, 215); /* Колір фону для обраного стану */
-    color: white; /* Колір тексту */
+    color: red; /* Колір тексту */
 }
 
 QTableWidget QHeaderView::section:unchecked {
@@ -541,3 +541,58 @@ QTableWidget QHeaderView::section:!enabled {
     background-color: rgb(200, 200, 200); /* Колір фону для неактивного стану */
     color: gray; /* Колір тексту */
 }
+*/
+/* Стиль QTableWidget для компактного та сучасного вигляду */
+
+QTableWidget {
+    border: 1px solid #E0E0E0; /* Обводка */
+    background-color: #FFFFFF; /* Фон */
+    gridline-color: #E0E0E0; /* Колір сітки */
+    selection-background-color: #0078D7; /* Колір виділення */
+    selection-color: #FFFFFF; /* Колір тексту при виділенні */
+    alternate-background-color: #F5F5F5; /* Фон для парних рядків */
+    font-size: 12px; /* Розмір шрифту */
+}
+
+QHeaderView::section {
+    background-color: #F0F0F0; /* Колір фону заголовків стовпців */
+    border: none; /* Без рамки */
+    border-bottom: 1px solid #E0E0E0; /* Обрамлення знизу */
+    padding: 4px 6px; /* Відступи в тексті заголовка */
+    font-weight: bold; /* Жирний текст для заголовків */
+}
+
+QHeaderView::section:checked {
+    background-color: #0078D7; /* Колір фону для обраного заголовка */
+    color: #FFFFFF; /* Колір тексту в обраному заголовку */
+}
+
+QHeaderView::section:unchecked {
+    background-color: #F0F0F0; /* Колір фону для невибраного заголовка */
+    color: #333333; /* Колір тексту в невибраному заголовку */
+}
+
+QHeaderView::section:pressed {
+    background-color: #005596; /* Колір фону при натисненні на заголовок */
+    color: #FFFFFF; /* Колір тексту при натисненні на заголовок */
+}
+
+QHeaderView::section:!enabled {
+    background-color: #F0F0F0; /* Колір фону для неактивних заголовків */
+    color: #A0A0A0; /* Колір тексту для неактивних заголовків */
+}
+
+QTableWidget::item {
+    padding: 4px 6px; /* Відступи в комірках */
+}
+
+QTableWidget::item:selected {
+    background-color: #0078D7; /* Колір фону для виділеної комірки */
+    color: #FFFFFF; /* Колір тексту для виділеної комірки */
+}
+
+QTableWidget::item:focus {
+    background-color: #F3F3F3; /* Колір фону при фокусі на комірці */
+    outline: none; /* Зняти рамку фокусу */
+}
+

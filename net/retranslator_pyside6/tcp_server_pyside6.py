@@ -2,7 +2,11 @@ from PySide6.QtCore import *
 from PySide6.QtNetwork import *
 from common.helpers import split_message_stream, SurGard, parse_surguard_message
 from common.logger_config import logger
-from database.sql_part_postgres import insert_into_buffer_sync, insert_event_sync, create_buffer_table_sync
+from database.sql_part_postgres import (
+    insert_into_buffer_sync,
+    insert_event_sync,
+    create_buffer_table_sync,
+)
 from common.yaml_config import YamlConfig
 
 
@@ -29,7 +33,9 @@ class MyTcpServer(QObject):
     def setup_keepalive_timer(self):
         self.keepalive_timer = QTimer(self)
         self.keepalive_timer.timeout.connect(self.send_keepalive)
-        self.keepalive_timer.start(self.config["other"]["keepalive"]* 1000)  # відправляти keepalive кожні 50 секунд
+        self.keepalive_timer.start(
+            self.config["other"]["keepalive"] * 1000
+        )  # відправляти keepalive кожні 50 секунд
 
     def run_server(self):
         if not self.server.listen(QHostAddress.Any, self.port):
@@ -43,15 +49,23 @@ class MyTcpServer(QObject):
         self.clients.append(client)
         client.readyRead.connect(self.handle_ready_read)
         client.disconnected.connect(self.handle_disconnected)
-        logger.info(f"New client connected: {client.peerAddress().toString()}:{client.peerPort()}")
-        self.signals.log_data.emit(f"New client connected: {client.peerAddress().toString()}:{client.peerPort()}")
+        logger.info(
+            f"New client connected: {client.peerAddress().toString()}:{client.peerPort()}"
+        )
+        self.signals.log_data.emit(
+            f"New client connected: {client.peerAddress().toString()}:{client.peerPort()}"
+        )
 
     def handle_ready_read(self):
         sender = self.sender()
         if sender in self.clients:
             data = sender.readAll()
-            logger.info(f"Received data from {sender.peerAddress().toString()}:{sender.peerPort()} {data}")
-            self.signals.log_data.emit(f"Received data from {sender.peerAddress().toString()}:{sender.peerPort()} {data}")
+            logger.info(
+                f"Received data from {sender.peerAddress().toString()}:{sender.peerPort()} {data}"
+            )
+            self.signals.log_data.emit(
+                f"Received data from {sender.peerAddress().toString()}:{sender.peerPort()} {data}"
+            )
             self._process_message_stream(data)
 
     def _process_message_stream(self, data):
@@ -65,8 +79,12 @@ class MyTcpServer(QObject):
                 insert_into_buffer_sync(message)
                 logger.info(f"{message} append to queue")
                 sg_message = parse_surguard_message(message)
-                insert_event_sync(sg_message, f'{sender.peerAddress().toString()}:{sender.peerPort()}')
-                self.signals.data_receive.emit(f'{sender.peerAddress().toString()}:{sender.peerPort()}', msg.decode()
+                insert_event_sync(
+                    sg_message, f"{sender.peerAddress().toString()}:{sender.peerPort()}"
+                )
+                self.signals.data_receive.emit(
+                    f"{sender.peerAddress().toString()}:{sender.peerPort()}",
+                    msg.decode(),
                 )
             else:
                 logger.error(f"Invalid message format {msg} {len(data)} send NAK")
@@ -80,14 +98,23 @@ class MyTcpServer(QObject):
         if sender in self.clients:
             self.clients.remove(sender)
             sender.deleteLater()
-            logger.info(f"Client disconnected: {sender.peerAddress().toString()}:{sender.peerPort()}")
-            self.signals.log_data.emit(f"Client disconnected: {sender.peerAddress().toString()}:{sender.peerPort()}")
+            logger.info(
+                f"Client disconnected: {sender.peerAddress().toString()}:{sender.peerPort()}"
+            )
+            self.signals.log_data.emit(
+                f"Client disconnected: {sender.peerAddress().toString()}:{sender.peerPort()}"
+            )
 
     def send_keepalive(self):
         for client in self.clients:
             client.write(MSG_END)
-            logger.info(f'Send keepalive to  {client.peerAddress().toString()}:{client.peerPort()})')
-            self.signals.log_data.emit(f'Send keepalive to  {client.peerAddress().toString()}:{client.peerPort()})')
+            logger.info(
+                f"Send keepalive to  {client.peerAddress().toString()}:{client.peerPort()})"
+            )
+            self.signals.log_data.emit(
+                f"Send keepalive to  {client.peerAddress().toString()}:{client.peerPort()})"
+            )
+
 
 # if __name__ == "__main__":
 #     import sys

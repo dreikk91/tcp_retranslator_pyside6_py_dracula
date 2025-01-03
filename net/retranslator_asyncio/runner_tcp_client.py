@@ -1,11 +1,11 @@
 import asyncio
+import logging
+import signal
 from PySide6.QtCore import QThread
 
 # from common.logger_config import logger
-from database.sql_part_sync import create_buffer_table_sync
 from common.yaml_config import YamlConfig
-from net.retranslator_asyncio.eventforwarder import EventForwarder
-import logging
+from net.retranslator_asyncio.event_forwarder.eventforwarder import EventForwarder
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,8 @@ class EventForwarderThread(QThread):
         self.check_connection_status_task = None
         self.cnt = 0
         self.tasks = []
-        self.loop = asyncio.new_event_loop()
+        self.loop = None
+
         # self.cs = ConnectionState()
 
     def run(self) -> None:
@@ -39,6 +40,8 @@ class EventForwarderThread(QThread):
             # with asyncio.Runner() as self.runner:
             #     self.runner.run(self.setup_tasks())
             # asyncio.run(self.setup_tasks(), debug=True)
+            self.loop = asyncio.new_event_loop()
+            self.loop.set_debug(False)
             self.loop.run_until_complete(self.setup_client_tasks())
         except KeyboardInterrupt:
             print("Server and client stopped by user")
@@ -47,16 +50,19 @@ class EventForwarderThread(QThread):
     def stop(self):
         self.loop.call_soon_threadsafe(self._stop)
 
+
     def _stop(self):
-        for task in self.tasks:
+        print(">> Cancelling tasks now")
+        for task in asyncio.all_tasks():
+            print(task)
             task.cancel()
 
+        print(">> Done cancelling tasks")
+        asyncio.get_event_loop().stop()
+        self.loop = None
+
     async def setup_client_tasks(self):
-        # await create_buffer_table_async()
-        # self.tasks.append(asyncio.create_task(self.server.run()))
         self.tasks.append(asyncio.create_task(self.client.start_tcp_client()))
-        # self.tasks.append(asyncio.create_task(self.server.keepalive()))
-        # self.tasks.append(asyncio.create_task(self.server.check_connection_state()))
-        # self.tasks.append(asyncio.create_task(commit_every_second()))
-        self.group = asyncio.gather(*self.tasks, return_exceptions=True)
+        self.group = asyncio.gather(*self.tasks, return_exceptions=False)
+
         await self.group
